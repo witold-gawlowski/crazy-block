@@ -78,11 +78,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColorV: 0.45
-  lifeTime: 30
+  lifeTime: 45
   blinkDuration: 1.2
   destroyDelay: 1
   price: 10
-  _pivot: {fileID: 0}
 --- !u!1001 &2071631400598974909
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -584,7 +584,7 @@ MonoBehaviour:
   totalCashText: {fileID: 19152612}
   rerollText: {fileID: 896695626}
   rerollButton: {fileID: 164016007}
-  rewardText: {fileID: 0}
+  rewardText: {fileID: 663296895}
 --- !u!1 &485819913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,7 +1114,7 @@ MonoBehaviour:
   ui: {fileID: 277802198}
   blockPrefabs:
   - {fileID: 7577407780560230504, guid: b37d5403f1354874fa345cc669824507, type: 3}
-  - {fileID: 7577407780560230504, guid: 83491cb206601674985f6ddbddf54da7, type: 3}
+  - {fileID: 2763309185974189147, guid: 00c17abb9f25a15419290ca5a5fc770d, type: 3}
   - {fileID: 326899511126365277, guid: f9aec0baf7771124dbf84122ef1a089e, type: 3}
   - {fileID: 7577407780560230504, guid: 10b8f940015c0a44bad37687401bc963, type: 3}
   - {fileID: 7577407780560230504, guid: d7d1e51fad87af4469e0131b7b26f467, type: 3}
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   - {fileID: 1392579050}
   - {fileID: 974884400}
   - {fileID: 1716400165}
-  initialCash: 100
+  initialCash: 1000
   rerollPrice: 10
 --- !u!1 &891093470
 GameObject:
@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v1.09
+  m_text: v1.13
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

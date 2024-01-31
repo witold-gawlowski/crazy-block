@@ -37,7 +37,7 @@ public class GlobalGameManager : MonoBehaviour
 
     public void HandleMapCompleted()
     {
-        ClearBoughtBlocks();
+        ClearSnappedBlocks();
 
         Destroy(_currentMapObj);
 
@@ -61,13 +61,13 @@ public class GlobalGameManager : MonoBehaviour
         _currentMapObj = Instantiate(_currentMapNode.GetPrefab());
     }
     
-    private void ClearBoughtBlocks()
+    private void ClearSnappedBlocks()
     {
         var blocks = GameObject.FindGameObjectsWithTag("Block");
         foreach (var block in blocks)
         {
             var script = block.GetComponent<BlockScript>();
-            if (script.IsBought())
+            if (script.IsBought() && MapManager.GetInstance().IsPlaced(block))
             {
                 Destroy(block);
             }

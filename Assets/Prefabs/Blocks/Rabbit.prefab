@@ -52,11 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColorV: 0.45
-  lifeTime: 30
+  lifeTime: 45
   blinkDuration: 1.2
   destroyDelay: 1
   price: 10
-  _pivot: {fileID: 0}
 --- !u!1 &8115393076529385480
 GameObject:
   m_ObjectHideFlags: 0

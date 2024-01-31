@@ -128,7 +128,7 @@ public class DragManager : MonoBehaviour
 
     void UpdatePosition()
     {
-        var fingerOffset = Vector2.up * Mathf.Clamp01(_touchDuration / fingerOffsetBuildupDuration) * 2.3f;
+        var fingerOffset = Vector2.up * Mathf.Clamp01(_touchDuration / fingerOffsetBuildupDuration) * 3.0f;
         var newPosition = (Vector2)_pointerPositionWorld + fingerOffset - _draggedScript.GetMiddleOffset();
         var newPositionRounded = Helpers.RoundPosition(newPosition);
         if (MapManager.GetInstance().CanBePlaced(DraggedBlock, newPositionRounded))
