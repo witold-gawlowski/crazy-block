@@ -14,4 +14,5 @@ public class TODO : MonoBehaviour
     // reroll musi zas?ania? klocki
     // smiana koloru przy snapie
     // link game as example to responsiveness threads
+    // poprawic srodki klocków
 }

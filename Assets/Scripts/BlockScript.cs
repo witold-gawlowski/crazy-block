@@ -12,6 +12,8 @@ public class BlockScript : MonoBehaviour
     [SerializeField] private float destroyDelay = 3f;
     [SerializeField] private int price = 10;
 
+    private GameObject _pivot;
+
     private List<SpriteRenderer> srs;
 
     private int _size;
@@ -29,6 +31,22 @@ public class BlockScript : MonoBehaviour
     {
         srs = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
         _size = srs.Count;
+
+        foreach(Transform t in transform)
+        {
+            if(t.tag == "Pivot")
+            {
+                _pivot = t.gameObject;
+                break;
+            }
+        }
+
+        Vector3 middle = Vector3.zero;
+        foreach (SpriteRenderer r in srs)
+        {
+            middle += r.transform.position;
+        }
+        _pivot.transform.position = middle / _size;
 
         var baseRGB = srs[0].color;
         Color.RGBToHSV(baseRGB, out colorH, out colorS, out initColorV);
@@ -64,6 +82,16 @@ public class BlockScript : MonoBehaviour
     public int GetSize()
     {
         return _size;
+    }
+
+    public Transform GetPivot()
+    {
+        return _pivot.transform;
+    }
+
+    public Vector2 GetMiddleOffset()
+    {
+        return _pivot.transform.position - transform.position;
     }
 
     public int GetPrice()

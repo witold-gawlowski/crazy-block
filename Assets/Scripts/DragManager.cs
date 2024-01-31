@@ -17,10 +17,10 @@ public class DragManager : MonoBehaviour
             _draggedScript = value?.GetComponent<BlockScript>();
         } 
     }
-    private Vector2 _offset;
+    private Vector2 _middleOffset;
     private Vector3 _pointerPositionWorld;
     private bool _isDraggedBlockSnapped;
-    private float _dragDuration;
+    private float _touchDuration;
     private Vector3 _mouseTouchStartPosition;
     private bool _dragStarted;
 
@@ -48,24 +48,6 @@ public class DragManager : MonoBehaviour
         _dragStarted = false;
     }
 
-    //private void Update()
-    //{
-    //    var mousePos = Input.mousePosition;
-    //    if (Input.GetMouseButton(0))
-    //    {
-    //        if (Input.GetMouseButtonDown(0))
-    //        {
-    //            HandlePointerDown(mousePos);
-    //        }
-    //        HandlePointerHeld(mousePos);
-    //    }
-
-    //    if (Input.GetMouseButtonUp(0))
-    //    {
-    //        HandlePointerUp();
-    //    }
-    //}
-
     public void HandlePointerDown(Vector3 pointerPosition)
     {
         _pointerPositionWorld = Camera.main.ScreenToWorldPoint(pointerPosition);
@@ -74,8 +56,7 @@ public class DragManager : MonoBehaviour
         if (collider)
         {
             DraggedBlock = collider.transform.parent.gameObject;
-            _offset = DraggedBlock.transform.position - _pointerPositionWorld;
-            _dragDuration = 0;
+            _touchDuration = 0;
             _mouseTouchStartPosition = _pointerPositionWorld;
         }
     }
@@ -85,6 +66,8 @@ public class DragManager : MonoBehaviour
         _pointerPositionWorld = Camera.main.ScreenToWorldPoint(pointerPosition);
         if (DraggedBlock)
         {
+            _touchDuration += Time.deltaTime;
+
             if (!IsTap() && !_dragStarted && IsInteractible(_draggedScript))
             {
                 OnStartDrag();
@@ -120,7 +103,7 @@ public class DragManager : MonoBehaviour
     private bool IsTap()
     {
         var mag = (_pointerPositionWorld - _mouseTouchStartPosition).magnitude;
-        return mag < 0.15f && _dragDuration < 0.15f;
+        return mag < 0.15f && _touchDuration < 0.1f;
     }
 
     private void OnStartDrag()
@@ -128,10 +111,6 @@ public class DragManager : MonoBehaviour
         if (MapManager.GetInstance().IsPlaced(DraggedBlock))
         {
             MapManager.GetInstance().Remove(DraggedBlock);
-        }
-        else
-        {
-
         }
     }
 
@@ -144,15 +123,13 @@ public class DragManager : MonoBehaviour
     {
         UpdatePosition();
         ShopManager.Instance.HandleBlockDrag(DraggedBlock);
-
-        _dragDuration += Time.deltaTime;
         return;
     }
 
     void UpdatePosition()
     {
-        var fingerOffset = Vector2.up * Mathf.Clamp01(_dragDuration / fingerOffsetBuildupDuration) * 2.0f;
-        var newPosition = (Vector2)_pointerPositionWorld + _offset + fingerOffset;
+        var fingerOffset = Vector2.up * Mathf.Clamp01(_touchDuration / fingerOffsetBuildupDuration) * 2.3f;
+        var newPosition = (Vector2)_pointerPositionWorld + fingerOffset - _draggedScript.GetMiddleOffset();
         var newPositionRounded = Helpers.RoundPosition(newPosition);
         if (MapManager.GetInstance().CanBePlaced(DraggedBlock, newPositionRounded))
         {
@@ -171,18 +148,15 @@ public class DragManager : MonoBehaviour
             var coords = Helpers.RoundPosition(DraggedBlock.transform.position);
             MapManager.GetInstance().Place(DraggedBlock, coords);
         }
-        else
-        {
-
-        }
     }
 
     private void HandleTap()
     {
         if (MapManager.GetInstance().IsPlaced(DraggedBlock))
-        {            MapManager.GetInstance().Remove(DraggedBlock);
+        {           
+            MapManager.GetInstance().Remove(DraggedBlock);
         }
-        DraggedBlock.transform.Rotate(Vector3.forward, 90);
+        DraggedBlock.transform.RotateAround(_draggedScript.GetPivot().position, Vector3.forward, 90);
         TryPlace(DraggedBlock, DraggedBlock.transform.position);
     }
 
