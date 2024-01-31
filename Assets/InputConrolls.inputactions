@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MyTouchPress",
+                    "name": "MyTouchDown",
                     "type": "Button",
                     "id": "33e111ab-362b-47bd-b147-ca8f3679e083",
                     "expectedControlType": "Button",
@@ -24,13 +24,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "New action",
-                    "type": "Value",
-                    "id": "e70fa93e-a157-4ce1-8fe3-1509aae37f59",
-                    "expectedControlType": "Touch",
+                    "name": "MyTouchUp",
+                    "type": "Button",
+                    "id": "c4be36d6-0e32-4637-92b8-112bced408f4",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -49,21 +49,21 @@
                     "name": "",
                     "id": "24d0f66b-b8af-4bf6-a94b-8dbb90086a68",
                     "path": "<Touchscreen>/Press",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "MyTouchPress",
+                    "action": "MyTouchDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "32c807bc-0ec4-4842-8e24-f8799dd78f5e",
-                    "path": "",
-                    "interactions": "",
+                    "id": "bd7971b8-791a-4cd8-b622-f831f1069b12",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "MyTouchUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

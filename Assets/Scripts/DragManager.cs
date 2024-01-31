@@ -18,16 +18,19 @@ public class DragManager : MonoBehaviour
         } 
     }
     private Vector2 _offset;
-    private Vector3 _mousePosition;
+    private Vector3 _pointerPositionWorld;
     private bool _isDraggedBlockSnapped;
     private float _dragDuration;
     private Vector3 _mouseTouchStartPosition;
     private bool _dragStarted;
 
+    [SerializeField] private float fingerOffsetBuildupDuration;
+
     public static DragManager Instance { get; private set; }
 
     private void Awake()
     {
+        Application.targetFrameRate = 120;
         if (Instance != null && Instance == this)
         {
             Destroy(this.gameObject);
@@ -45,40 +48,41 @@ public class DragManager : MonoBehaviour
         _dragStarted = false;
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                HandlePointerDown();
-            }
-            HandlePointerPressed();
-        }
+    //private void Update()
+    //{
+    //    var mousePos = Input.mousePosition;
+    //    if (Input.GetMouseButton(0))
+    //    {
+    //        if (Input.GetMouseButtonDown(0))
+    //        {
+    //            HandlePointerDown(mousePos);
+    //        }
+    //        HandlePointerHeld(mousePos);
+    //    }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            HandlePointerUp();
-        }
-    }
+    //    if (Input.GetMouseButtonUp(0))
+    //    {
+    //        HandlePointerUp();
+    //    }
+    //}
 
-    private void HandlePointerDown()
+    public void HandlePointerDown(Vector3 pointerPosition)
     {
-        _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _pointerPositionWorld = Camera.main.ScreenToWorldPoint(pointerPosition);
         var mask = LayerMask.GetMask(new string[] { "Blocks" });
-        Collider2D collider = Physics2D.OverlapPoint(_mousePosition, mask);
+        Collider2D collider = Physics2D.OverlapPoint(_pointerPositionWorld, mask);
         if (collider)
         {
             DraggedBlock = collider.transform.parent.gameObject;
-            _offset = DraggedBlock.transform.position - _mousePosition;
+            _offset = DraggedBlock.transform.position - _pointerPositionWorld;
             _dragDuration = 0;
-            _mouseTouchStartPosition = _mousePosition;
+            _mouseTouchStartPosition = _pointerPositionWorld;
         }
     }
 
-    private void HandlePointerPressed()
+    public void HandlePointerHeld(Vector3 pointerPosition)
     {
-        _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _pointerPositionWorld = Camera.main.ScreenToWorldPoint(pointerPosition);
         if (DraggedBlock)
         {
             if (!IsTap() && !_dragStarted && IsInteractible(_draggedScript))
@@ -94,7 +98,7 @@ public class DragManager : MonoBehaviour
         }
     }
 
-    private void HandlePointerUp()
+    public void HandlePointerUp()
     {
         if (DraggedBlock)
         {
@@ -115,7 +119,7 @@ public class DragManager : MonoBehaviour
 
     private bool IsTap()
     {
-        var mag = (_mousePosition - _mouseTouchStartPosition).magnitude;
+        var mag = (_pointerPositionWorld - _mouseTouchStartPosition).magnitude;
         return mag < 0.15f && _dragDuration < 0.15f;
     }
 
@@ -147,7 +151,8 @@ public class DragManager : MonoBehaviour
 
     void UpdatePosition()
     {
-        var newPosition = (Vector2)_mousePosition + _offset;
+        var fingerOffset = Vector2.up * Mathf.Clamp01(_dragDuration / fingerOffsetBuildupDuration) * 2.0f;
+        var newPosition = (Vector2)_pointerPositionWorld + _offset + fingerOffset;
         var newPositionRounded = Helpers.RoundPosition(newPosition);
         if (MapManager.GetInstance().CanBePlaced(DraggedBlock, newPositionRounded))
         {

@@ -37,7 +37,7 @@ public partial class @InputConrolls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""MyTouchPress"",
+                    ""name"": ""MyTouchDown"",
                     ""type"": ""Button"",
                     ""id"": ""33e111ab-362b-47bd-b147-ca8f3679e083"",
                     ""expectedControlType"": ""Button"",
@@ -46,13 +46,13 @@ public partial class @InputConrolls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""New action"",
-                    ""type"": ""Value"",
-                    ""id"": ""e70fa93e-a157-4ce1-8fe3-1509aae37f59"",
-                    ""expectedControlType"": ""Touch"",
+                    ""name"": ""MyTouchUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4be36d6-0e32-4637-92b8-112bced408f4"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -71,21 +71,21 @@ public partial class @InputConrolls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""24d0f66b-b8af-4bf6-a94b-8dbb90086a68"",
                     ""path"": ""<Touchscreen>/Press"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MyTouchPress"",
+                    ""action"": ""MyTouchDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""32c807bc-0ec4-4842-8e24-f8799dd78f5e"",
-                    ""path"": """",
-                    ""interactions"": """",
+                    ""id"": ""bd7971b8-791a-4cd8-b622-f831f1069b12"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""MyTouchUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -97,8 +97,8 @@ public partial class @InputConrolls: IInputActionCollection2, IDisposable
         // New action map
         m_Newactionmap = asset.FindActionMap("New action map", throwIfNotFound: true);
         m_Newactionmap_MyTouchPosition = m_Newactionmap.FindAction("MyTouchPosition", throwIfNotFound: true);
-        m_Newactionmap_MyTouchPress = m_Newactionmap.FindAction("MyTouchPress", throwIfNotFound: true);
-        m_Newactionmap_Newaction = m_Newactionmap.FindAction("New action", throwIfNotFound: true);
+        m_Newactionmap_MyTouchDown = m_Newactionmap.FindAction("MyTouchDown", throwIfNotFound: true);
+        m_Newactionmap_MyTouchUp = m_Newactionmap.FindAction("MyTouchUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,15 +161,15 @@ public partial class @InputConrolls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Newactionmap;
     private List<INewactionmapActions> m_NewactionmapActionsCallbackInterfaces = new List<INewactionmapActions>();
     private readonly InputAction m_Newactionmap_MyTouchPosition;
-    private readonly InputAction m_Newactionmap_MyTouchPress;
-    private readonly InputAction m_Newactionmap_Newaction;
+    private readonly InputAction m_Newactionmap_MyTouchDown;
+    private readonly InputAction m_Newactionmap_MyTouchUp;
     public struct NewactionmapActions
     {
         private @InputConrolls m_Wrapper;
         public NewactionmapActions(@InputConrolls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MyTouchPosition => m_Wrapper.m_Newactionmap_MyTouchPosition;
-        public InputAction @MyTouchPress => m_Wrapper.m_Newactionmap_MyTouchPress;
-        public InputAction @Newaction => m_Wrapper.m_Newactionmap_Newaction;
+        public InputAction @MyTouchDown => m_Wrapper.m_Newactionmap_MyTouchDown;
+        public InputAction @MyTouchUp => m_Wrapper.m_Newactionmap_MyTouchUp;
         public InputActionMap Get() { return m_Wrapper.m_Newactionmap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -182,12 +182,12 @@ public partial class @InputConrolls: IInputActionCollection2, IDisposable
             @MyTouchPosition.started += instance.OnMyTouchPosition;
             @MyTouchPosition.performed += instance.OnMyTouchPosition;
             @MyTouchPosition.canceled += instance.OnMyTouchPosition;
-            @MyTouchPress.started += instance.OnMyTouchPress;
-            @MyTouchPress.performed += instance.OnMyTouchPress;
-            @MyTouchPress.canceled += instance.OnMyTouchPress;
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @MyTouchDown.started += instance.OnMyTouchDown;
+            @MyTouchDown.performed += instance.OnMyTouchDown;
+            @MyTouchDown.canceled += instance.OnMyTouchDown;
+            @MyTouchUp.started += instance.OnMyTouchUp;
+            @MyTouchUp.performed += instance.OnMyTouchUp;
+            @MyTouchUp.canceled += instance.OnMyTouchUp;
         }
 
         private void UnregisterCallbacks(INewactionmapActions instance)
@@ -195,12 +195,12 @@ public partial class @InputConrolls: IInputActionCollection2, IDisposable
             @MyTouchPosition.started -= instance.OnMyTouchPosition;
             @MyTouchPosition.performed -= instance.OnMyTouchPosition;
             @MyTouchPosition.canceled -= instance.OnMyTouchPosition;
-            @MyTouchPress.started -= instance.OnMyTouchPress;
-            @MyTouchPress.performed -= instance.OnMyTouchPress;
-            @MyTouchPress.canceled -= instance.OnMyTouchPress;
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @MyTouchDown.started -= instance.OnMyTouchDown;
+            @MyTouchDown.performed -= instance.OnMyTouchDown;
+            @MyTouchDown.canceled -= instance.OnMyTouchDown;
+            @MyTouchUp.started -= instance.OnMyTouchUp;
+            @MyTouchUp.performed -= instance.OnMyTouchUp;
+            @MyTouchUp.canceled -= instance.OnMyTouchUp;
         }
 
         public void RemoveCallbacks(INewactionmapActions instance)
@@ -221,7 +221,7 @@ public partial class @InputConrolls: IInputActionCollection2, IDisposable
     public interface INewactionmapActions
     {
         void OnMyTouchPosition(InputAction.CallbackContext context);
-        void OnMyTouchPress(InputAction.CallbackContext context);
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnMyTouchDown(InputAction.CallbackContext context);
+        void OnMyTouchUp(InputAction.CallbackContext context);
     }
 }

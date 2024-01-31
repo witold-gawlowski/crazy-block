@@ -1,18 +1,59 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private PlayerInput playerInput;
+    private InputAction touchPositionAction;
+    private InputAction touchDownAction;
+    private InputAction touchUpAction;
+
+    private Vector2 lastPosition;
+    private void Awake()
     {
-        
+        playerInput = GetComponent<PlayerInput>();
+        touchPositionAction = playerInput.actions["MyTouchPosition"];
+        touchDownAction = playerInput.actions["MyTouchDown"];
+        touchUpAction = playerInput.actions["MyTouchUp"];
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        touchDownAction.performed += HandleTouchDownAction;
+        touchUpAction.performed += HandleTouchUpAction;
+        touchPositionAction.performed += HandleTOuchHoldAction;
     }
+
+    private void OnDisable()
+    {
+        touchDownAction.performed -= HandleTouchDownAction;    
+        touchUpAction.performed -= HandleTouchUpAction;
+        touchPositionAction.performed -= HandleTOuchHoldAction;
+    }
+
+    private void Update()
+    {
+        //DragManager.Instance.HandlePointerHeld(touchPosition);
+    }
+
+    private void HandleTouchDownAction(InputAction.CallbackContext context)
+    {
+        var touchPosition = touchPositionAction.ReadValue<Vector2>();
+        DragManager.Instance.HandlePointerDown(touchPosition);
+    }
+
+    private void HandleTOuchHoldAction(InputAction.CallbackContext context)
+    {
+        var touchPosition = touchPositionAction.ReadValue<Vector2>();
+        DragManager.Instance.HandlePointerHeld(touchPosition);
+    }
+
+    private void HandleTouchUpAction(InputAction.CallbackContext context)
+    {
+        DragManager.Instance.HandlePointerUp();
+    }
+
 }
