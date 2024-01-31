@@ -1,0 +1,74 @@
+{
+    "name": "InputConrolls",
+    "maps": [
+        {
+            "name": "New action map",
+            "id": "86edf822-4014-4cca-bce0-ca343249234c",
+            "actions": [
+                {
+                    "name": "MyTouchPosition",
+                    "type": "Value",
+                    "id": "c1e9c5ba-765f-4e10-8d09-aae2cad33b20",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MyTouchPress",
+                    "type": "Button",
+                    "id": "33e111ab-362b-47bd-b147-ca8f3679e083",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "New action",
+                    "type": "Value",
+                    "id": "e70fa93e-a157-4ce1-8fe3-1509aae37f59",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "24f6784f-8ace-4947-b5dd-c2d2b9134b49",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MyTouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24d0f66b-b8af-4bf6-a94b-8dbb90086a68",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MyTouchPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32c807bc-0ec4-4842-8e24-f8799dd78f5e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

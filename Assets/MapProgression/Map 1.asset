@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1aeec0680dd08e489bba3ec4de06715, type: 3}
+  m_Name: Map 1
+  m_EditorClassIdentifier: 
+  mapPrefab: {fileID: 4192601516933046503, guid: 44272888275d50f45b10fa4e11361b95, type: 3}
+  successors:
+  - Node: {fileID: 11400000, guid: 18ada74d937f8354aa4b6468dff86bd0, type: 2}
+    Chance: 1.6
+  - Node: {fileID: 11400000, guid: 31e1b4c77686ef54ea7171879fd2e7d7, type: 2}
+    Chance: 1
