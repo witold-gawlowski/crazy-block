@@ -21,7 +21,7 @@ public class BlockScript : MonoBehaviour
     private float colorH;
     private float initColorV;
     private float colorS;
-    private float progress;
+    private float timeProgress;
 
     private bool isAlive;
     private bool isBought;
@@ -54,7 +54,7 @@ public class BlockScript : MonoBehaviour
 
     private void Start()
     {
-        progress = 0;
+        timeProgress = 0;
         isAlive = true;
         isBought = false;
     }
@@ -63,15 +63,15 @@ public class BlockScript : MonoBehaviour
     {
         if (isBought)
         {
-            progress += Time.deltaTime;
+            timeProgress += Time.deltaTime;
 
-            if (progress < lifeTime)
+            if (timeProgress < lifeTime)
             {
                 UpdateColor();
             }
         }
 
-        if(progress > lifeTime && isAlive)
+        if(timeProgress > lifeTime && isAlive)
         {
             isAlive = false;
             StartCoroutine(BlinkAndDestroyCoroutine());
@@ -144,7 +144,7 @@ public class BlockScript : MonoBehaviour
 
     private void UpdateColor()
     {
-        float t = progress / lifeTime;
+        float t = timeProgress / lifeTime;
         float newColorV = Mathf.Lerp(initColorV, targetColorV, t);
         Color newCOlor = Color.HSVToRGB(colorH, colorS, newColorV);
 

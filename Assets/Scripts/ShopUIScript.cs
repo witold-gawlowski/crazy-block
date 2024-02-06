@@ -21,6 +21,7 @@ public class ShopUIScript : MonoBehaviour
     [SerializeField] private TMP_Text rerollText;
     [SerializeField] private Button rerollButton;
     [SerializeField] private TMP_Text rewardText;
+    [SerializeField] private GameObject mapCompletedPanel;
 
 
     public Action RerollPressedEvent;
@@ -67,8 +68,15 @@ public class ShopUIScript : MonoBehaviour
 
     public void HandleLevelCompleted(int cash)
     {
+        mapCompletedPanel.SetActive(true);
         rewardText.text = "+$" + cash;  
     }
+
+    public void HandleNewLevel()
+    {
+        mapCompletedPanel.SetActive(false);
+    }
+    
 
     public void HandleRerollPress()
     {

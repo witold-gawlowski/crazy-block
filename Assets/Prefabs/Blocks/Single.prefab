@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColorV: 0.45
-  lifeTime: 45
+  lifeTime: 90
   blinkDuration: 1.2
   destroyDelay: 1
   price: 10

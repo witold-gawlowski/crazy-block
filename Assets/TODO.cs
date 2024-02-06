@@ -9,17 +9,9 @@ namespace design
     {
         class main
         {
-            // symmetric blocks
-
-            // eazy restart
-
-            // zmiana koloru przy snapie
 
             // zatrzymanie i feedback po levelu
-            // prosty start: mało klockow -> levele zlozone z tych klockow
-            // zbyt wymagający tap
 
-            // block frequency
             // add levels
 
             //============================
@@ -27,6 +19,9 @@ namespace design
             // icon: tetris block with dollar
             // put back to shop
             // link game as example to responsiveness threads
+            // eazy restart
+            // block frequency
+            // zmiana koloru przy snapie
         }
 
         class Pytanai

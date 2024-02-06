@@ -105,7 +105,7 @@ public class MapManager : MonoBehaviour
         Debug.Log(_coveredArea + " " + mapSize);
         if(_coveredArea == mapSize)
         {
-            GlobalGameManager.Instance.HandleMapCompleted();
+            GlobalGameManager.Instance.FinalizeLevel();
         }
     }
 }

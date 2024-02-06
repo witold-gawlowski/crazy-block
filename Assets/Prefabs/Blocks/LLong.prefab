@@ -274,7 +274,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: lifeTime
-      value: 45
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: destroyDelay

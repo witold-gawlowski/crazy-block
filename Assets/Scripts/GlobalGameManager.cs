@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GlobalGameManager : MonoBehaviour
@@ -35,8 +36,40 @@ public class GlobalGameManager : MonoBehaviour
         LoadCurrentNode();
     }
 
-    public void HandleMapCompleted()
+    //public void HandleMapCompleted()
+    //{
+    //    ClearSnappedBlocks();
+
+    //    Destroy(_currentMapObj);
+
+    //    ShopManager.Instance.AddCash(_currentMapNode.GetReward());
+
+    //    _currentMapNode = _currentMapNode.GetNext();
+    //    LoadCurrentNode();
+
+    //    ui.HandleLevelCompleted(_currentMapNode.GetReward());
+
+    //    MapManager.GetInstance().Init();
+    //}
+
+    public void FinalizeLevel()
     {
+        StartCoroutine(FinalizeLevelCOrouitne());
+    }
+
+    private IEnumerator FinalizeLevelCOrouitne()
+    {
+        ui.HandleLevelCompleted(_currentMapNode.GetReward());
+
+        yield return new WaitForSeconds(2);
+        StartNewLevel();
+    }
+
+    private void StartNewLevel()
+    {
+
+        ui.HandleNewLevel();
+
         ClearSnappedBlocks();
 
         Destroy(_currentMapObj);
@@ -45,8 +78,6 @@ public class GlobalGameManager : MonoBehaviour
 
         _currentMapNode = _currentMapNode.GetNext();
         LoadCurrentNode();
-
-        ui.HandleLevelCompleted(_currentMapNode.GetReward());
 
         MapManager.GetInstance().Init();
     }
