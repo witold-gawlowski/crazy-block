@@ -629,7 +629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07de6bfc827f7434eaef3d6fe8b7d679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingerOffsetBuildupDuration: 0.15
+  fingerOffsetBuildupDuration: 0.11
+  tapThresholdDuration: 0.15
 --- !u!1 &530077724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,7 +1595,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v1.13
+  m_text: v1.14
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

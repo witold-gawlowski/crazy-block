@@ -21,10 +21,12 @@ public class DragManager : MonoBehaviour
     private Vector3 _pointerPositionWorld;
     private bool _isDraggedBlockSnapped;
     private float _touchDuration;
+    private float _timeFromDragStart;
     private Vector3 _mouseTouchStartPosition;
     private bool _dragStarted;
 
     [SerializeField] private float fingerOffsetBuildupDuration;
+    [SerializeField] private float tapThresholdDuration;
 
     public static DragManager Instance { get; private set; }
 
@@ -57,6 +59,7 @@ public class DragManager : MonoBehaviour
         {
             DraggedBlock = collider.transform.parent.gameObject;
             _touchDuration = 0;
+            _timeFromDragStart = 0;
             _mouseTouchStartPosition = _pointerPositionWorld;
         }
     }
@@ -68,10 +71,11 @@ public class DragManager : MonoBehaviour
         {
             _touchDuration += Time.deltaTime;
 
-            if (!IsTap() && !_dragStarted && IsInteractible(_draggedScript))
+            if (IsDrag() && !_dragStarted && IsInteractible(_draggedScript)) 
             {
                 OnStartDrag();
                 _dragStarted = true;
+
             }
 
             if (_dragStarted)
@@ -100,10 +104,16 @@ public class DragManager : MonoBehaviour
         }
     }
 
+    private bool IsDrag()
+    {
+        var mag = (_pointerPositionWorld - _mouseTouchStartPosition).magnitude;
+        return mag > 0.15f;
+    }
+
     private bool IsTap()
     {
         var mag = (_pointerPositionWorld - _mouseTouchStartPosition).magnitude;
-        return mag < 0.15f && _touchDuration < 0.1f;
+        return mag < 0.15f && _touchDuration < tapThresholdDuration;
     }
 
     private void OnStartDrag()
@@ -121,6 +131,7 @@ public class DragManager : MonoBehaviour
 
     private void OnDrag()
     {
+        _timeFromDragStart += Time.deltaTime;
         UpdatePosition();
         ShopManager.Instance.HandleBlockDrag(DraggedBlock);
         return;
@@ -128,7 +139,7 @@ public class DragManager : MonoBehaviour
 
     void UpdatePosition()
     {
-        var fingerOffset = Vector2.up * Mathf.Clamp01(_touchDuration / fingerOffsetBuildupDuration) * 3.0f;
+        var fingerOffset = Vector2.up * Mathf.Clamp01(_timeFromDragStart / fingerOffsetBuildupDuration) * 3.0f;
         var newPosition = (Vector2)_pointerPositionWorld + fingerOffset - _draggedScript.GetMiddleOffset();
         var newPositionRounded = Helpers.RoundPosition(newPosition);
         if (MapManager.GetInstance().CanBePlaced(DraggedBlock, newPositionRounded))

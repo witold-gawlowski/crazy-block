@@ -16,11 +16,11 @@ public class Helpers : MonoBehaviour
 
     public static IEnumerable<Vector2Int> GetBlockEnumerator(GameObject block, Vector2Int coordinates)
     {
-        foreach (Transform tileTransform in block.transform)
+        foreach (Transform t in block.transform)
         {
-            if (tileTransform != block.transform)
+            if (t != block.transform && t.tag == "BlockTile")
             {
-                yield return coordinates + Helpers.RoundPosition(tileTransform.position - block.transform.position);
+                yield return coordinates + Helpers.RoundPosition(t.position - block.transform.position);
             }
         }
     }
