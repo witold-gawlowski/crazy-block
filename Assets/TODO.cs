@@ -9,13 +9,17 @@ namespace design
     {
         class main
         {
-
-            // zatrzymanie i feedback po levelu
-
-            // add levels
-
+            // cant take back placed block
+            // easier level on start
+            // normalizacja nagród poziomów -> piczba płytek * 5 + 15%
+            // normalizacja kosztów klocków -> liczba płytek * 5 +- random
+            // hand made levels
+            // progresja z nowymi poziomami
+            // musi być flow na początku -> proste poziomy
+            // stworzyć bazowy poziom trudności -> musi się dać grać w kółko 
+            // trzeba dać bazowe klocki z częstościami
             //============================
-            // reroll musi zaslania klocki
+            // reroll musi zaslanić klocki
             // icon: tetris block with dollar
             // put back to shop
             // link game as example to responsiveness threads
@@ -80,6 +84,15 @@ namespace design
                 // musi byc trochę hajsu, musza być w miarę proste poziomy, pierwszy powinein być bardzo prosty -> dwa klocki
                 // co jest potrzebne do skonczenia gry
                 // levele, balans, 
+
+                // co składa się na progresję? 
+
+
+                // bazowy poziom trudności -> kilka zmieniających sie prostych poziomów
+                // wtedy dokładamy progresję
+                // proste klocki na początek -> nowy level nowe klocki
+                // wszystkie klocki trzeba podzielić na kategorie zaawansowania (trudności) 
+                // kiedy wchodzą kategorie ? wraz z zwiększającem się poziomem trudności
             }
         }
     }

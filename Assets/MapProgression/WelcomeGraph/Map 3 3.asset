@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1aeec0680dd08e489bba3ec4de06715, type: 3}
+  m_Name: Map 3 3
+  m_EditorClassIdentifier: 
+  mapPrefab: {fileID: 6395608433285616630, guid: fffbd234dbf3afe40a55da64f46a9ded, type: 3}
+  successors:
+  - Node: {fileID: 11400000, guid: 31eaed3a88c8dd741a849311744806dc, type: 2}
+    Chance: 2
+  - Node: {fileID: 11400000, guid: 1627db256451d5e4c8f15dc1a49474b4, type: 2}
+    Chance: 2
+  - Node: {fileID: 11400000, guid: 3f2d0ff55e2ff944a9013086926df5ed, type: 2}
+    Chance: 2
+  - Node: {fileID: 11400000, guid: 1a1fd0e0135eabf4784acfdf3db0e696, type: 2}
+    Chance: 1
+  reward: 200

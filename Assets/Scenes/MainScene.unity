@@ -1650,7 +1650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94bc743d1102e494b9c6ad81af352fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staterMapNode: {fileID: 11400000, guid: 18ada74d937f8354aa4b6468dff86bd0, type: 2}
+  staterMapNode: {fileID: 11400000, guid: 4874f3c93ac96094992e3072061360b7, type: 2}
   ui: {fileID: 277802198}
 --- !u!1 &1392579049
 GameObject:

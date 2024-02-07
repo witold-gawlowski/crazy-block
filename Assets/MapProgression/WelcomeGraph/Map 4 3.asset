@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1aeec0680dd08e489bba3ec4de06715, type: 3}
-  m_Name: Map 0
+  m_Name: Map 4 3
   m_EditorClassIdentifier: 
-  mapPrefab: {fileID: 8286895468993662025, guid: 73f177fa22972fb47bce1916ec4c1788, type: 3}
+  mapPrefab: {fileID: 4719560810848254010, guid: 5635a3ebcf29f1f499ba8d08cd3f167f, type: 3}
   successors:
-  - Node: {fileID: 11400000, guid: 2f934cb65cf901342b755667bfa88e7b, type: 2}
-    Chance: 3
+  - Node: {fileID: 11400000, guid: 71935258fe5258e4d83eae1f807492cc, type: 2}
+    Chance: 1
+  - Node: {fileID: 11400000, guid: 0818cc98d11520c4888c4d3c23730f74, type: 2}
+    Chance: 1
   reward: 200
