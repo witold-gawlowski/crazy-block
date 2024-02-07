@@ -291,10 +291,10 @@ RectTransform:
   - {fileID: 1715786814}
   m_Father: {fileID: 552531647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.3702, y: 5.3564}
-  m_SizeDelta: {x: 1.4, y: 1.4}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -0.5288539, y: 6.2091055}
+  m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.23557308, y: 4.1045527}
 --- !u!114 &164016007
 MonoBehaviour:
@@ -317,7 +317,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.61587757, g: 0.754717, b: 0.7506389, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -894,8 +894,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.08, y: -10.33}
-  m_SizeDelta: {x: -2.7199998, y: -0.54000044}
+  m_AnchoredPosition: {x: 5.08, y: -10.390002}
+  m_SizeDelta: {x: -2.7199998, y: -0.42000437}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &552531648
 MonoBehaviour:
@@ -910,7 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.348, g: 0.348, b: 0.348, a: 0.42745098}
+  m_Color: {r: 0.348, g: 0.348, b: 0.348, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1115,42 +1115,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 277802198}
   blockPrefabs:
-  - {fileID: 7577407780560230504, guid: b37d5403f1354874fa345cc669824507, type: 3}
-  - {fileID: 2763309185974189147, guid: 00c17abb9f25a15419290ca5a5fc770d, type: 3}
-  - {fileID: 326899511126365277, guid: f9aec0baf7771124dbf84122ef1a089e, type: 3}
-  - {fileID: 7577407780560230504, guid: 10b8f940015c0a44bad37687401bc963, type: 3}
-  - {fileID: 7577407780560230504, guid: d7d1e51fad87af4469e0131b7b26f467, type: 3}
-  - {fileID: 7577407780560230504, guid: 236a5d532dd38fc46a563bb0f65bbd84, type: 3}
-  - {fileID: 7970726329380611984, guid: 3acffeb66240a63439184771f5a591e3, type: 3}
-  - {fileID: 326899511126365277, guid: cf701462892ec8e448bab02d596138cc, type: 3}
-  - {fileID: 326899511126365277, guid: 8a666d9c376f6bc48bca792371d0007a, type: 3}
-  - {fileID: 326899511126365277, guid: a681ebec1f672a944b7718fec82ea6ac, type: 3}
-  - {fileID: 326899511126365277, guid: 986702621eab80b4c85e32a1fb2573f9, type: 3}
-  - {fileID: 326899511126365277, guid: 166ca9f7839207e458a4339171cda38a, type: 3}
-  - {fileID: 326899511126365277, guid: ef6742f2bdd51914ab6203df46516212, type: 3}
-  - {fileID: 7577407780560230504, guid: a8a817204c4055e4caf0199520a4a243, type: 3}
-  - {fileID: 7577407780560230504, guid: 1ba344010dc09d9449632ff9deabce29, type: 3}
-  - {fileID: 326899511126365277, guid: c4462ee16154f94459a8f54b5f85c0d4, type: 3}
-  - {fileID: 7577407780560230504, guid: ff4fc68057c82a94b95e869fdf86a607, type: 3}
-  - {fileID: 326899511126365277, guid: 596c0b5e746d1204884685299c8c6fe9, type: 3}
-  - {fileID: 7577407780560230504, guid: 13f19229a6339024786826500d6b1ad9, type: 3}
-  - {fileID: 7577407780560230504, guid: ee212ce3ed59e8e4881ce05692d83e3e, type: 3}
-  - {fileID: 326899511126365277, guid: 1bea77701174cec4a9a57b141573a479, type: 3}
-  - {fileID: 326899511126365277, guid: a74441453abf9144580563c2f6f480b7, type: 3}
-  - {fileID: 326899511126365277, guid: 595bad12d8280c44fb4651f86d5127f7, type: 3}
-  - {fileID: 7577407780560230504, guid: f13db5f490999f242b139e36444989d4, type: 3}
-  - {fileID: 7577407780560230504, guid: 79ad1df23c781304e91650728f1298dc, type: 3}
-  - {fileID: 7577407780560230504, guid: cb2249e22d58f1144925fa90f3b48bbf, type: 3}
-  - {fileID: 7577407780560230504, guid: 787929874c90bfa4fa09bddc10f93ccb, type: 3}
-  - {fileID: 7577407780560230504, guid: 74ec0e248a696a84c9560c5455c9b9fc, type: 3}
-  - {fileID: 7577407780560230504, guid: 531b1525b6cce9540b84f225954746fd, type: 3}
-  - {fileID: 326899511126365277, guid: bf306b7d334bdd84b8b185d0c4d12180, type: 3}
+  - {fileID: 5760947647094079715, guid: 00c17abb9f25a15419290ca5a5fc770d, type: 3}
+  - {fileID: 37045253083505872, guid: d7d1e51fad87af4469e0131b7b26f467, type: 3}
+  - {fileID: 37045253083505872, guid: a8a817204c4055e4caf0199520a4a243, type: 3}
+  - {fileID: -1889451743431595494, guid: 1ba344010dc09d9449632ff9deabce29, type: 3}
+  - {fileID: 7864025003624589541, guid: c4462ee16154f94459a8f54b5f85c0d4, type: 3}
+  - {fileID: 37045253083505872, guid: 74ec0e248a696a84c9560c5455c9b9fc, type: 3}
+  - {fileID: 37045253083505872, guid: b37d5403f1354874fa345cc669824507, type: 3}
+  - {fileID: 7864025003624589541, guid: f9aec0baf7771124dbf84122ef1a089e, type: 3}
+  - {fileID: 37045253083505872, guid: 236a5d532dd38fc46a563bb0f65bbd84, type: 3}
+  - {fileID: 519731524773305128, guid: 3acffeb66240a63439184771f5a591e3, type: 3}
+  - {fileID: 7864025003624589541, guid: a681ebec1f672a944b7718fec82ea6ac, type: 3}
+  - {fileID: 7864025003624589541, guid: 986702621eab80b4c85e32a1fb2573f9, type: 3}
+  - {fileID: 7864025003624589541, guid: 166ca9f7839207e458a4339171cda38a, type: 3}
+  - {fileID: 7864025003624589541, guid: ef6742f2bdd51914ab6203df46516212, type: 3}
+  - {fileID: 37045253083505872, guid: ff4fc68057c82a94b95e869fdf86a607, type: 3}
+  - {fileID: 7864025003624589541, guid: 596c0b5e746d1204884685299c8c6fe9, type: 3}
+  - {fileID: 37045253083505872, guid: 79ad1df23c781304e91650728f1298dc, type: 3}
+  - {fileID: 37045253083505872, guid: 531b1525b6cce9540b84f225954746fd, type: 3}
+  - {fileID: 7864025003624589541, guid: bf306b7d334bdd84b8b185d0c4d12180, type: 3}
+  - {fileID: 7864025003624589541, guid: cf701462892ec8e448bab02d596138cc, type: 3}
+  - {fileID: 7864025003624589541, guid: 8a666d9c376f6bc48bca792371d0007a, type: 3}
+  - {fileID: 37045253083505872, guid: ee212ce3ed59e8e4881ce05692d83e3e, type: 3}
+  - {fileID: 7864025003624589541, guid: 1bea77701174cec4a9a57b141573a479, type: 3}
+  - {fileID: 7864025003624589541, guid: a74441453abf9144580563c2f6f480b7, type: 3}
+  - {fileID: 7864025003624589541, guid: 595bad12d8280c44fb4651f86d5127f7, type: 3}
+  - {fileID: 37045253083505872, guid: f13db5f490999f242b139e36444989d4, type: 3}
+  - {fileID: 37045253083505872, guid: cb2249e22d58f1144925fa90f3b48bbf, type: 3}
+  - {fileID: 37045253083505872, guid: 787929874c90bfa4fa09bddc10f93ccb, type: 3}
+  - {fileID: 37045253083505872, guid: 10b8f940015c0a44bad37687401bc963, type: 3}
+  - {fileID: 37045253083505872, guid: 13f19229a6339024786826500d6b1ad9, type: 3}
   positionMarkers:
   - {fileID: 1392579050}
   - {fileID: 974884400}
   - {fileID: 1716400165}
-  initialCash: 120
-  rerollPrice: 10
+  initialCash: 150
+  rerollPrice: 5
 --- !u!1 &891093470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,9 +1218,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 552531647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.63997}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.61}
   m_SizeDelta: {x: 2, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &896695626
@@ -1243,7 +1243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $10
+  m_text: $5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1927,8 +1927,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

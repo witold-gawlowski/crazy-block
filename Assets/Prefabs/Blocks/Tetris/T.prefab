@@ -81,10 +81,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColorV: 0.45
-  lifeTime: 90
+  lifeTime: 360
   blinkDuration: 1.2
   destroyDelay: 1
   price: 10
+  frequency: 8
 --- !u!1001 &2071631400598974909
 PrefabInstance:
   m_ObjectHideFlags: 0

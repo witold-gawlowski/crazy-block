@@ -4,13 +4,20 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BlockScript : MonoBehaviour
+
+public interface IWeighted
+{
+    public float GetWeight();
+}
+
+public class BlockScript : MonoBehaviour, IWeighted
 {
     [SerializeField] private float targetColorV = 0.45f;
     [SerializeField] private float lifeTime = 10f;
     [SerializeField] private float blinkDuration = 1f;
     [SerializeField] private float destroyDelay = 3f;
     [SerializeField] private int price = 10;
+    [SerializeField] private float frequency = 1f;
 
     private GameObject _pivot;
 
@@ -97,6 +104,11 @@ public class BlockScript : MonoBehaviour
     public int GetPrice()
     {
         return price;
+    }
+
+    public float GetWeight()
+    {
+        return frequency;
     }
 
     public bool IsBought()

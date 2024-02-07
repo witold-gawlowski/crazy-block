@@ -10,14 +10,8 @@ namespace design
         class main
         {
             // cant take back placed block
-            // easier level on start
             // normalizacja nagród poziomów -> piczba płytek * 5 + 15%
             // normalizacja kosztów klocków -> liczba płytek * 5 +- random
-            // hand made levels
-            // progresja z nowymi poziomami
-            // musi być flow na początku -> proste poziomy
-            // stworzyć bazowy poziom trudności -> musi się dać grać w kółko 
-            // trzeba dać bazowe klocki z częstościami
             //============================
             // reroll musi zaslanić klocki
             // icon: tetris block with dollar

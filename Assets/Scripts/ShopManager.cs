@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private ShopUIScript ui;
-    [SerializeField] private List<GameObject> blockPrefabs;
+    [SerializeField] private List<BlockScript> blockPrefabs;
     [SerializeField] private List<Transform> positionMarkers;
 
     [SerializeField] private int initialCash = 100;
@@ -79,7 +79,7 @@ public class ShopManager : MonoBehaviour
         offer = new List<BlockScript>();
         foreach (Transform t in positionMarkers)
         {
-            var prefab = Helpers.GetRandomElement<GameObject>(blockPrefabs);
+            var prefab = Helpers.GetRandomWeightedElement<BlockScript>(blockPrefabs);
             var block = Instantiate(prefab, t.transform.position, Quaternion.identity);
             var script = block.GetComponent<BlockScript>();
             offer.Add(script);

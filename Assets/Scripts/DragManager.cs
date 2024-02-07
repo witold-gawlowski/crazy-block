@@ -21,7 +21,7 @@ public class DragManager : MonoBehaviour
     private Vector3 _pointerPositionWorld;
     private bool _isDraggedBlockSnapped;
     private float _touchDuration;
-    private float _timeFromDragStart;
+    private float _timeFromBoughtDragStart;
     private Vector3 _mouseTouchStartPosition;
     private bool _dragStarted;
 
@@ -59,7 +59,7 @@ public class DragManager : MonoBehaviour
         {
             DraggedBlock = collider.transform.parent.gameObject;
             _touchDuration = 0;
-            _timeFromDragStart = 0;
+            _timeFromBoughtDragStart = 0;
             _mouseTouchStartPosition = _pointerPositionWorld;
         }
     }
@@ -75,7 +75,6 @@ public class DragManager : MonoBehaviour
             {
                 OnStartDrag();
                 _dragStarted = true;
-
             }
 
             if (_dragStarted)
@@ -126,12 +125,19 @@ public class DragManager : MonoBehaviour
 
     private bool IsInteractible(BlockScript block)
     {
+        if(MapManager.GetInstance().IsPlaced(block.gameObject))
+        {
+            return false;
+        }
         return block.IsBought() || ShopManager.Instance.CanBeBought(block);
     }
 
     private void OnDrag()
     {
-        _timeFromDragStart += Time.deltaTime;
+        if (_draggedScript.IsBought())
+        {
+            _timeFromBoughtDragStart += Time.deltaTime;
+        }
         UpdatePosition();
         ShopManager.Instance.HandleBlockDrag(DraggedBlock);
         return;
@@ -139,8 +145,9 @@ public class DragManager : MonoBehaviour
 
     void UpdatePosition()
     {
-        var fingerOffset = Vector2.up * Mathf.Clamp01(_timeFromDragStart / fingerOffsetBuildupDuration) * 3.0f;
-        var newPosition = (Vector2)_pointerPositionWorld + fingerOffset - _draggedScript.GetMiddleOffset();
+        bool isBought = _draggedScript.IsBought();
+        var fingerOffset = Vector2.up * Mathf.Clamp01(_timeFromBoughtDragStart / fingerOffsetBuildupDuration) * 3.0f;
+        var newPosition = (Vector2)_pointerPositionWorld + (isBought ? fingerOffset : Vector2.zero) - _draggedScript.GetMiddleOffset();
         var newPositionRounded = Helpers.RoundPosition(newPosition);
         if (MapManager.GetInstance().CanBePlaced(DraggedBlock, newPositionRounded))
         {

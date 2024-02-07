@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1aeec0680dd08e489bba3ec4de06715, type: 3}
+  m_Name: double tetris 6
+  m_EditorClassIdentifier: 
+  mapPrefab: {fileID: 8286895468993662025, guid: 5ff8c74b8137d9941bf38fc517afca6b, type: 3}
+  successors:
+  - Node: {fileID: 11400000, guid: 17f0615db0aff3e48a02f41e875616a1, type: 2}
+    Chance: 3
+  - Node: {fileID: 11400000, guid: 18ada74d937f8354aa4b6468dff86bd0, type: 2}
+    Chance: 3
+  reward: 30

@@ -81,4 +81,27 @@ public class Helpers : MonoBehaviour
         DateTime currentUTC = DateTime.UtcNow;
         return ((DateTimeOffset)currentUTC).ToUnixTimeSeconds();
     }
+
+    public static T GetRandomWeightedElement<T>(List<T> weightedList) where T : IWeighted
+    {
+        // Calculate total weight
+        float totalWeight = weightedList.Sum(item => item.GetWeight());
+
+        // Generate a random value between 0 and totalWeight
+        float randomValue = Random.value * totalWeight;
+
+        // Iterate through the list and find the element
+        float currentWeight = 0;
+        foreach (var item in weightedList)
+        {
+            currentWeight += item.GetWeight();
+            if (randomValue <= currentWeight)
+            {
+                return item;
+            }
+        }
+
+        // This should not happen, but return null if it does
+        return default(T);
+    }
 }

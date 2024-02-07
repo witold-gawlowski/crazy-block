@@ -10,14 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1aeec0680dd08e489bba3ec4de06715, type: 3}
-  m_Name: Map 1 1
+  m_Name: double tetris 7
   m_EditorClassIdentifier: 
-  mapPrefab: {fileID: 4192601516933046503, guid: 44272888275d50f45b10fa4e11361b95, type: 3}
+  mapPrefab: {fileID: 8286895468993662025, guid: a2d093980680d554791d671c23ef1a1c, type: 3}
   successors:
-  - Node: {fileID: 11400000, guid: 31e1b4c77686ef54ea7171879fd2e7d7, type: 2}
+  - Node: {fileID: 11400000, guid: 4f2c942f43fc3184384b4904e7135386, type: 2}
     Chance: 3
-  - Node: {fileID: 11400000, guid: 41623c6250b9dbe4ea45903ea4d99b68, type: 2}
-    Chance: 3
-  - Node: {fileID: 11400000, guid: d081c00ebe3f7a644ac3bd098ab8ffa2, type: 2}
-    Chance: 1
-  reward: 200
+  - Node: {fileID: 11400000, guid: 18ada74d937f8354aa4b6468dff86bd0, type: 2}
+    Chance: 4
+  reward: 30
