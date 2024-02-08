@@ -18,7 +18,6 @@ public class ShopManager : MonoBehaviour
 
     private int _cash;
     private List<BlockScript> offer;
-    private BlockScript draggedScript;
 
     public static ShopManager Instance { get; private set; }
     private void Awake()
@@ -88,21 +87,15 @@ public class ShopManager : MonoBehaviour
         ui.HandleNewShopOffer(offer, Cash);
     }
 
-    public void HandleBlockDrag(GameObject block)
+    public void HandleBlockRelease(BlockScript draggedScript)
     {
-        if(draggedScript == null || draggedScript.gameObject != block)
+        if (!IsBought(draggedScript))
         {
-            draggedScript = block.GetComponent<BlockScript>();
-        }
-
-        if(!IsBought(draggedScript))
-        {
-            var mask = LayerMask.GetMask(new string[] { "Respawn" });
-            if (!Physics2D.OverlapPoint(block.transform.position, mask))
+            if(!draggedScript.IsOverShop())
             {
                 Buy(draggedScript);
             }
-        } 
+        }
     }
 
     public bool CanBeBought(BlockScript block)
@@ -116,7 +109,7 @@ public class ShopManager : MonoBehaviour
 
     private bool IsBought(BlockScript blockScript)
     {
-        return !offer.Contains(draggedScript);
+        return !offer.Contains(blockScript);
     }
 
     public void Buy(BlockScript block)

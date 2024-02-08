@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GlobalGameManager : MonoBehaviour
@@ -6,6 +7,8 @@ public class GlobalGameManager : MonoBehaviour
     [SerializeField] private SuccessionNode staterMapNode;
 
     [SerializeField] private ShopUIScript ui;
+
+    [SerializeField] private Color mapColor;
 
     private GameObject _currentMapObj;
     private SuccessionNode _currentMapNode;
@@ -90,8 +93,18 @@ public class GlobalGameManager : MonoBehaviour
     private void LoadCurrentNode()
     {
         _currentMapObj = Instantiate(_currentMapNode.GetPrefab());
+        UpdateMapColor();
     }
     
+    private void UpdateMapColor()
+    {
+        var srs = _currentMapObj.GetComponentsInChildren<SpriteRenderer>();
+        foreach(var r in srs)
+        {
+            r.color = mapColor;
+        }
+    }
+
     private void ClearSnappedBlocks()
     {
         var blocks = GameObject.FindGameObjectsWithTag("Block");

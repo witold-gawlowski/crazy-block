@@ -23,6 +23,9 @@ public class ShopUIScript : MonoBehaviour
     [SerializeField] private TMP_Text rewardText;
     [SerializeField] private GameObject mapCompletedPanel;
 
+    [SerializeField] private Color availableColor;
+    [SerializeField] private Color unavailableColor;
+
 
     public Action RerollPressedEvent;
 
@@ -117,12 +120,12 @@ public class ShopUIScript : MonoBehaviour
         if(canAffordReroll)
         {
             rerollButton.interactable = true;
-            rerollText.color = Color.white;
+            rerollText.color = availableColor;
         }
         else
         {
             rerollButton.interactable = false;
-            rerollText.color = Color.red;
+            rerollText.color = unavailableColor;
         }
     }
 
@@ -135,11 +138,11 @@ public class ShopUIScript : MonoBehaviour
                 var price = item.blockScript.GetPrice();
                 if (price <= currentCash)
                 {
-                    item.priceText.color = Color.white;
+                    item.priceText.color = availableColor;
                 }
                 else
                 {
-                    item.priceText.color = Color.red;
+                    item.priceText.color = unavailableColor;
                 }
             }
         }

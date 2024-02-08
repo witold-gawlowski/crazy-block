@@ -18,6 +18,8 @@ public class BlockScript : MonoBehaviour, IWeighted
     [SerializeField] private float destroyDelay = 3f;
     [SerializeField] private int price = 10;
     [SerializeField] private float frequency = 1f;
+    [SerializeField] private float prePurchaseAlphssa = 0.6f;
+    [SerializeField] private Color placedCOlor;
 
     private GameObject _pivot;
 
@@ -32,6 +34,7 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     private bool isAlive;
     private bool isBought;
+    private bool isPlaced;
 
 
     private void Awake()
@@ -64,11 +67,13 @@ public class BlockScript : MonoBehaviour, IWeighted
         timeProgress = 0;
         isAlive = true;
         isBought = false;
+        isPlaced = false;
+        UpdateToShopColor();
     }
 
     private void Update()
     {
-        if (isBought)
+        if (isBought && !isPlaced)
         {
             timeProgress += Time.deltaTime;
 
@@ -96,6 +101,17 @@ public class BlockScript : MonoBehaviour, IWeighted
         return _pivot.transform;
     }
 
+    public bool IsOverShop()
+    {
+        var mask = LayerMask.GetMask(new string[] { "Respawn" });
+        if (Physics2D.OverlapPoint(transform.position, mask))
+        {
+            Debug.Log("overshop");
+            return true;
+        }
+        return false;
+    }
+
     public Vector2 GetMiddleOffset()
     {
         return _pivot.transform.position - transform.position;
@@ -118,8 +134,15 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     public void ProcessPurchase()
     {
+        UpdateCOlorToPurchased();
         isBought = true;
         MoveToBack();
+    }
+
+    public void ProcessPlacement()
+    {
+        isPlaced = true;
+        UpdateColorToPlaced();
     }
 
     private IEnumerator BlinkAndDestroyCoroutine()
@@ -152,6 +175,34 @@ public class BlockScript : MonoBehaviour, IWeighted
         }
 
         Destroy(gameObject);
+    }
+    
+    private void UpdateCOlorToPurchased()
+    {
+        Color newColor = srs[0].color;
+        newColor.a = 1;
+        foreach (var item in srs)
+        {
+            item.color = newColor;
+        }
+    }
+
+    private void UpdateColorToPlaced()
+    {
+        foreach (var item in srs)
+        {
+            item.color = placedCOlor;
+        }
+    }
+
+    private void UpdateToShopColor()
+    {
+        Color newColor = srs[0].color;
+        newColor.a = prePurchaseAlphssa;
+        foreach (var item in srs)
+        {
+            item.color = newColor;
+        }
     }
 
     private void UpdateColor()

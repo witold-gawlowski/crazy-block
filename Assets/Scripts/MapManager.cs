@@ -102,7 +102,6 @@ public class MapManager : MonoBehaviour
 
     private void CheckForLevelCompleted()
     {
-        Debug.Log(_coveredArea + " " + mapSize);
         if(_coveredArea == mapSize)
         {
             GlobalGameManager.Instance.FinalizeLevel();

@@ -57,6 +57,8 @@ MonoBehaviour:
   destroyDelay: 1
   price: 10
   frequency: 1
+  prePurchaseAlphssa: 0.6
+  placedCOlor: {r: 0.15686275, g: 0.24705882, b: 0.38431373, a: 1}
 --- !u!1 &8115393076529385480
 GameObject:
   m_ObjectHideFlags: 0

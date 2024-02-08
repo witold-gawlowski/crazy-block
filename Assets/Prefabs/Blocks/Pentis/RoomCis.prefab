@@ -288,6 +288,22 @@ PrefabInstance:
       propertyPath: blinkDuration
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
+      propertyPath: placedCOlor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
+      propertyPath: placedCOlor.b
+      value: 0.38431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
+      propertyPath: placedCOlor.g
+      value: 0.24705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
+      propertyPath: placedCOlor.r
+      value: 0.15686275
+      objectReference: {fileID: 0}
     - target: {fileID: 7577407780560230504, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: m_Name
       value: RoomCis

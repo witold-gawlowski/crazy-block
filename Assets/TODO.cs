@@ -9,16 +9,26 @@ namespace design
     {
         class main
         {
-            // cant take back placed block
-            // normalizacja nagród poziomów -> piczba płytek * 5 + 15%
-            // normalizacja kosztów klocków -> liczba płytek * 5 +- random
-            //============================
+            // lepsze znikanie: bez mrugania, po prostu brok ciemnieje, potem raz ciemnieje delikatnie skokowo
+                // wtedy już nie można go ruszać i w ciągu 1 sekundy staje sie przezroczysty i znika
+            // zmiana koloru na brązowy
+            // klocki póki nie kupione powinny być jaśniejsze
+            // klocki do momentu wyciągnięcia sa blueprintami
+            // nie da sie wrocic klockiem do sklepu
+            // można wrocic z kupnem puki sę nie puściło
+            // kasa w sklepie i jakiś feedback że się zmieniła 
+            // klicki nie podchodzą pod przycisk reroll
+            // restart button
+            // za łatwo żeby klocki były kupione
+            // potrzebny restart
+            // klocki nie mogą wchodzić pod restart -> restart zasłania
+            //
+            //================================
             // reroll musi zaslanić klocki
             // icon: tetris block with dollar
             // put back to shop
             // link game as example to responsiveness threads
             // eazy restart
-            // block frequency
             // zmiana koloru przy snapie
         }
 
@@ -81,12 +91,13 @@ namespace design
 
                 // co składa się na progresję? 
 
-
                 // bazowy poziom trudności -> kilka zmieniających sie prostych poziomów
                 // wtedy dokładamy progresję
                 // proste klocki na początek -> nowy level nowe klocki
                 // wszystkie klocki trzeba podzielić na kategorie zaawansowania (trudności) 
                 // kiedy wchodzą kategorie ? wraz z zwiększającem się poziomem trudności
+
+                // jak pokazać że klocki zużywają pieniądze
             }
         }
     }

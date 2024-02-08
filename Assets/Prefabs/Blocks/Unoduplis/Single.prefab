@@ -83,6 +83,8 @@ MonoBehaviour:
   destroyDelay: 1
   price: 10
   frequency: 2
+  prePurchaseAlphssa: 0.6
+  placedCOlor: {r: 0.15686275, g: 0.24705882, b: 0.38431373, a: 1}
 --- !u!1001 &2071631400598974909
 PrefabInstance:
   m_ObjectHideFlags: 0
