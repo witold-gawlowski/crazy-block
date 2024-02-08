@@ -10,24 +10,15 @@ namespace design
         class main
         {
             // animacja kasy +-
-            // reroll icon
-            // kompletujący klocek nie odejmuje hajsu przed koncem poziomu
             // order klocków powinien rosnać wraz ze spawnowaniem
             // klocki położone powinny mieć ustalony order
             // lepsze znikanie: bez mrugania, po prostu brok ciemnieje, potem raz ciemnieje delikatnie skokowo
                 // wtedy już nie można go ruszać i w ciągu 1 sekundy staje sie przezroczysty i znika
             // zmiana koloru na brązowy
-            // klocki póki nie kupione powinny być jaśniejsze
-            // klocki do momentu wyciągnięcia sa blueprintami
-            // nie da sie wrocic klockiem do sklepu
-            // można wrocic z kupnem puki sę nie puściło
             // kasa w sklepie i jakiś feedback że się zmieniła 
-            // klicki nie podchodzą pod przycisk reroll
             // restart button
-            // za łatwo żeby klocki były kupione
             // potrzebny restart
             // klocki nie mogą wchodzić pod restart -> restart zasłania
-            //
             //================================
             // reroll musi zaslanić klocki
             // icon: tetris block with dollar
