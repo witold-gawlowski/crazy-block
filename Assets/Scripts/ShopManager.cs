@@ -79,8 +79,12 @@ public class ShopManager : MonoBehaviour
         foreach (Transform t in positionMarkers)
         {
             var prefab = Helpers.GetRandomWeightedElement<BlockScript>(blockPrefabs);
-            var block = Instantiate(prefab, t.transform.position, Quaternion.identity);
+            var block = Instantiate(prefab);
             var script = block.GetComponent<BlockScript>();
+            script.Init();
+            script.SetPosition(t.transform.position);
+
+
             offer.Add(script);
         }
 

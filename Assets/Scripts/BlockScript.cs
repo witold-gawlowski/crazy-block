@@ -39,27 +39,7 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     private void Awake()
     {
-        srs = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
-        _size = srs.Count;
 
-        foreach(Transform t in transform)
-        {
-            if(t.tag == "Pivot")
-            {
-                _pivot = t.gameObject;
-                break;
-            }
-        }
-
-        Vector3 middle = Vector3.zero;
-        foreach (SpriteRenderer r in srs)
-        {
-            middle += r.transform.position;
-        }
-        _pivot.transform.position = middle / _size;
-
-        var baseRGB = srs[0].color;
-        Color.RGBToHSV(baseRGB, out colorH, out colorS, out initColorV);
     }
 
     private void Start()
@@ -91,6 +71,41 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     }
 
+    public void Init()
+    {
+        srs = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
+        _size = srs.Count;
+
+        CenterPivot();
+
+        var baseRGB = srs[0].color;
+        Color.RGBToHSV(baseRGB, out colorH, out colorS, out initColorV);
+    }
+
+    public void SetPosition(Vector3 pos)
+    {
+        transform.position = pos - _pivot.transform.localPosition;
+    }
+
+    private void CenterPivot()
+    {
+        foreach (Transform t in transform)
+        {
+            if (t.tag == "Pivot")
+            {
+                _pivot = t.gameObject;
+                break;
+            }
+        }
+
+        Vector3 middle = Vector3.zero;
+        foreach (SpriteRenderer r in srs)
+        {
+            middle += r.transform.position;
+        }
+        _pivot.transform.position = middle / _size;
+    }
+
     public int GetSize()
     {
         return _size;
@@ -106,7 +121,6 @@ public class BlockScript : MonoBehaviour, IWeighted
         var mask = LayerMask.GetMask(new string[] { "Respawn" });
         if (Physics2D.OverlapPoint(transform.position, mask))
         {
-            Debug.Log("overshop");
             return true;
         }
         return false;

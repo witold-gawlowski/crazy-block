@@ -9,6 +9,11 @@ namespace design
     {
         class main
         {
+            // animacja kasy +-
+            // reroll icon
+            // kompletujący klocek nie odejmuje hajsu przed koncem poziomu
+            // order klocków powinien rosnać wraz ze spawnowaniem
+            // klocki położone powinny mieć ustalony order
             // lepsze znikanie: bez mrugania, po prostu brok ciemnieje, potem raz ciemnieje delikatnie skokowo
                 // wtedy już nie można go ruszać i w ciągu 1 sekundy staje sie przezroczysty i znika
             // zmiana koloru na brązowy
@@ -98,6 +103,11 @@ namespace design
                 // kiedy wchodzą kategorie ? wraz z zwiększającem się poziomem trudności
 
                 // jak pokazać że klocki zużywają pieniądze
+
+                // animacja kasy opcje: 
+                    // duszek zmiany
+                    // zmieniające się monetki
+                    //
             }
         }
     }
