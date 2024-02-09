@@ -14,12 +14,15 @@ public class BlockScript : MonoBehaviour, IWeighted
 {
     [SerializeField] private float targetColorV = 0.45f;
     [SerializeField] private float lifeTime = 10f;
-    [SerializeField] private float blinkDuration = 1f;
     [SerializeField] private float destroyDelay = 3f;
     [SerializeField] private int price = 10;
     [SerializeField] private float frequency = 1f;
     [SerializeField] private float prePurchaseAlphssa = 0.6f;
     [SerializeField] private Color placedCOlor;
+    [SerializeField] private Color snappedColor;
+    [SerializeField] private Color shopCOlor;
+    [SerializeField] private Color boughtColor;
+    [SerializeField] private Color deadColor;
 
     private GameObject _pivot;
 
@@ -27,9 +30,6 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     private int _size;
 
-    private float colorH;
-    private float initColorV;
-    private float colorS;
     private float timeProgress;
 
     private bool isAlive;
@@ -37,18 +37,13 @@ public class BlockScript : MonoBehaviour, IWeighted
     private bool isPlaced;
 
 
-    private void Awake()
-    {
-
-    }
-
     private void Start()
     {
         timeProgress = 0;
         isAlive = true;
         isBought = false;
         isPlaced = false;
-        UpdateToShopColor();
+        UpdateToShopColorAlpha();
     }
 
     private void Update()
@@ -59,14 +54,15 @@ public class BlockScript : MonoBehaviour, IWeighted
 
             if (timeProgress < lifeTime)
             {
-                UpdateColor();
+                AddTint();
             }
         }
 
         if(timeProgress > lifeTime && isAlive)
         {
             isAlive = false;
-            StartCoroutine(BlinkAndDestroyCoroutine());
+            StartCoroutine(Die());
+            DragManager.Instance.HandleBlockDead(this);
         }
 
     }
@@ -77,9 +73,23 @@ public class BlockScript : MonoBehaviour, IWeighted
         _size = srs.Count;
 
         CenterPivot();
+    }
 
-        var baseRGB = srs[0].color;
-        Color.RGBToHSV(baseRGB, out colorH, out colorS, out initColorV);
+    public void HandleSnap()
+    {
+        UpdateColorToSnapped();
+    }
+
+    public void HandleUnsnap()
+    {
+        if (isBought)
+        {
+            UpdateCOlorToPurchased();
+        }
+        else
+        {
+            UpdateColorToShop();
+        }
     }
 
     public void SetPosition(Vector3 pos)
@@ -146,6 +156,11 @@ public class BlockScript : MonoBehaviour, IWeighted
         return isBought;
     }
 
+    public bool IsDead()
+    {
+        return !isAlive;
+    }
+
     public void ProcessPurchase()
     {
         UpdateCOlorToPurchased();
@@ -159,28 +174,28 @@ public class BlockScript : MonoBehaviour, IWeighted
         UpdateColorToPlaced();
     }
 
-    private IEnumerator BlinkAndDestroyCoroutine()
+    private IEnumerator Die()
     {
-        // Blinking effect
+        foreach (var r in srs)
+        {
+            r.color = deadColor;
+        }
+
+        yield return new WaitForSeconds(3.0f);
+
+        float fadeOutDuration = 3f;
         float startTime = Time.time;
-        while (Time.time - startTime < blinkDuration)
+        var fadeoutCOlor = deadColor;
+        while (Time.time - startTime < fadeOutDuration)
         {
-            foreach (SpriteRenderer sr in srs)
+            float fadeoutProgress = Mathf.Clamp01((Time.time - startTime) / fadeOutDuration);
+            fadeoutCOlor.a = 1 - fadeoutProgress;
+            foreach (var r in srs)
             {
-                sr.enabled = !sr.enabled;
+                r.color = fadeoutCOlor; 
             }
-
-            yield return new WaitForSeconds(0.2f); // Adjust blink speed if needed
+            yield return new WaitForSeconds(0.1f);
         }
-
-        // Ensure SpriteRenderers are enabled before destroying the object
-        foreach (SpriteRenderer sr in srs)
-        {
-            sr.enabled = true;
-        }
-
-        // Delay before destroying the object
-        yield return new WaitForSeconds(destroyDelay);
 
         // Destroy the entire object
         if (MapManager.GetInstance().IsPlaced(this.gameObject))
@@ -190,14 +205,30 @@ public class BlockScript : MonoBehaviour, IWeighted
 
         Destroy(gameObject);
     }
-    
+
     private void UpdateCOlorToPurchased()
     {
-        Color newColor = srs[0].color;
-        newColor.a = 1;
         foreach (var item in srs)
         {
-            item.color = newColor;
+            item.color = boughtColor;
+        }
+        AddTint();
+    }
+
+    private void UpdateColorToSnapped()
+    {
+        foreach (var item in srs)
+        {
+            item.color = snappedColor;
+        }
+        AddTint();
+    }
+
+    private void UpdateColorToShop()
+    {
+        foreach (var item in srs)
+        {
+            item.color = shopCOlor;
         }
     }
 
@@ -209,7 +240,7 @@ public class BlockScript : MonoBehaviour, IWeighted
         }
     }
 
-    private void UpdateToShopColor()
+    private void UpdateToShopColorAlpha()
     {
         Color newColor = srs[0].color;
         newColor.a = prePurchaseAlphssa;
@@ -219,8 +250,12 @@ public class BlockScript : MonoBehaviour, IWeighted
         }
     }
 
-    private void UpdateColor()
+    private void AddTint()
     {
+        float colorH, initColorV, colorS;
+        var untintedColor = GetUntintedColor();
+        Color.RGBToHSV(untintedColor, out colorH, out colorS, out initColorV);
+
         float t = timeProgress / lifeTime;
         float newColorV = Mathf.Lerp(initColorV, targetColorV, t);
         Color newCOlor = Color.HSVToRGB(colorH, colorS, newColorV);
@@ -229,6 +264,21 @@ public class BlockScript : MonoBehaviour, IWeighted
         {
             item.color = newCOlor;
         }
+    }
+
+    private Color GetUntintedColor()
+    {
+        if (DragManager.Instance.IsSnapped(this))
+        {
+            return snappedColor;
+        }
+        
+        if (isBought)
+        {
+            return boughtColor;
+        }
+
+        return Color.magenta;
     }
 
     private void MoveToBack()

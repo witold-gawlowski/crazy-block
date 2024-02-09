@@ -86,6 +86,15 @@ public class DragManager : MonoBehaviour
         }
     }
 
+
+    public void HandleBlockDead(BlockScript blockScript)
+    {
+        if (_draggedScript == blockScript)
+        {
+            HandlePointerUp();
+        }
+    }
+
     public void HandlePointerUp()
     {
         if (DraggedBlock)
@@ -103,6 +112,15 @@ public class DragManager : MonoBehaviour
 
             DraggedBlock = null;
         }
+    }
+
+    public bool IsSnapped(BlockScript blockScript)
+    {
+        if(_draggedScript == blockScript && _isDraggedBlockSnapped)
+        {
+            return true;
+        }
+        return false;
     }
 
     private bool IsDrag()
@@ -127,10 +145,16 @@ public class DragManager : MonoBehaviour
 
     private bool IsInteractible(BlockScript block)
     {
-        if(MapManager.GetInstance().IsPlaced(block.gameObject))
+        if (block.IsDead())
         {
             return false;
         }
+
+        if (MapManager.GetInstance().IsPlaced(block.gameObject))
+        {
+            return false;
+        }
+
         return block.IsBought() || ShopManager.Instance.CanBeBought(block);
     }
 
@@ -156,9 +180,16 @@ public class DragManager : MonoBehaviour
         {
             DraggedBlock.transform.position = new Vector3(newPositionRounded.x, newPositionRounded.y);
             _isDraggedBlockSnapped = true;
+            _draggedScript.HandleSnap();
             return;
         }
+
         DraggedBlock.transform.position = newPosition;
+
+        if (_isDraggedBlockSnapped)
+        {
+            _draggedScript.HandleUnsnap();
+        }
         _isDraggedBlockSnapped = false;
     }
 
@@ -166,7 +197,7 @@ public class DragManager : MonoBehaviour
     {
         ShopManager.Instance.HandleBlockRelease(_draggedScript);
 
-        if (_isDraggedBlockSnapped)
+        if (_isDraggedBlockSnapped && !_draggedScript.IsDead())
         {
             var coords = Helpers.RoundPosition(DraggedBlock.transform.position);
             MapManager.GetInstance().Place(DraggedBlock, coords);

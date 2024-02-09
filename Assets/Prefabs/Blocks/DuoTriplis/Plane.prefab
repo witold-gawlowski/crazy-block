@@ -83,13 +83,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColorV: 0.45
-  lifeTime: 360
-  blinkDuration: 1.2
+  lifeTime: 5
   destroyDelay: 1
   price: 10
   frequency: 2
   prePurchaseAlphssa: 0.6
   placedCOlor: {r: 0.15686275, g: 0.24705882, b: 0.38431373, a: 1}
+  snappedColor: {r: 1, g: 0.553, b: 0.553, a: 1}
+  shopCOlor: {r: 0.9529412, g: 0.44313726, b: 0.44313726, a: 0.6}
+  boughtColor: {r: 0.95294124, g: 0.4431373, b: 0.4431373, a: 1}
+  deadColor: {r: 0.34901962, g: 0.16470589, b: 0.16470589, a: 1}
 --- !u!1001 &2071631400598974909
 PrefabInstance:
   m_ObjectHideFlags: 0
