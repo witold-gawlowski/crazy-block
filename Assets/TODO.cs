@@ -12,13 +12,10 @@ namespace design
             // animacja kasy +-
             // order klocków powinien rosnać wraz ze spawnowaniem
             // klocki położone powinny mieć ustalony order
-            // lepsze znikanie: bez mrugania, po prostu brok ciemnieje, potem raz ciemnieje delikatnie skokowo
-                // wtedy już nie można go ruszać i w ciągu 1 sekundy staje sie przezroczysty i znika
             // zmiana koloru na brązowy
             // kasa w sklepie i jakiś feedback że się zmieniła 
             // restart button
             // potrzebny restart
-            // klocki nie mogą wchodzić pod restart -> restart zasłania
             //================================
             // reroll musi zaslanić klocki
             // icon: tetris block with dollar

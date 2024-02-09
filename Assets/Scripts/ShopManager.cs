@@ -12,11 +12,13 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private int initialCash = 100;
     [SerializeField] private int rerollPrice = 10;
 
-    public System.Action<int, bool> CashChanged;
+    public System.Action<int, int, bool> CashChanged;
 
-    public int Cash { get { return _cash; } private set { _cash = value; CashChanged(_cash, CanAffordReroll()); } }
+    public int Cash { get { return _cash; } private set { _oldCash = _cash; _cash = value; CashChanged(_cash, _oldCash, CanAffordReroll()); } }
 
     private int _cash;
+    private int _oldCash;
+
     private List<BlockScript> offer;
 
     public static ShopManager Instance { get; private set; }

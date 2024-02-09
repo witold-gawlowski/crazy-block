@@ -25,7 +25,10 @@ public class ShopUIScript : MonoBehaviour
 
     [SerializeField] private Color availableColor;
     [SerializeField] private Color unavailableColor;
+    [SerializeField] private float targetIncreasedCashSize = 85;
+    [SerializeField] private float targetDecreasedCashSize = 50;
 
+    private float regularCashTextSize;
 
     public Action RerollPressedEvent;
 
@@ -37,6 +40,8 @@ public class ShopUIScript : MonoBehaviour
             var newUIItem = new ShopUIItem() { priceText = text};
             shopUIItems.Add(newUIItem);
         }
+
+        regularCashTextSize = totalCashText.fontSize;
     }
 
 
@@ -62,10 +67,40 @@ public class ShopUIScript : MonoBehaviour
         ShopManager.Instance.CashChanged -= HandleCashChanged;
     }
 
-    private void HandleCashChanged(int value, bool canAffordReroll)
+    private IEnumerator AnimateCashCoroutine(int current, int target)
+    {
+        int diff = current < target ? 1 : -1;
+        float baseInterval = 0.02f;
+
+        int i = current;
+
+        float newCashTExtSize = regularCashTextSize;
+        do
+        {
+            newCashTExtSize += (diff > 0 ? 0.5f : -0.5f);
+            SetCashTextSize(Mathf.Clamp(newCashTExtSize, targetDecreasedCashSize, targetIncreasedCashSize));
+            i += diff;
+            SetCashText(i);
+            yield return new WaitForSeconds(baseInterval);
+        } while (i != target);
+
+        yield return new WaitForSeconds(0.5f);
+
+        float cashTExtSize = totalCashText.fontSize;
+        for(float j=0; j<1; j += 0.1f)
+        {
+            float newCashTextSize = Mathf.Lerp(cashTExtSize, regularCashTextSize, j);
+            SetCashTextSize(newCashTextSize);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return null;
+    }
+
+    private void HandleCashChanged(int value, int oldValue, bool canAffordReroll)
     {
         UpdateBlockTextColors(value);
-        SetCashText(value);
+        StartCoroutine(AnimateCashCoroutine(oldValue, value));
         UpdateRerollButton(canAffordReroll);
     }
 
@@ -89,6 +124,12 @@ public class ShopUIScript : MonoBehaviour
     public void SetCashText(int value)
     {
         totalCashText.text = "$" + value.ToString();
+    }
+
+    public void SetCashTextSize(float value)
+    {
+        Debug.Log(value);
+        totalCashText.fontSize = value;
     }
 
     public void HandleItemBought(BlockScript block)
