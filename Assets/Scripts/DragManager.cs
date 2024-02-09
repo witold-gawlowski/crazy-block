@@ -21,11 +21,12 @@ public class DragManager : MonoBehaviour
     private Vector3 _pointerPositionWorld;
     private bool _isDraggedBlockSnapped;
     private float _touchDuration;
-    private float _timeFromDragNotOverShop;
+    private float _timeFromDragStart;
     private Vector3 _mouseTouchStartPosition;
     private bool _dragStarted;
 
     [SerializeField] private float _fingerOffsetBuildupYDistance;
+    [SerializeField] private float _fingerOffsetBuildupDuration = 0.25f;
     [SerializeField] private float tapThresholdDuration;
 
     public static DragManager Instance { get; private set; }
@@ -52,6 +53,8 @@ public class DragManager : MonoBehaviour
 
     public void HandlePointerDown(Vector3 pointerPosition)
     {
+        _timeFromDragStart = 0;
+
         _pointerPositionWorld = Camera.main.ScreenToWorldPoint(pointerPosition);
         var mask = LayerMask.GetMask(new string[] { "Blocks" });
         Collider2D collider = Physics2D.OverlapPoint(_pointerPositionWorld, mask);
@@ -59,7 +62,6 @@ public class DragManager : MonoBehaviour
         {
             DraggedBlock = collider.transform.parent.gameObject;
             _touchDuration = 0;
-            _timeFromDragNotOverShop = 0;
             _mouseTouchStartPosition = _pointerPositionWorld;
         }
     }
@@ -134,10 +136,8 @@ public class DragManager : MonoBehaviour
 
     private void OnDrag()
     {
-        if (!_draggedScript.IsOverShop())
-        {
-            _timeFromDragNotOverShop += Time.deltaTime;
-        }
+        _timeFromDragStart += Time.deltaTime;
+
         UpdatePosition();
         return;
     }
@@ -145,9 +145,12 @@ public class DragManager : MonoBehaviour
     void UpdatePosition()
     {
         bool isOverShop = _draggedScript.IsOverShop();
-        float yAboveShop = Mathf.Clamp(_pointerPositionWorld.y + 7.0f, 0, _fingerOffsetBuildupYDistance);
-        var fingerOffset = Vector2.up * Mathf.Clamp01(yAboveShop / _fingerOffsetBuildupYDistance) * 3.0f;
-        var newPosition = (Vector2)_pointerPositionWorld + (isOverShop ? Vector2.zero : fingerOffset) - _draggedScript.GetMiddleOffset();
+        float yAboveShop = Mathf.Clamp(_pointerPositionWorld.y + 8.5f, 0, _fingerOffsetBuildupYDistance);
+        bool isBought = _draggedScript.IsBought();
+        float shopBlockOffsetBlend = isBought ? 1 : Mathf.Clamp01(yAboveShop / _fingerOffsetBuildupYDistance);
+        float boughtBlockOffsetBlend = isBought ? Mathf.Clamp01(_timeFromDragStart / _fingerOffsetBuildupDuration) : 1;
+        var fingerOffset = Vector2.up * shopBlockOffsetBlend * boughtBlockOffsetBlend * 3.0f;
+        var newPosition = (Vector2)_pointerPositionWorld + fingerOffset - _draggedScript.GetMiddleOffset();
         var newPositionRounded = Helpers.RoundPosition(newPosition);
         if (MapManager.GetInstance().CanBePlaced(DraggedBlock, newPositionRounded))
         {
