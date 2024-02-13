@@ -11,6 +11,7 @@ public class ShopManager : MonoBehaviour
 
     [SerializeField] private int initialCash = 100;
     [SerializeField] private int rerollPrice = 10;
+    [SerializeField] private AnimationCurve lifetimeToPrice;
 
     public System.Action<int, int, bool> CashChanged;
 
@@ -49,6 +50,11 @@ public class ShopManager : MonoBehaviour
     {
         Reroll();
         Cash = initialCash;
+    }
+
+    public int GetPrice(float lifeTime, int initialPrice)
+    {
+        return Mathf.RoundToInt(lifetimeToPrice.Evaluate(lifeTime) * initialPrice);
     }
 
     public void HandleRerollPressedEvent()

@@ -16,4 +16,4 @@ MonoBehaviour:
   successors:
   - Node: {fileID: 11400000, guid: 8e0988891c2036a40b05a35d983d8a07, type: 2}
     Chance: 3
-  reward: 30
+  reward: 100

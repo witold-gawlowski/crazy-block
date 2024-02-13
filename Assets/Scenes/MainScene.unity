@@ -1212,8 +1212,8 @@ MonoBehaviour:
   - {fileID: 1392579050}
   - {fileID: 974884400}
   - {fileID: 1716400165}
-  initialCash: 150
-  rerollPrice: 5
+  initialCash: 250
+  rerollPrice: 20
 --- !u!1 &891093470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,7 +1306,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $5
+  m_text: $20
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2476,8 +2476,8 @@ Transform:
   m_GameObject: {fileID: 2086044644}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 0.1424, z: 0}
+  m_LocalScale: {x: 13, y: 5.284785, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 891093471}

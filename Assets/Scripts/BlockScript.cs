@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public interface IWeighted
@@ -13,16 +14,16 @@ public interface IWeighted
 public class BlockScript : MonoBehaviour, IWeighted
 {
     [SerializeField] private float targetColorV = 0.45f;
-    [SerializeField] private float lifeTime = 10f;
     [SerializeField] private float destroyDelay = 3f;
-    [SerializeField] private int price = 10;
+    [FormerlySerializedAs("price")] [SerializeField] private int initialPrice = 10;
     [SerializeField] private float frequency = 1f;
-    [SerializeField] private float prePurchaseAlphssa = 0.6f;
     [SerializeField] private Color placedCOlor;
-    [SerializeField] private Color snappedColor;
-    [SerializeField] private Color shopCOlor;
-    [SerializeField] private Color boughtColor;
     [SerializeField] private Color deadColor;
+    [SerializeField] private Color initialColor;
+    [SerializeField] private float maxLifeTime = 90;
+    [SerializeField] private float averageLifeTime = 45;
+    [SerializeField] private float lifeTimeVariance = 30;
+
 
     private GameObject _pivot;
 
@@ -30,35 +31,34 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     private int _size;
 
-    private float timeProgress;
+    private float lifeTime;
+    private float timeElapsed;
 
     private bool isAlive;
     private bool isBought;
     private bool isPlaced;
 
-
     private void Start()
     {
-        timeProgress = 0;
+        timeElapsed = 0;
         isAlive = true;
         isBought = false;
         isPlaced = false;
-        UpdateToShopColorAlpha();
     }
 
     private void Update()
     {
         if (isBought && !isPlaced)
         {
-            timeProgress += Time.deltaTime;
+            timeElapsed += Time.deltaTime;
 
-            if (timeProgress < lifeTime)
+            if (timeElapsed < lifeTime)
             {
                 AddTint();
             }
         }
 
-        if(timeProgress > lifeTime && isAlive)
+        if(timeElapsed > lifeTime && isAlive)
         {
             isAlive = false;
             StartCoroutine(Die());
@@ -72,24 +72,13 @@ public class BlockScript : MonoBehaviour, IWeighted
         srs = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
         _size = srs.Count;
 
+        initialColor = srs[0].color;
+
         CenterPivot();
-    }
 
-    public void HandleSnap()
-    {
-        UpdateColorToSnapped();
-    }
+        RandomizeLifeTimne();
 
-    public void HandleUnsnap()
-    {
-        if (isBought)
-        {
-            UpdateCOlorToPurchased();
-        }
-        else
-        {
-            UpdateColorToShop();
-        }
+        AddTint();
     }
 
     public void SetPosition(Vector3 pos)
@@ -143,7 +132,7 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     public int GetPrice()
     {
-        return price;
+        return ShopManager.Instance.GetPrice(lifeTime, initialPrice);
     }
 
     public float GetWeight()
@@ -163,7 +152,6 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     public void ProcessPurchase()
     {
-        UpdateCOlorToPurchased();
         isBought = true;
         MoveToBack();
     }
@@ -206,30 +194,9 @@ public class BlockScript : MonoBehaviour, IWeighted
         Destroy(gameObject);
     }
 
-    private void UpdateCOlorToPurchased()
+    private void RandomizeLifeTimne()
     {
-        foreach (var item in srs)
-        {
-            item.color = boughtColor;
-        }
-        AddTint();
-    }
-
-    private void UpdateColorToSnapped()
-    {
-        foreach (var item in srs)
-        {
-            item.color = snappedColor;
-        }
-        AddTint();
-    }
-
-    private void UpdateColorToShop()
-    {
-        foreach (var item in srs)
-        {
-            item.color = shopCOlor;
-        }
+        lifeTime = Random.Range(averageLifeTime - lifeTimeVariance, averageLifeTime + lifeTimeVariance);
     }
 
     private void UpdateColorToPlaced()
@@ -240,24 +207,15 @@ public class BlockScript : MonoBehaviour, IWeighted
         }
     }
 
-    private void UpdateToShopColorAlpha()
-    {
-        Color newColor = srs[0].color;
-        newColor.a = prePurchaseAlphssa;
-        foreach (var item in srs)
-        {
-            item.color = newColor;
-        }
-    }
-
     private void AddTint()
     {
         float colorH, initColorV, colorS;
         var untintedColor = GetUntintedColor();
         Color.RGBToHSV(untintedColor, out colorH, out colorS, out initColorV);
 
-        float t = timeProgress / lifeTime;
-        float newColorV = Mathf.Lerp(initColorV, targetColorV, t);
+        float timeLeft = lifeTime - timeElapsed;
+        float decayParam = 1 - timeLeft / maxLifeTime;
+        float newColorV = Mathf.Lerp(initColorV, targetColorV, decayParam);
         Color newCOlor = Color.HSVToRGB(colorH, colorS, newColorV);
 
         foreach (var item in srs)
@@ -267,18 +225,8 @@ public class BlockScript : MonoBehaviour, IWeighted
     }
 
     private Color GetUntintedColor()
-    {
-        if (DragManager.Instance.IsSnapped(this))
-        {
-            return snappedColor;
-        }
-        
-        if (isBought)
-        {
-            return boughtColor;
-        }
-
-        return Color.magenta;
+    {        
+        return initialColor;
     }
 
     private void MoveToBack()

@@ -207,12 +207,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
+      propertyPath: price
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: lifeTime
-      value: 360
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: frequency
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: deadColor.a

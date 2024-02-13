@@ -180,16 +180,16 @@ public class DragManager : MonoBehaviour
         {
             DraggedBlock.transform.position = new Vector3(newPositionRounded.x, newPositionRounded.y);
             _isDraggedBlockSnapped = true;
-            _draggedScript.HandleSnap();
+            //_draggedScript.HandleSnap();
             return;
         }
 
         DraggedBlock.transform.position = newPosition;
 
-        if (_isDraggedBlockSnapped)
-        {
-            _draggedScript.HandleUnsnap();
-        }
+        //if (_isDraggedBlockSnapped)
+        //{
+        //    _draggedScript.HandleUnsnap();
+        //}
         _isDraggedBlockSnapped = false;
     }
 

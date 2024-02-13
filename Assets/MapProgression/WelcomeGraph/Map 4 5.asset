@@ -18,4 +18,4 @@ MonoBehaviour:
     Chance: 1
   - Node: {fileID: 11400000, guid: 4c6a2873bd35a034ba216351928a3f7b, type: 2}
     Chance: 1
-  reward: 60
+  reward: 100

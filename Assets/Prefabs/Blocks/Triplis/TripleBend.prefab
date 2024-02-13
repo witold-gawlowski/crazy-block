@@ -80,10 +80,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColorV: 0.45
-  lifeTime: 360
+  lifeTime: 30
   destroyDelay: 1
-  price: 10
-  frequency: 4
+  price: 25
+  frequency: 2
   prePurchaseAlphssa: 0.6
   placedCOlor: {r: 0.15686275, g: 0.24705882, b: 0.38431373, a: 1}
   snappedColor: {r: 1, g: 0.553, b: 0.553, a: 1}
