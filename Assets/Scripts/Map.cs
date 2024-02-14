@@ -7,6 +7,7 @@ public class Map
     private Dictionary<Vector2Int, GameObject> levelMap;
     private HashSet<Vector2Int> blockedCoords;
     private HashSet<GameObject> placedBlocks;
+    private GameObject mapObject;
     private int mapSize;
 
     private int _coveredArea;

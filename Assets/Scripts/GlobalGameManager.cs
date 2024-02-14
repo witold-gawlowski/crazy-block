@@ -39,22 +39,6 @@ public class GlobalGameManager : MonoBehaviour
         LoadCurrentNode();
     }
 
-    //public void HandleMapCompleted()
-    //{
-    //    ClearSnappedBlocks();
-
-    //    Destroy(_currentMapObj);
-
-    //    ShopManager.Instance.AddCash(_currentMapNode.GetReward());
-
-    //    _currentMapNode = _currentMapNode.GetNext();
-    //    LoadCurrentNode();
-
-    //    ui.HandleLevelCompleted(_currentMapNode.GetReward());
-
-    //    MapManager.GetInstance().Init();
-    //}
-
     public void FinalizeLevel()
     {
         StartCoroutine(FinalizeLevelCOrouitne());
@@ -68,12 +52,27 @@ public class GlobalGameManager : MonoBehaviour
         StartNewLevel();
     }
 
+    private void AddNewMap()
+    {
+        // deactivate current map and move to history
+
+        // load new map (should be same as before)
+    }
+
+    private void HandleMapCompleted()
+    {
+        // destroy current map
+        
+        // load map from history if possible
+            // if not Load new map
+    }
+
     private void StartNewLevel()
     {
 
         ui.HandleNewLevel();
 
-        ClearSnappedBlocks();
+        DestroyBlocksFromTopLevel();
 
         Destroy(_currentMapObj);
 
@@ -82,7 +81,7 @@ public class GlobalGameManager : MonoBehaviour
         _currentMapNode = _currentMapNode.GetNext();
         LoadCurrentNode();
 
-        MapManager.GetInstance().Init();
+        MapManager.GetInstance().AddCleanMap();
     }
 
     public GameObject GetCurrentMapObject()
@@ -105,7 +104,7 @@ public class GlobalGameManager : MonoBehaviour
         }
     }
 
-    private void ClearSnappedBlocks()
+    private void DestroyBlocksFromTopLevel()
     {
         var blocks = GameObject.FindGameObjectsWithTag("Block");
         foreach (var block in blocks)

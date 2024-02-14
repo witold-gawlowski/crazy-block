@@ -10,7 +10,7 @@ public class MapManager : MonoBehaviour
 {
     private static MapManager instance;
 
-    private Map map;
+    private List<Map> maps;
 
     private void Awake()
     {
@@ -18,11 +18,13 @@ public class MapManager : MonoBehaviour
         {
             instance = this;
         }
+
+        maps = new List<Map>();
     }
 
     private void Start()
     {
-        Init();
+        AddCleanMap();
     }
 
     public static MapManager GetInstance()
@@ -30,30 +32,35 @@ public class MapManager : MonoBehaviour
         return instance;
     }
 
-    public void Init()
+    public void AddCleanMap()
     {
-        map = new Map();
-        map.Init();
+        var newMap = new Map();
+        newMap.Init();
+        maps.Add(newMap);
+    }
+
+    public void DestroyLastMap()
+    {
+        maps.RemoveAt(maps.Count - 1);
     }
 
     public void Place(GameObject block, Vector2Int coordinates)
     {
-        map.Place(block, coordinates);
+        maps.Last().Place(block, coordinates);
     }
-
 
     public void Remove(GameObject block)
     {
-        map.Remove(block);
+        maps.Last().Remove(block);
     }
 
     public bool CanBePlaced(GameObject block, Vector2Int coordinates)
     {
-        return map.CanBePlaced(block, coordinates);
+        return maps.Last().CanBePlaced(block, coordinates);
     }
 
     public bool IsPlaced(GameObject block)
     {
-        return map.IsPlaced(block);
+        return maps.Last().IsPlaced(block);
     }
 }

@@ -305,6 +305,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
+      propertyPath: initialPrice
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: blinkDuration
       value: 1.2
       objectReference: {fileID: 0}
@@ -359,6 +363,10 @@ PrefabInstance:
     - target: {fileID: 7577407780560230504, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: m_Name
       value: Corner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7577407780560230504, guid: b4e2152d24812654cba7449b597347b6, type: 3}
+      propertyPath: m_TagString
+      value: Block
       objectReference: {fileID: 0}
     - target: {fileID: 7577407780560230507, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: m_LocalPosition.x
