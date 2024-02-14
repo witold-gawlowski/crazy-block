@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Map : MonoBehaviour
+public class Map
 {
     private Dictionary<Vector2Int, GameObject> levelMap;
     private HashSet<Vector2Int> blockedCoords;
@@ -10,7 +10,7 @@ public class Map : MonoBehaviour
     private int mapSize;
 
     private int _coveredArea;
-    private int CoveredArea { get { return _coveredArea; } set { _coveredArea = value; CheckForLevelCompleted(); } }
+    private int CoveredArea { get { return _coveredArea; } set { _coveredArea = value; TryFinalize(); } }
 
 
     public void Init()
@@ -77,7 +77,7 @@ public class Map : MonoBehaviour
         return placedBlocks.Contains(block);
     }
 
-    private void CheckForLevelCompleted()
+    public void TryFinalize()
     {
         if (_coveredArea == mapSize)
         {
