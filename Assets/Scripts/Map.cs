@@ -85,4 +85,18 @@ public class Map
             GlobalGameManager.Instance.FinalizeLevel();
         }
     }
+
+    public void DestroyPlacedBlocks()
+    {
+        foreach(var b in placedBlocks)
+        {
+            GameObject.Destroy(b);
+        }
+    }
+
+    public void DestroyMap()
+    {
+        GameObject.Destroy(mapObject);
+    }
+
 }

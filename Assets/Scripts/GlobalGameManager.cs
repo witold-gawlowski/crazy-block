@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GlobalGameManager : MonoBehaviour
 {
-    [SerializeField] private SuccessionNode staterMapNode;
-
     [SerializeField] private ShopUIScript ui;
 
     [SerializeField] private Color mapColor;
 
-    private GameObject _currentMapObj;
-    private SuccessionNode _currentMapNode;
+    [SerializeField] private GameObject mapGeneratorObject;
 
+    private MapGeneratorInterface mapGenerator;
+    private GameObject _currentMapObj;
+
+    private int level;
     public static GlobalGameManager Instance { get; private set; }
 
     private void Awake()
@@ -26,6 +27,7 @@ public class GlobalGameManager : MonoBehaviour
         {
             Instance = this;
         }
+        mapGenerator = mapGeneratorObject.GetComponent<MapGeneratorInterface>();
     }
 
     private void Start()
@@ -35,8 +37,9 @@ public class GlobalGameManager : MonoBehaviour
 
     public void HandleNewGame()
     {
-        _currentMapNode = staterMapNode;
+        mapGenerator.Init();
         LoadCurrentNode();
+        level = 1;
     }
 
     public void FinalizeLevel()
@@ -46,39 +49,26 @@ public class GlobalGameManager : MonoBehaviour
 
     private IEnumerator FinalizeLevelCOrouitne()
     {
-        ui.HandleLevelCompleted(_currentMapNode.GetReward());
+        ui.HandleLevelCompleted(mapGenerator.GetCurrentReward());
 
         yield return new WaitForSeconds(2);
         StartNewLevel();
     }
 
-    private void AddNewMap()
-    {
-        // deactivate current map and move to history
-
-        // load new map (should be same as before)
-    }
-
-    private void HandleMapCompleted()
-    {
-        // destroy current map
-        
-        // load map from history if possible
-            // if not Load new map
-    }
-
     private void StartNewLevel()
     {
+        level++;
 
-        ui.HandleNewLevel();
+        ui.HandleNewLevel(level);
 
         DestroyBlocksFromTopLevel();
 
         Destroy(_currentMapObj);
 
-        ShopManager.Instance.AddCash(_currentMapNode.GetReward());
+        ShopManager.Instance.AddCash(mapGenerator.GetCurrentReward());
 
-        _currentMapNode = _currentMapNode.GetNext();
+        mapGenerator.Next();
+
         LoadCurrentNode();
 
         MapManager.GetInstance().AddCleanMap();
@@ -91,7 +81,7 @@ public class GlobalGameManager : MonoBehaviour
 
     private void LoadCurrentNode()
     {
-        _currentMapObj = Instantiate(_currentMapNode.GetPrefab());
+        _currentMapObj = Instantiate(mapGenerator.GetCurrent());
         UpdateMapColor();
     }
     
