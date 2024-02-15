@@ -77,8 +77,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColorV: 0.45
-  lifeTime: 10
-  blinkDuration: 1
   destroyDelay: 3
-  price: 10
-  _pivot: {fileID: 6167124298469451623}
+  initialPrice: 10
+  frequency: 1
+  placedCOlor: {r: 0, g: 0, b: 0, a: 0}
+  deadColor: {r: 0, g: 0, b: 0, a: 0}
+  initialColor: {r: 0, g: 0, b: 0, a: 0}
+  maxLifeTime: 90
+  averageLifeTime: 45
+  lifeTimeVariance: 30

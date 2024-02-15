@@ -22,7 +22,7 @@ public class BlockScript : MonoBehaviour, IWeighted
     [SerializeField] private Color initialColor;
     [SerializeField] private float maxLifeTime = 90;
     [SerializeField] private float averageLifeTime = 45;
-    [SerializeField] private float lifeTimeVariance = 30;
+    [SerializeField] private float lifeTimeVariance = 10;
 
 
     private GameObject _pivot;
@@ -196,7 +196,7 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     private void RandomizeLifeTimne()
     {
-        lifeTime = Random.Range(averageLifeTime - lifeTimeVariance, averageLifeTime + lifeTimeVariance);
+        lifeTime = Mathf.Clamp(GlobalGameManager.Instance.GetBlockLifeLength() + Random.Range(-lifeTimeVariance, lifeTimeVariance), 10, 180);
     }
 
     private void UpdateColorToPlaced()

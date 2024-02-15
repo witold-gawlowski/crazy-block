@@ -721,6 +721,7 @@ MonoBehaviour:
   rerollButton: {fileID: 164016007}
   rewardText: {fileID: 511346117}
   mapCompletedPanel: {fileID: 909094172}
+  levelNuberText: {fileID: 999093022}
   availableColor: {r: 0.990566, g: 0.60772395, b: 0, a: 1}
   unavailableColor: {r: 1, g: 0, b: 0, a: 1}
   targetIncreasedCashSize: 85
@@ -1257,7 +1258,7 @@ MonoBehaviour:
   - {fileID: 1392579050}
   - {fileID: 974884400}
   - {fileID: 1716400165}
-  initialCash: 150
+  initialCash: 250
   rerollPrice: 10
   lifetimeToPrice:
     serializedVersion: 2
@@ -1930,6 +1931,39 @@ MonoBehaviour:
   ui: {fileID: 277802198}
   mapColor: {r: 0.4, g: 0.53333336, b: 0.74509805, a: 1}
   mapGeneratorObject: {fileID: 1743153353}
+  blockLifeLengthByLevel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 90
+      inSlope: -3.1128042
+      outSlope: -3.1128042
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 14.9605255
+      value: 43.430813
+      inSlope: -1.962099
+      outSlope: -1.962099
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 50
+      value: 15
+      inSlope: -0.8113938
+      outSlope: -0.8113938
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1392579049
 GameObject:
   m_ObjectHideFlags: 0

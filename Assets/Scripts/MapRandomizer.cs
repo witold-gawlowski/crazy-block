@@ -22,7 +22,7 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
 
     public int GetCurrentReward()
     {
-        return 200;
+        return 90;
     }
 
     public void Init()

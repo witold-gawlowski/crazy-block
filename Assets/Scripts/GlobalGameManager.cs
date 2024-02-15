@@ -10,6 +10,8 @@ public class GlobalGameManager : MonoBehaviour
 
     [SerializeField] private GameObject mapGeneratorObject;
 
+    [SerializeField] private AnimationCurve blockLifeLengthByLevel;
+
     private MapGeneratorInterface mapGenerator;
     private GameObject _currentMapObj;
 
@@ -45,6 +47,11 @@ public class GlobalGameManager : MonoBehaviour
     public void FinalizeLevel()
     {
         StartCoroutine(FinalizeLevelCOrouitne());
+    }
+
+    public float GetBlockLifeLength()
+    {
+        return blockLifeLengthByLevel.Evaluate(level);
     }
 
     private IEnumerator FinalizeLevelCOrouitne()
