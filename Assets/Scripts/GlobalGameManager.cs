@@ -18,6 +18,8 @@ public class GlobalGameManager : MonoBehaviour
     private int level;
     public static GlobalGameManager Instance { get; private set; }
 
+    private float restartCooldown;
+
     private void Awake()
     {
         if (Instance != null && Instance == this)
@@ -30,6 +32,7 @@ public class GlobalGameManager : MonoBehaviour
             Instance = this;
         }
         mapGenerator = mapGeneratorObject.GetComponent<MapGeneratorInterface>();
+        restartCooldown = 0;
     }
 
     private void Start()
@@ -37,11 +40,47 @@ public class GlobalGameManager : MonoBehaviour
         HandleNewGame();
     }
 
+    private void Update()
+    {
+        UpdateRestart();
+    }
+
+    private void UpdateRestart()
+    {
+        if (restartCooldown > 0)
+        {
+            restartCooldown -= Time.deltaTime;
+        }
+
+        if (restartCooldown <= 0)
+        {
+            ui.ShowRestartVisible(false);
+        }
+    }
+
     public void HandleNewGame()
     {
         mapGenerator.Init();
         LoadCurrentNode();
         level = 1;
+    }
+
+    public void HandleRestart()
+    {
+        if(restartCooldown > 0)
+        {
+            {
+                level = 0;
+                StartNewLevel();
+                ShopManager.Instance.Reroll();
+                ShopManager.Instance.ResetCash();
+                DestroyLooseBlocks();
+            }
+            restartCooldown = 0;
+            return;
+        }
+        ui.ShowRestartVisible(true);
+        restartCooldown += 3.0f;
     }
 
     public void FinalizeLevel()
@@ -59,6 +98,8 @@ public class GlobalGameManager : MonoBehaviour
         ui.HandleLevelCompleted(mapGenerator.GetCurrentReward());
 
         yield return new WaitForSeconds(2);
+
+        ShopManager.Instance.AddCash(mapGenerator.GetCurrentReward());
         StartNewLevel();
     }
 
@@ -71,8 +112,6 @@ public class GlobalGameManager : MonoBehaviour
         DestroyBlocksFromTopLevel();
 
         Destroy(_currentMapObj);
-
-        ShopManager.Instance.AddCash(mapGenerator.GetCurrentReward());
 
         mapGenerator.Next();
 
@@ -98,6 +137,19 @@ public class GlobalGameManager : MonoBehaviour
         foreach(var r in srs)
         {
             r.color = mapColor;
+        }
+    }
+
+    private void DestroyLooseBlocks()
+    {
+        var blocks = GameObject.FindGameObjectsWithTag("Block");
+        foreach (var block in blocks)
+        {
+            var script = block.GetComponent<BlockScript>();
+            if (script.IsBought() && !MapManager.GetInstance().IsPlaced(block))
+            {
+                Destroy(block);
+            }
         }
     }
 

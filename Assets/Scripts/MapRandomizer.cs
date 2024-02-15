@@ -28,7 +28,6 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
     public void Init()
     {
         SortGameObjectsByLevelTileCount(levelPrefabs);
-        Debug.Log("init randomizer");
         currentMapIndex = 0;
         Next();
     }
@@ -47,11 +46,6 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
             int count2 = CountChildrenWithTag(obj2, "LevelTile");
             return count1.CompareTo(count2); // Sort in descending order
         });
-
-        foreach (var gameObject in levelPrefabs)
-        {
-            Debug.Log(CountChildrenWithTag(gameObject, "LevelTile"));
-        }
     }
 
     int CountChildrenWithTag(GameObject parent, string tag)

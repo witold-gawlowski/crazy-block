@@ -50,6 +50,11 @@ public class InputManager : MonoBehaviour
             DragManager.Instance.HandlePointerHeld(lastPosition);
         }
         positionUpdatedThisFrame = false;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GlobalGameManager.Instance.HandleRestart();
+        }
     }
 
     private void HandleTouchDownAction(InputAction.CallbackContext context)

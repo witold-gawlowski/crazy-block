@@ -23,6 +23,7 @@ public class ShopUIScript : MonoBehaviour
     [SerializeField] private TMP_Text rewardText;
     [SerializeField] private GameObject mapCompletedPanel;
     [SerializeField] private TMP_Text levelNuberText;
+    [SerializeField] private GameObject restartText;
 
     [SerializeField] private Color availableColor;
     [SerializeField] private Color unavailableColor;
@@ -68,6 +69,11 @@ public class ShopUIScript : MonoBehaviour
         ShopManager.Instance.CashChanged -= HandleCashChanged;
     }
 
+    public void ShowRestartVisible(bool value)
+    {
+        restartText.SetActive(value);
+    }
+
     private IEnumerator AnimateCashCoroutine(int current, int target)
     {
         int diff = current < target ? 1 : -1;
@@ -80,7 +86,7 @@ public class ShopUIScript : MonoBehaviour
         {
             newCashTExtSize += (diff > 0 ? 0.5f : -0.5f);
             SetCashTextSize(Mathf.Clamp(newCashTExtSize, targetDecreasedCashSize, targetIncreasedCashSize));
-            i += diff;
+            i += diff * (Mathf.Abs(target-i) > 10 ? 10 : 1);
             SetCashText(i);
             yield return new WaitForSeconds(baseInterval);
         } while (i != target);
@@ -100,9 +106,12 @@ public class ShopUIScript : MonoBehaviour
 
     private void HandleCashChanged(int value, int oldValue, bool canAffordReroll)
     {
-        UpdateBlockTextColors(value);
-        StartCoroutine(AnimateCashCoroutine(oldValue, value));
-        UpdateRerollButton(canAffordReroll);
+        if (value != oldValue)
+        {
+            UpdateBlockTextColors(value);
+            StartCoroutine(AnimateCashCoroutine(oldValue, value));
+            UpdateRerollButton(canAffordReroll);
+        }
     }
 
     public void HandleLevelCompleted(int cash)
@@ -131,7 +140,6 @@ public class ShopUIScript : MonoBehaviour
 
     public void SetCashTextSize(float value)
     {
-        Debug.Log(value);
         totalCashText.fontSize = value;
     }
 

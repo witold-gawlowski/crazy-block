@@ -49,7 +49,7 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         Reroll();
-        Cash = initialCash;
+        ResetCash();
     }
 
     public int GetPrice(float lifeTime, int initialPrice)
@@ -61,6 +61,11 @@ public class ShopManager : MonoBehaviour
     {
         Reroll();
         Cash = Cash - rerollPrice;
+    }
+
+    public void ResetCash()
+    {
+        Cash = initialCash;
     }
 
     public void AddCash(int value)
