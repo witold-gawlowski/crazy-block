@@ -14,7 +14,7 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
 
     public void Next()
     {
-        var newMapIndex = Mathf.Clamp(currentMapIndex + Random.Range(-2, 4), 0, levelPrefabs.Count);
+        var newMapIndex = Mathf.Clamp(currentMapIndex + Random.Range(-1, 10), 0, levelPrefabs.Count);
         
         levelPrefabs.RemoveAt(currentMapIndex);
         currentMapIndex = newMapIndex;

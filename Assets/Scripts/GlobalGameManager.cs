@@ -118,6 +118,8 @@ public class GlobalGameManager : MonoBehaviour
         LoadCurrentNode();
 
         MapManager.GetInstance().AddCleanMap();
+
+        ShopManager.Instance.HandleNewLevel();
     }
 
     public GameObject GetCurrentMapObject()

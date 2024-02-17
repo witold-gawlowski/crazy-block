@@ -21,6 +21,7 @@ public class ShopManager : MonoBehaviour
     private int _oldCash;
 
     private List<BlockScript> offer;
+    private BlockSpammer spammer;
 
     public static ShopManager Instance { get; private set; }
     private void Awake()
@@ -34,6 +35,7 @@ public class ShopManager : MonoBehaviour
         {
             Instance = this;
         }
+        spammer = GetComponentInChildren<BlockSpammer>();
     }
 
     private void OnEnable()
@@ -52,15 +54,36 @@ public class ShopManager : MonoBehaviour
         ResetCash();
     }
 
-    public int GetPrice(float lifeTime, int initialPrice)
+    public void HandleNewLevel()
     {
-        return Mathf.RoundToInt(lifetimeToPrice.Evaluate(lifeTime) * initialPrice);
+        spammer.HandleNewLevel();
     }
 
     public void HandleRerollPressedEvent()
     {
         Reroll();
         Cash = Cash - rerollPrice;
+    }
+
+    public void HandleBlockRelease(BlockScript draggedScript)
+    {
+        if (!IsBought(draggedScript))
+        {
+            if (!draggedScript.IsOverShop())
+            {
+                Buy(draggedScript);
+            }
+        }
+    }
+
+    public List<BlockScript> GetAllBlocks()
+    {
+        return blockPrefabs;
+    }
+
+    public int GetPrice(float lifeTime, int initialPrice)
+    {
+        return Mathf.RoundToInt(lifetimeToPrice.Evaluate(lifeTime) * initialPrice);
     }
 
     public void ResetCash()
@@ -102,17 +125,6 @@ public class ShopManager : MonoBehaviour
         }
 
         ui.HandleNewShopOffer(offer, Cash);
-    }
-
-    public void HandleBlockRelease(BlockScript draggedScript)
-    {
-        if (!IsBought(draggedScript))
-        {
-            if(!draggedScript.IsOverShop())
-            {
-                Buy(draggedScript);
-            }
-        }
     }
 
     public bool CanBeBought(BlockScript block)

@@ -9,6 +9,15 @@ namespace design
     {
         class main
         {
+            // na początku dużo dłużej żyjace klocki
+            // progresja: szybsze znikanie
+            // klocki znikają też ze sklepu
+            // -> klocki znikają w bardziej przewidywalny sposób
+            // promowanie wykupywania dużych klocków z długim czasem: koszt
+            // start z wylosowanymi wieloma klockami na początku żeby gracz mógł lepiej poczuć ocb
+            // bardziej zrozumiałe ile golda się dostanie ( napisane przy poziomie) 
+            // po każdym poziomie parę klocków za darmo (coraz mniej)
+
             // animacja kasy +-
             // order klocków powinien rosnać wraz ze spawnowaniem
             // klocki położone powinny mieć ustalony order
