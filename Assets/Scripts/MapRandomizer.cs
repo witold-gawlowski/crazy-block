@@ -9,14 +9,15 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
     public string folderPath = "Assets/Prefabs";
 
     [SerializeField] private List<GameObject> levelPrefabs;
+    [SerializeField] private List<GameObject> prefabPool;
 
     private int currentMapIndex;
 
     public void Next()
     {
-        var newMapIndex = Mathf.Clamp(currentMapIndex + Random.Range(-1, 10), 0, levelPrefabs.Count);
-        
-        levelPrefabs.RemoveAt(currentMapIndex);
+        var newMapIndex = Mathf.Clamp(currentMapIndex + Random.Range(-1, 10), 0, prefabPool.Count);
+
+        prefabPool.RemoveAt(currentMapIndex);
         currentMapIndex = newMapIndex;
     }
 
@@ -27,14 +28,15 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
 
     public void Init()
     {
-        SortGameObjectsByLevelTileCount(levelPrefabs);
+        prefabPool = new List<GameObject>(levelPrefabs);
+        SortGameObjectsByLevelTileCount(prefabPool);
         currentMapIndex = 0;
         Next();
     }
 
     public GameObject GetCurrent()
     {
-        return levelPrefabs[currentMapIndex];
+        return prefabPool[currentMapIndex];
     }
 
     void SortGameObjectsByLevelTileCount(List<GameObject> gameObjects)

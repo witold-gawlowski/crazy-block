@@ -38,14 +38,6 @@ public class BlockScript : MonoBehaviour, IWeighted
     private bool isBought;
     private bool isPlaced;
 
-    private void Start()
-    {
-        timeElapsed = 0;
-        isAlive = true;
-        isBought = false;
-        isPlaced = false;
-    }
-
     private void Update()
     {
         if (isBought && !isPlaced)
@@ -67,7 +59,7 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     }
 
-    public void Init()
+    public void Init(bool alreadyBought = false)
     {
         srs = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
         _size = srs.Count;
@@ -79,6 +71,11 @@ public class BlockScript : MonoBehaviour, IWeighted
         RandomizeLifeTimne();
 
         AddTint();
+
+        isBought = alreadyBought;
+        timeElapsed = 0;
+        isAlive = true;
+        isPlaced = false;
     }
 
     public void SetPosition(Vector3 pos)

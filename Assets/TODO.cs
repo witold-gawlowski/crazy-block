@@ -17,6 +17,10 @@ namespace design
             // start z wylosowanymi wieloma klockami na początku żeby gracz mógł lepiej poczuć ocb
             // bardziej zrozumiałe ile golda się dostanie ( napisane przy poziomie) 
             // po każdym poziomie parę klocków za darmo (coraz mniej)
+            // fix block order
+            // randomize block hue so they can overlap
+            // w sklepie jest wiecej małych klocków a losowane są większe klocki
+
 
             // animacja kasy +-
             // order klocków powinien rosnać wraz ze spawnowaniem

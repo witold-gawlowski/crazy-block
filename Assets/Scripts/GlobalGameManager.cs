@@ -37,7 +37,9 @@ public class GlobalGameManager : MonoBehaviour
 
     private void Start()
     {
-        HandleNewGame();
+        level = 0;
+        mapGenerator.Init();
+        StartNewLevel();
     }
 
     private void Update()
@@ -58,23 +60,17 @@ public class GlobalGameManager : MonoBehaviour
         }
     }
 
-    public void HandleNewGame()
-    {
-        mapGenerator.Init();
-        LoadCurrentNode();
-        level = 1;
-    }
-
     public void HandleRestart()
     {
         if(restartCooldown > 0)
         {
             {
                 level = 0;
+                DestroyLooseBlocks();
+                mapGenerator.Init();
                 StartNewLevel();
                 ShopManager.Instance.Reroll();
                 ShopManager.Instance.ResetCash();
-                DestroyLooseBlocks();
             }
             restartCooldown = 0;
             return;
@@ -109,7 +105,7 @@ public class GlobalGameManager : MonoBehaviour
 
         ui.HandleNewLevel(level);
 
-        DestroyBlocksFromTopLevel();
+        DestroyPlacedBLocks();
 
         Destroy(_currentMapObj);
 
@@ -155,7 +151,7 @@ public class GlobalGameManager : MonoBehaviour
         }
     }
 
-    private void DestroyBlocksFromTopLevel()
+    private void DestroyPlacedBLocks()
     {
         var blocks = GameObject.FindGameObjectsWithTag("Block");
         foreach (var block in blocks)
