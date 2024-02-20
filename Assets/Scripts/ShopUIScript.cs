@@ -24,6 +24,7 @@ public class ShopUIScript : MonoBehaviour
     [SerializeField] private GameObject mapCompletedPanel;
     [SerializeField] private TMP_Text levelNuberText;
     [SerializeField] private GameObject restartText;
+    [SerializeField] private TMP_Text rewardInfoText;
 
     [SerializeField] private Color availableColor;
     [SerializeField] private Color unavailableColor;
@@ -124,6 +125,7 @@ public class ShopUIScript : MonoBehaviour
     public void HandleNewLevel(int level)
     {
         mapCompletedPanel.SetActive(false);
+        UpdateRewardInfoText(GlobalGameManager.Instance.GetCurrentReward());
         levelNuberText.text = "Level " + level;
     }
     
@@ -131,6 +133,11 @@ public class ShopUIScript : MonoBehaviour
     public void HandleRerollPress()
     {
         RerollPressedEvent();
+    }
+
+    public void UpdateRewardInfoText(int value)
+    {
+        rewardInfoText.text = "Reward: $" + value;
     }
 
     public void SetCashText(int value)

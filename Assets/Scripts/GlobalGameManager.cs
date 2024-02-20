@@ -78,10 +78,22 @@ public class GlobalGameManager : MonoBehaviour
         ui.ShowRestartVisible(true);
         restartCooldown += 3.0f;
     }
+
+    public GameObject GetShopUIObj()
+    {
+        return ui.gameObject;
+    }
+
     public int GetLevel()
     {
         return level;
     }
+
+    public int GetCurrentReward()
+    {
+        return mapGenerator.GetCurrentReward();
+    }
+
     public void FinalizeLevel()
     {
         StartCoroutine(FinalizeLevelCOrouitne());

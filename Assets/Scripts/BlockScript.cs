@@ -21,11 +21,14 @@ public class BlockScript : MonoBehaviour, IWeighted
     [SerializeField] private Color deadColor;
     [SerializeField] private Color initialColor;
     [SerializeField] private float maxLifeTime = 90;
-    [SerializeField] private float averageLifeTime = 45;
     [SerializeField] private float lifeTimeVariance = 10;
+    [SerializeField] private float clockAppearenceInterval = 15;
+    [SerializeField] private GameObject clockPrefab;
 
 
     private GameObject _pivot;
+    private BlockClock _clock;
+    
 
     private List<SpriteRenderer> srs;
 
@@ -48,9 +51,22 @@ public class BlockScript : MonoBehaviour, IWeighted
             {
                 AddTint();
             }
+
+            if(_clock == null && lifeTime - timeElapsed < clockAppearenceInterval)
+            {
+                var canvas = GlobalGameManager.Instance.GetShopUIObj().transform;
+                var clockObj = Instantiate(clockPrefab, canvas);
+                _clock = clockObj.GetComponent<BlockClock>();
+            }
         }
 
-        if(timeElapsed > lifeTime && isAlive)
+        if (_clock)
+        {
+            _clock.UpdateImageFill((lifeTime - timeElapsed) / clockAppearenceInterval);
+            _clock.UpdatePoistion(transform);
+        }
+
+        if (timeElapsed > lifeTime && isAlive)
         {
             isAlive = false;
             StartCoroutine(Die());
@@ -58,6 +74,14 @@ public class BlockScript : MonoBehaviour, IWeighted
         }
 
     }
+
+    public void OnDestroy()
+    {
+        if (_clock)
+        {
+            Destroy(_clock.gameObject);
+        }
+    }   
 
     public void Init(bool alreadyBought = false)
     {
@@ -159,6 +183,12 @@ public class BlockScript : MonoBehaviour, IWeighted
     {
         isPlaced = true;
         UpdateColorToPlaced();
+
+        if (_clock)
+        {
+            Destroy(_clock.gameObject);
+            _clock = null;
+        }
     }
 
     private IEnumerator Die()

@@ -10,8 +10,6 @@ namespace design
         class main
         {
             // -> klocki znikają w bardziej przewidywalny sposób
-            // w sklepie tylko małe klocki
-            // dodatkowe klocki przez pierwsze 5 poziomów tylko małe
             // bardziej zrozumiałe ile golda się dostanie ( napisane przy poziomie)
             // fix block order
             // sklep ma być drogi
