@@ -4,10 +4,6 @@ using UnityEngine.Advertisements;
 
 public class BannerAdExample : MonoBehaviour
 {
-    // For the purpose of this example, these buttons are for functionality testing:
-    [SerializeField] Button _loadBannerButton;
-    [SerializeField] Button _showBannerButton;
-    [SerializeField] Button _hideBannerButton;
 
     [SerializeField] BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
 
@@ -15,7 +11,8 @@ public class BannerAdExample : MonoBehaviour
     [SerializeField] string _iOSAdUnitId = "Banner_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms.
 
-    void Start()
+
+    public void HandleAdsInitializationComplete()
     {
         // Get the Ad Unit ID for the current platform:
 #if UNITY_IOS
@@ -24,12 +21,13 @@ public class BannerAdExample : MonoBehaviour
         _adUnitId = _androidAdUnitId;
 #endif
 
+
         // Set the banner position:
         Advertisement.Banner.SetPosition(_bannerPosition);
+        Debug.Log("trying to load banner");
+        GetComponent<DebugAds>().PritText("trying to load banner");
         LoadBanner();
-        ShowBannerAd();
     }
-
     // Implement a method to call when the Load Banner button is clicked:
     public void LoadBanner()
     {
@@ -46,12 +44,15 @@ public class BannerAdExample : MonoBehaviour
 
     // Implement code to execute when the loadCallback event triggers:
     void OnBannerLoaded()
-    { 
+    {
+        GetComponent<DebugAds>().PritText("banner loaded, trying to show banner");
+        ShowBannerAd();
     }
 
     // Implement code to execute when the load errorCallback event triggers:
     void OnBannerError(string message)
     {
+        GetComponent<DebugAds>().PritText($"Banner Error: {message}");
         Debug.Log($"Banner Error: {message}");
         // Optionally execute additional code, such as attempting to load another ad.
     }
@@ -79,14 +80,11 @@ public class BannerAdExample : MonoBehaviour
     }
 
     void OnBannerClicked() { }
-    void OnBannerShown() { }
+    void OnBannerShown()
+    {
+        Debug.Log("banner shown");
+        GetComponent<DebugAds>().PritText("bannershown");
+    }
     void OnBannerHidden() { }
 
-    void OnDestroy()
-    {
-        // Clean up the listeners:
-        _loadBannerButton.onClick.RemoveAllListeners();
-        _showBannerButton.onClick.RemoveAllListeners();
-        _hideBannerButton.onClick.RemoveAllListeners();
-    }
 }

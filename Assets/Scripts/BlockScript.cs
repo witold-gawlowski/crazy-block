@@ -70,6 +70,8 @@ public class BlockScript : MonoBehaviour, IWeighted
 
         RandomizeLifeTimne();
 
+        RandomizeHue();
+
         AddTint();
 
         isBought = alreadyBought;
@@ -194,6 +196,12 @@ public class BlockScript : MonoBehaviour, IWeighted
     private void RandomizeLifeTimne()
     {
         lifeTime = Mathf.Clamp(GlobalGameManager.Instance.GetBlockLifeLength() + Random.Range(-lifeTimeVariance, lifeTimeVariance), 10, 180);
+    }
+
+    private void RandomizeHue()
+    {
+        float hue = Random.value;
+        initialColor = Color.HSVToRGB(hue, 1, 1);
     }
 
     private void UpdateColorToPlaced()

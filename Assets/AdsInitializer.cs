@@ -8,8 +8,12 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     [SerializeField] bool _testMode = true;
     private string _gameId;
 
+    private BannerAdExample banner;
+
     void Awake()
     {
+        banner = GetComponent<BannerAdExample>();
+
         InitializeAds();
     }
 
@@ -31,11 +35,14 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 
     public void OnInitializationComplete()
     {
+        GetComponent<DebugAds>().PritText("Unity Ads initialization complete.");
         Debug.Log("Unity Ads initialization complete.");
+        banner.HandleAdsInitializationComplete();
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
         Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+        GetComponent<DebugAds>().PritText($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
     }
 }

@@ -9,20 +9,26 @@ namespace design
     {
         class main
         {
+            // -> klocki znikają w bardziej przewidywalny sposób
+            // w sklepie tylko małe klocki
+            // dodatkowe klocki przez pierwsze 5 poziomów tylko małe
+            // bardziej zrozumiałe ile golda się dostanie ( napisane przy poziomie)
+            // fix block order
+            // sklep ma być drogi
+            // przegrywanie
+            // zmiana koloru przy snapie
+
             // na początku dużo dłużej żyjace klocki
             // progresja: szybsze znikanie
-            // klocki znikają też ze sklepu
-            // -> klocki znikają w bardziej przewidywalny sposób
+            // klocki znikają też ze sklepu ?
             // promowanie wykupywania dużych klocków z długim czasem: koszt
-            // start z wylosowanymi wieloma klockami na początku żeby gracz mógł lepiej poczuć ocb
-            // bardziej zrozumiałe ile golda się dostanie ( napisane przy poziomie) 
-            // po każdym poziomie parę klocków za darmo (coraz mniej)
-            // fix block order
-            // randomize block hue so they can overlap
-            // w sklepie jest wiecej małych klocków a losowane są większe klocki
+            // po każdym poziomie parę klocków za darmo (coraz mniej?)
+            // za dużo klocków losowanych nie pasuje
+            // brzydkie kolory
+            // na początku mniej klocków losowanych
+            // duże klocki losowane, małe klocki w sklepie
 
 
-            // animacja kasy +-
             // order klocków powinien rosnać wraz ze spawnowaniem
             // klocki położone powinny mieć ustalony order
             // zmiana koloru na brązowy
@@ -30,12 +36,7 @@ namespace design
             // restart button
             // potrzebny restart
             //================================
-            // reroll musi zaslanić klocki
-            // icon: tetris block with dollar
-            // put back to shop
             // link game as example to responsiveness threads
-            // eazy restart
-            // zmiana koloru przy snapie
         }
 
         class Pytanai
