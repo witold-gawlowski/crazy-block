@@ -9,26 +9,22 @@ namespace design
     {
         class main
         {
-            // chcemy pewnej przewidywalności kolejnych poziomów (widoczny następny poziom w rogu) 
-            // release mandatory: start screen, zakonczenie, nieskończona gra, score
-            // score
-            // debet! -> przegrana gdy 15 s na debecie
-            // zmiana koloru przy snapie
-            // recyklowanie (potrzebne do usuwania niepotrzebnych klocków)
-            // warunki przegranej: na debecie przez 20 sekund
             // dowolna ilość klocka w sklepie
             // restart -> give up
             // give up -> score screen
             // score screen -> restart
+            // release mandatory: start screen, zakonczenie, nieskończona gra, score
+            // debet! -> przegrana gdy 15 s na debecie
+            // recyklowanie (potrzebne do usuwania niepotrzebnych klocków)
+            // chcemy pewnej przewidywalności kolejnych poziomów (widoczny następny poziom w rogu) 
+            // zmiana koloru przy snapie
 
-        // BALANS
             // ilość dodatkowych klocków proporcjonalna do wielkości poziomu
             // w sklepie powinny też być duże klocki (bo nie ma jak wypełniać dużych poziomów)
             // regulowana ilość klocków w sklepie
             // sklep powinien być większy (bo potrzeba też dużech klocków) 
             // more levels (into bigger ones) 
             // fix block order
-
             // upewnić się że małe klocki sa odpowiedno drogie 
             // more money for bigger levels 
             // upewnić się że duże i długo żyjące klocki sa odpowienio tanie (chcemy promować planowanie) 
