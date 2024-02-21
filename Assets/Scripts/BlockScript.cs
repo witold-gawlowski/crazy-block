@@ -34,7 +34,7 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     private int _size;
 
-    private float lifeTime;
+    private float _lifeTime;
     private float timeElapsed;
 
     private bool isAlive;
@@ -47,12 +47,12 @@ public class BlockScript : MonoBehaviour, IWeighted
         {
             timeElapsed += Time.deltaTime;
 
-            if (timeElapsed < lifeTime)
+            if (timeElapsed < _lifeTime)
             {
                 AddTint();
             }
 
-            if(_clock == null && lifeTime - timeElapsed < clockAppearenceInterval)
+            if(_clock == null && _lifeTime - timeElapsed < clockAppearenceInterval)
             {
                 var canvas = GlobalGameManager.Instance.GetShopUIObj().transform;
                 var clockObj = Instantiate(clockPrefab, canvas);
@@ -62,11 +62,11 @@ public class BlockScript : MonoBehaviour, IWeighted
 
         if (_clock)
         {
-            _clock.UpdateImageFill((lifeTime - timeElapsed) / clockAppearenceInterval);
+            _clock.UpdateImageFill((_lifeTime - timeElapsed) / clockAppearenceInterval);
             _clock.UpdatePoistion(transform);
         }
 
-        if (timeElapsed > lifeTime && isAlive)
+        if (timeElapsed > _lifeTime && isAlive)
         {
             isAlive = false;
             StartCoroutine(Die());
@@ -138,6 +138,11 @@ public class BlockScript : MonoBehaviour, IWeighted
         return _pivot.transform;
     }
 
+    public float GetLifeTime()
+    {
+        return _lifeTime;
+    }
+
     public bool IsOverShop()
     {
         var mask = LayerMask.GetMask(new string[] { "Respawn" });
@@ -155,7 +160,7 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     public int GetPrice()
     {
-        return ShopManager.Instance.GetPrice(lifeTime, initialPrice);
+        return ShopManager.Instance.GetPrice(_lifeTime, initialPrice);
     }
 
     public float GetWeight()
@@ -225,7 +230,7 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     private void RandomizeLifeTimne()
     {
-        lifeTime = Mathf.Clamp(GlobalGameManager.Instance.GetBlockLifeLength() + Random.Range(-lifeTimeVariance, lifeTimeVariance), 10, 180);
+        _lifeTime = Mathf.Clamp(GlobalGameManager.Instance.GetBlockLifeLength() + Random.Range(-lifeTimeVariance, lifeTimeVariance), 10, 180);
     }
 
     private void RandomizeHue()
@@ -248,7 +253,7 @@ public class BlockScript : MonoBehaviour, IWeighted
         var untintedColor = GetUntintedColor();
         Color.RGBToHSV(untintedColor, out colorH, out colorS, out initColorV);
 
-        float timeLeft = lifeTime - timeElapsed;
+        float timeLeft = _lifeTime - timeElapsed;
         float decayParam = 1 - timeLeft / maxLifeTime;
         float newColorV = Mathf.Lerp(initColorV, targetColorV, decayParam);
         Color newCOlor = Color.HSVToRGB(colorH, colorS, newColorV);

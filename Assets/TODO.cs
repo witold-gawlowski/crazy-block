@@ -16,7 +16,7 @@ namespace design
             // start screen: start, quit
             // debet! -> przegrana gdy 15 s na debecie
             // recyklowanie (potrzebne do usuwania niepotrzebnych klocków)
-            // chcemy pewnej przewidywalności kolejnych poziomów (widoczny następny poziom w rogu) 
+            // chcemy pewnej przewidywalności kolejnych poziomów (widoczny następny poziom w rogu)
             // zmiana koloru przy snapie
 
 

@@ -1,10 +1,28 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
+    class OfferElement
+    {
+        public void DestroyInstance()
+        {
+            if(_instance != null )
+            {
+                Destroy(_instance);
+            }
+        }
+
+        public GameObject _prefab;
+        public float _lifeTime;
+        public int _price;
+        public GameObject _instance;
+    }
+
     [SerializeField] private ShopUIScript ui;
     [SerializeField] private List<BlockScript> blockPrefabs;
     [SerializeField] private List<Transform> positionMarkers;
@@ -21,6 +39,7 @@ public class ShopManager : MonoBehaviour
     private int _oldCash;
 
     private List<BlockScript> offer;
+    private List<OfferElement> offer2;
     private BlockSpammer spammer;
 
     public static ShopManager Instance { get; private set; }
@@ -112,20 +131,62 @@ public class ShopManager : MonoBehaviour
         }
 
         offer = new List<BlockScript>();
+
         foreach (Transform t in positionMarkers)
         {
-            var prefab = Helpers.GetRandomWeightedElement<BlockScript>(blockPrefabs);
-            var block = Instantiate(prefab);
+            var prefabScript = Helpers.GetRandomWeightedElement<BlockScript>(blockPrefabs);
+            var block = Instantiate(prefabScript);
             var script = block.GetComponent<BlockScript>();
             script.Init();
             script.SetPosition(t.transform.position);
-
 
             offer.Add(script);
         }
 
         ui.HandleNewShopOffer(offer, Cash);
     }
+
+    public void Reroll2()
+    {
+        CleanOffer2();
+
+        foreach (Transform t in positionMarkers)
+        {
+            var prefabScript = Helpers.GetRandomWeightedElement<BlockScript>(blockPrefabs);
+            var blockObject = Instantiate(prefabScript.gameObject);
+            var blockScript = blockObject.GetComponent<BlockScript>();
+
+            blockScript.Init();
+            blockScript.SetPosition(t.transform.position);
+
+            var newOfferElem = new OfferElement()
+            {
+                _instance = blockObject,
+                _lifeTime = blockScript.GetLifeTime(),
+                _prefab = prefabScript.gameObject,
+                _price = blockScript.GetPrice()
+            };
+
+            offer2.Add(newOfferElem);
+        }
+
+        var offerObjects = offer2.Select(e => e._instance.GetComponent<BlockScript>()).ToList();
+        ui.HandleNewShopOffer(offerObjects, Cash);
+    }
+
+    public void CleanOffer2()
+    {
+        if (offer2 != null)
+        {
+            foreach (var item in offer2)
+            {
+                item.DestroyInstance();
+            }
+        }
+
+        offer2 = new List<OfferElement>();
+    }
+
 
     public bool CanBeBought(BlockScript block)
     {
@@ -147,7 +208,8 @@ public class ShopManager : MonoBehaviour
         offer.Remove(block);
         ui.HandleItemBought(block);
         block.ProcessPurchase();
-        if(offer.Count == 0)
+
+        if (offer.Count == 0)
         {
             Reroll();
         }
