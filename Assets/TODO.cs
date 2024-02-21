@@ -9,32 +9,28 @@ namespace design
     {
         class main
         {
-            // -> klocki znikają w bardziej przewidywalny sposób
-            // bardziej zrozumiałe ile golda się dostanie ( napisane przy poziomie)
+            // release mandatory
+            // more money for bigger levels 
+            // game over conditions
+                // 
+            // restart -> give up
+            // give up -> score screen
+            // score screen -> restart
+            // more levels (into bigger ones) 
+            // w sklepie powinny też być duże klocki (bo nie ma jak wypełniać dużych poziomów)
+            // klocków powinno byc coraz więcej 
+            // sklep powinien być większy (bo potrzeba też dużech klocków) 
+            // warunki przegranej: na debecie przez 20 sekund
+            // debet!
             // fix block order
-            // sklep ma być drogi
-            // przegrywanie
+            // fajnie by było gdyby można było kupić dowolną ilość klocka w sklepie!! :D
+            // upewnić się że małe klocki sa odpowiedno drogie 
             // zmiana koloru przy snapie
-
-            // na początku dużo dłużej żyjace klocki
-            // progresja: szybsze znikanie
-            // klocki znikają też ze sklepu ?
-            // promowanie wykupywania dużych klocków z długim czasem: koszt
-            // po każdym poziomie parę klocków za darmo (coraz mniej?)
-            // za dużo klocków losowanych nie pasuje
-            // brzydkie kolory
+            // upewnić się że duże i długo żyjące klocki sa odpowienio tanie (chcemy promować planowanie) 
+            // w sklepie musi byc dość małych klocków żeby dało się łatwo kończyć kształty
             // na początku mniej klocków losowanych
-            // duże klocki losowane, małe klocki w sklepie
-
-
+            // poprawić pozycje losowania 
             // order klocków powinien rosnać wraz ze spawnowaniem
-            // klocki położone powinny mieć ustalony order
-            // zmiana koloru na brązowy
-            // kasa w sklepie i jakiś feedback że się zmieniła 
-            // restart button
-            // potrzebny restart
-            //================================
-            // link game as example to responsiveness threads
         }
 
         class Pytanai
