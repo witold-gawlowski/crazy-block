@@ -21,6 +21,8 @@ public class ShopManager : MonoBehaviour
         public float _lifeTime;
         public int _price;
         public GameObject _instance;
+        public Transform _shopMarker;
+        public Color _color;
     }
 
     [SerializeField] private ShopUIScript ui;
@@ -38,8 +40,7 @@ public class ShopManager : MonoBehaviour
     private int _cash;
     private int _oldCash;
 
-    private List<BlockScript> offer;
-    private List<OfferElement> offer2;
+    private List<OfferElement> offer;
     private BlockSpammer spammer;
 
     public static ShopManager Instance { get; private set; }
@@ -69,7 +70,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        Reroll();
+        Reroll2();
         ResetCash();
     }
 
@@ -80,13 +81,13 @@ public class ShopManager : MonoBehaviour
 
     public void HandleRerollPressedEvent()
     {
-        Reroll();
+        Reroll2();
         Cash = Cash - rerollPrice;
     }
 
     public void HandleBlockRelease(BlockScript draggedScript)
     {
-        if (!IsBought(draggedScript))
+        if (!draggedScript.IsBought())
         {
             if (!draggedScript.IsOverShop())
             {
@@ -120,32 +121,6 @@ public class ShopManager : MonoBehaviour
         return rerollPrice <= Cash;
     }
 
-    public void Reroll()
-    {
-        if (offer != null)
-        {
-            foreach (var item in offer)
-            {
-                Destroy(item.gameObject);
-            }
-        }
-
-        offer = new List<BlockScript>();
-
-        foreach (Transform t in positionMarkers)
-        {
-            var prefabScript = Helpers.GetRandomWeightedElement<BlockScript>(blockPrefabs);
-            var block = Instantiate(prefabScript);
-            var script = block.GetComponent<BlockScript>();
-            script.Init();
-            script.SetPosition(t.transform.position);
-
-            offer.Add(script);
-        }
-
-        ui.HandleNewShopOffer(offer, Cash);
-    }
-
     public void Reroll2()
     {
         CleanOffer2();
@@ -164,27 +139,42 @@ public class ShopManager : MonoBehaviour
                 _instance = blockObject,
                 _lifeTime = blockScript.GetLifeTime(),
                 _prefab = prefabScript.gameObject,
-                _price = blockScript.GetPrice()
+                _price = blockScript.GetPrice(),
+                _shopMarker = t,
+                _color = blockScript.GetInitialColor()
             };
 
-            offer2.Add(newOfferElem);
+            offer.Add(newOfferElem);
         }
 
-        var offerObjects = offer2.Select(e => e._instance.GetComponent<BlockScript>()).ToList();
+        var offerObjects = offer.Select(e => e._instance.GetComponent<BlockScript>()).ToList();
+        ui.HandleNewShopOffer(offerObjects, Cash);
+    }
+
+    private void Respawn(OfferElement e)
+    {
+        var blockObj = Instantiate(e._prefab);
+        var blockScript = blockObj.GetComponent<BlockScript>();
+
+        blockScript.Init(false, e._lifeTime, e._color);
+        blockScript.SetPosition(e._shopMarker.position);
+        e._instance = blockObj;
+
+        var offerObjects = offer.Select(e => e._instance.GetComponent<BlockScript>()).ToList();
         ui.HandleNewShopOffer(offerObjects, Cash);
     }
 
     public void CleanOffer2()
     {
-        if (offer2 != null)
+        if (offer != null)
         {
-            foreach (var item in offer2)
+            foreach (var item in offer)
             {
                 item.DestroyInstance();
             }
         }
 
-        offer2 = new List<OfferElement>();
+        offer = new List<OfferElement>();
     }
 
 
@@ -199,19 +189,25 @@ public class ShopManager : MonoBehaviour
 
     private bool IsBought(BlockScript blockScript)
     {
-        return !offer.Contains(blockScript);
+        return blockScript.IsBought();
+    }
+
+    private void HandleBlockBought(BlockScript block)
+    {
+        foreach (var e in offer)
+        {
+            if (e._instance == block.gameObject)
+            {
+                Respawn(e);
+            }
+        }
     }
 
     public void Buy(BlockScript block)
     {
         Cash = Cash - block.GetPrice();
-        offer.Remove(block);
+        HandleBlockBought(block);
         ui.HandleItemBought(block);
         block.ProcessPurchase();
-
-        if (offer.Count == 0)
-        {
-            Reroll();
-        }
     }
 }

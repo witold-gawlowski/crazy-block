@@ -69,7 +69,7 @@ public class GlobalGameManager : MonoBehaviour
                 DestroyLooseBlocks();
                 mapGenerator.Init();
                 StartNewLevel();
-                ShopManager.Instance.Reroll();
+                ShopManager.Instance.Reroll2();
                 ShopManager.Instance.ResetCash();
             }
             restartCooldown = 0;

@@ -53,7 +53,7 @@ public class BlockSpammer : MonoBehaviour
             }
 
             // Instantiate the chosen block at the spawn point
-            var newBlock =    Instantiate(randomBlock, spawnPoints[i].position, Quaternion.identity);
+            var newBlock = Instantiate(randomBlock, spawnPoints[i].position, Quaternion.identity);
             newBlock.GetComponent<BlockScript>().Init(true);
         }
     }

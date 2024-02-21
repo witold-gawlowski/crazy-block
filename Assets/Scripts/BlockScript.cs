@@ -83,7 +83,8 @@ public class BlockScript : MonoBehaviour, IWeighted
         }
     }   
 
-    public void Init(bool alreadyBought = false)
+
+    public void Init(bool alreadyBought = false, float lifeTime = -1, object color = null)
     {
         srs = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
         _size = srs.Count;
@@ -92,9 +93,23 @@ public class BlockScript : MonoBehaviour, IWeighted
 
         CenterPivot();
 
-        RandomizeLifeTimne();
+        if (lifeTime < 0)
+        {
+            RandomizeLifeTimne();
+        }
+        else
+        {
+            _lifeTime = lifeTime;
+        }
 
-        RandomizeHue();
+        if (color == null)
+        {
+            RandomizeHue();
+        }
+        else
+        {
+            initialColor = (Color)color;   
+        }
 
         AddTint();
 
@@ -104,9 +119,16 @@ public class BlockScript : MonoBehaviour, IWeighted
         isPlaced = false;
     }
 
+
+
     public void SetPosition(Vector3 pos)
     {
         transform.position = pos - _pivot.transform.localPosition;
+    }
+
+    public Color GetInitialColor()
+    {
+        return initialColor;
     }
 
     private void CenterPivot()
