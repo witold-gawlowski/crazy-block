@@ -9,28 +9,34 @@ namespace design
     {
         class main
         {
-            // release mandatory
-            // more money for bigger levels 
-            // game over conditions
-                // 
+            // chcemy pewnej przewidywalności kolejnych poziomów (widoczny następny poziom w rogu) 
+            // release mandatory: start screen, zakonczenie, nieskończona gra, score
+            // score
+            // debet! -> przegrana gdy 15 s na debecie
+            // zmiana koloru przy snapie
+            // recyklowanie (potrzebne do usuwania niepotrzebnych klocków)
+            // warunki przegranej: na debecie przez 20 sekund
+            // dowolna ilość klocka w sklepie
             // restart -> give up
             // give up -> score screen
             // score screen -> restart
-            // more levels (into bigger ones) 
+
+        // BALANS
+            // ilość dodatkowych klocków proporcjonalna do wielkości poziomu
             // w sklepie powinny też być duże klocki (bo nie ma jak wypełniać dużych poziomów)
-            // klocków powinno byc coraz więcej 
+            // regulowana ilość klocków w sklepie
             // sklep powinien być większy (bo potrzeba też dużech klocków) 
-            // warunki przegranej: na debecie przez 20 sekund
-            // debet!
+            // more levels (into bigger ones) 
             // fix block order
-            // fajnie by było gdyby można było kupić dowolną ilość klocka w sklepie!! :D
+
             // upewnić się że małe klocki sa odpowiedno drogie 
-            // zmiana koloru przy snapie
+            // more money for bigger levels 
             // upewnić się że duże i długo żyjące klocki sa odpowienio tanie (chcemy promować planowanie) 
             // w sklepie musi byc dość małych klocków żeby dało się łatwo kończyć kształty
             // na początku mniej klocków losowanych
             // poprawić pozycje losowania 
             // order klocków powinien rosnać wraz ze spawnowaniem
+            // poprawić buga z poziomami 
         }
 
         class Pytanai
