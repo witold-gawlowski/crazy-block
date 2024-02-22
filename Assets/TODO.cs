@@ -8,8 +8,8 @@ namespace design
     public class TODO : MonoBehaviour
     {
         class main
-        {
-            // chcemy pewnej przewidywalności kolejnych poziomów (widoczny następny poziom w rogu)
+        {   
+            // regulowana ilośc klocków
             
             // zmiana koloru przy snapie
             // recyklowanie (potrzebne do usuwania niepotrzebnych klocków)

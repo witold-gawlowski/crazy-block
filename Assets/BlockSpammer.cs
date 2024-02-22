@@ -7,22 +7,23 @@ public class BlockSpammer : MonoBehaviour
     [SerializeField] private List<BlockScript> blocks;
     [SerializeField] private List<BlockScript> protectionPeriodBlocks;
     [SerializeField] List<Transform> spawnPoints;
+    [SerializeField] private AnimationCurve spawnCountCurve;
 
     public void HandleNewLevel()
     {
-        if(GlobalGameManager.Instance.GetLevel() <= 5)
+        var spawnCount = Mathf.RoundToInt(spawnCountCurve.Evaluate(GlobalGameManager.Instance.GetLevel()));
+        if (GlobalGameManager.Instance.GetLevel() <= 5)
         {
-            SpawnRandomBlocks(true);
+            SpawnRandomBlocks(spawnCount, true);
         }
         else
         {
-            SpawnRandomBlocks();
+            SpawnRandomBlocks(spawnCount);
         }
     }
 
-    void SpawnRandomBlocks(bool protectionPeriod = false)
+    void SpawnRandomBlocks(int numberOfBlocksToSpawn = 3, bool protectionPeriod = false)
     {
-        int numberOfBlocksToSpawn = 3;
         if (numberOfBlocksToSpawn > spawnPoints.Count)
         {
             Debug.LogWarning("Number of blocks to spawn is greater than the number of spawn points. Adjusting to the number of spawn points.");
