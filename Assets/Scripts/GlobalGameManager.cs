@@ -16,8 +16,11 @@ public class GlobalGameManager : MonoBehaviour
 
     [SerializeField] private GamplayUIScript gameplayUI;
 
+    [SerializeField] private GameObject nextmapPreviewParent;
+
     private MapGeneratorInterface mapGenerator;
     private GameObject _currentMapObj;
+    private GameObject _nextMapObj;
 
     private int level;
     public static GlobalGameManager Instance { get; private set; }
@@ -144,6 +147,7 @@ public class GlobalGameManager : MonoBehaviour
         DestroyPlacedBLocks();
 
         Destroy(_currentMapObj);
+        Destroy(_nextMapObj);
 
         mapGenerator.Next();
 
@@ -162,6 +166,7 @@ public class GlobalGameManager : MonoBehaviour
     private void LoadCurrentNode()
     {
         _currentMapObj = Instantiate(mapGenerator.GetCurrent());
+        _nextMapObj = Instantiate(mapGenerator.PeekNext(), nextmapPreviewParent.transform);
         UpdateMapColor();
     }
     

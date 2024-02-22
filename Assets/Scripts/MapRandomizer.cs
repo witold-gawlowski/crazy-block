@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using System.IO;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
 {
@@ -12,10 +13,12 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
     [SerializeField] private List<GameObject> prefabPool;
 
     private int currentMapIndex;
+    private int _nextShift;
 
     public void Next()
     {
-        var newMapIndex = Mathf.Clamp(currentMapIndex + Random.Range(-1, 10), 0, prefabPool.Count);
+        var newMapIndex = Mathf.Clamp(currentMapIndex + _nextShift, 0, prefabPool.Count);
+        _nextShift = Random.Range(-1, 10);
 
         prefabPool.RemoveAt(currentMapIndex);
         currentMapIndex = newMapIndex;
@@ -31,6 +34,7 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
         prefabPool = new List<GameObject>(levelPrefabs);
         SortGameObjectsByLevelTileCount(prefabPool);
         currentMapIndex = 0;
+        _nextShift = Random.Range(-1, 10);
         Next();
     }
 
@@ -63,5 +67,10 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
         }
 
         return count;
+    }
+
+    public GameObject PeekNext()
+    {
+        return prefabPool[currentMapIndex + _nextShift];
     }
 }

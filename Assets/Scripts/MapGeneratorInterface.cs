@@ -7,5 +7,7 @@ public interface MapGeneratorInterface
     public void Init();
     public void Next();
     public GameObject GetCurrent();
+
+    public GameObject PeekNext();
     public int GetCurrentReward();
 }

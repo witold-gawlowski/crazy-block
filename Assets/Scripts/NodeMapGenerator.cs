@@ -29,4 +29,8 @@ public class NodeMapGenerator : MonoBehaviour, MapGeneratorInterface
         _currentMapNode = _currentMapNode.GetNext();
     }
 
+    public GameObject PeekNext()
+    {
+        throw new System.NotImplementedException();
+    }
 }
