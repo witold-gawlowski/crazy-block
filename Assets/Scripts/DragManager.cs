@@ -155,7 +155,8 @@ public class DragManager : MonoBehaviour
             return false;
         }
 
-        return block.IsBought() || ShopManager.Instance.CanBeBought(block);
+        return true;
+        //return block.IsBought() || ShopManager.Instance.CanBeBought(block);
     }
 
     private void OnDrag()

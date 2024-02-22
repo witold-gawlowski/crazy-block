@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GlobalGameManager.Instance.HandleRestart();
+            GlobalGameManager.Instance.HandleBack();
         }
     }
 

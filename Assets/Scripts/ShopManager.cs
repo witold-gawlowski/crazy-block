@@ -11,7 +11,7 @@ public class ShopManager : MonoBehaviour
     {
         public void DestroyInstance()
         {
-            if(_instance != null )
+            if (_instance != null)
             {
                 Destroy(_instance);
             }
@@ -32,6 +32,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private int initialCash = 100;
     [SerializeField] private int rerollPrice = 10;
     [SerializeField] private AnimationCurve lifetimeToPrice;
+    [SerializeField] private float debetDuration = 15;
 
     public System.Action<int, int, bool> CashChanged;
 
@@ -39,6 +40,8 @@ public class ShopManager : MonoBehaviour
 
     private int _cash;
     private int _oldCash;
+    private bool _debetCountdownStarted;
+    private float _debetCountdownStartTime;
 
     private List<OfferElement> offer;
     private BlockSpammer spammer;
@@ -58,6 +61,11 @@ public class ShopManager : MonoBehaviour
         spammer = GetComponentInChildren<BlockSpammer>();
     }
 
+    private void Update()
+    {
+        UpdateDebetTimer();
+    }
+
     private void OnEnable()
     {
         ui.RerollPressedEvent += HandleRerollPressedEvent;
@@ -68,9 +76,9 @@ public class ShopManager : MonoBehaviour
         ui.RerollPressedEvent -= HandleRerollPressedEvent;
     }
 
-    private void Start()
+   private void Start()
     {
-        Reroll2();
+        Reroll();
         ResetCash();
     }
 
@@ -81,8 +89,15 @@ public class ShopManager : MonoBehaviour
 
     public void HandleRerollPressedEvent()
     {
-        Reroll2();
+        Reroll();
         Cash = Cash - rerollPrice;
+    }
+
+    public void HandleRestart()
+    {
+        ResetCash();
+        Reroll();
+        _debetCountdownStarted = false;
     }
 
     public void HandleBlockRelease(BlockScript draggedScript)
@@ -121,9 +136,9 @@ public class ShopManager : MonoBehaviour
         return rerollPrice <= Cash;
     }
 
-    public void Reroll2()
+    public void Reroll()
     {
-        CleanOffer2();
+        CleanOffer();
 
         foreach (Transform t in positionMarkers)
         {
@@ -147,8 +162,7 @@ public class ShopManager : MonoBehaviour
             offer.Add(newOfferElem);
         }
 
-        var offerObjects = offer.Select(e => e._instance.GetComponent<BlockScript>()).ToList();
-        ui.HandleNewShopOffer(offerObjects, Cash);
+        ui.HandleNewShopOffer(Cash);
     }
 
     private void Respawn(OfferElement e)
@@ -160,11 +174,10 @@ public class ShopManager : MonoBehaviour
         blockScript.SetPosition(e._shopMarker.position);
         e._instance = blockObj;
 
-        var offerObjects = offer.Select(e => e._instance.GetComponent<BlockScript>()).ToList();
-        ui.HandleNewShopOffer(offerObjects, Cash);
+        ui.HandleNewShopOffer(Cash);
     }
 
-    public void CleanOffer2()
+    public void CleanOffer()
     {
         if (offer != null)
         {
@@ -177,6 +190,10 @@ public class ShopManager : MonoBehaviour
         offer = new List<OfferElement>();
     }
 
+    public List<BlockScript> GetOfferBlockScripts()
+    {
+        return offer.Select(e => e._instance.GetComponent<BlockScript>()).ToList();
+    }
 
     public bool CanBeBought(BlockScript block)
     {
@@ -190,6 +207,41 @@ public class ShopManager : MonoBehaviour
     private bool IsBought(BlockScript blockScript)
     {
         return blockScript.IsBought();
+    }
+
+    private void UpdateDebetTimer()
+    {
+        if (Cash < 0)
+        {
+            if (_debetCountdownStarted)
+            {
+                var remainingTIme = debetDuration - (Time.time - _debetCountdownStartTime);
+
+                if(remainingTIme > 0)
+                {
+                    ui.SetDebetCountdownValue(remainingTIme);
+                }
+                else
+                {
+                    GlobalGameManager.Instance.GameOver();
+                }               
+            }
+            else
+            {
+                _debetCountdownStartTime = Time.time;
+                ui.SetDebetCountdonwVisible(true);
+                _debetCountdownStarted = true;
+            }
+
+        }
+        else
+        {
+            if (_debetCountdownStarted)
+            {
+                ui.SetDebetCountdonwVisible(false);
+                _debetCountdownStarted = false;
+            }
+        }
     }
 
     private void HandleBlockBought(BlockScript block)

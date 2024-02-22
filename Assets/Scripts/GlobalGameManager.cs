@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GlobalGameManager : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class GlobalGameManager : MonoBehaviour
 
     [SerializeField] private AnimationCurve blockLifeLengthByLevel;
 
+    [SerializeField] private GamplayUIScript gameplayUI;
+
     private MapGeneratorInterface mapGenerator;
     private GameObject _currentMapObj;
 
@@ -19,6 +23,7 @@ public class GlobalGameManager : MonoBehaviour
     public static GlobalGameManager Instance { get; private set; }
 
     private float restartCooldown;
+    private bool _isPaused;
 
     private void Awake()
     {
@@ -38,6 +43,7 @@ public class GlobalGameManager : MonoBehaviour
     private void Start()
     {
         level = 0;
+        _isPaused = false;
         mapGenerator.Init();
         StartNewLevel();
     }
@@ -60,18 +66,11 @@ public class GlobalGameManager : MonoBehaviour
         }
     }
 
-    public void HandleRestart()
+    public void HandleBack()
     {
         if(restartCooldown > 0)
         {
-            {
-                level = 0;
-                DestroyLooseBlocks();
-                mapGenerator.Init();
-                StartNewLevel();
-                ShopManager.Instance.Reroll2();
-                ShopManager.Instance.ResetCash();
-            }
+            SceneManager.LoadScene("MenuScene");
             restartCooldown = 0;
             return;
         }
@@ -79,9 +78,31 @@ public class GlobalGameManager : MonoBehaviour
         restartCooldown += 3.0f;
     }
 
+    public void GameOver()
+    {
+        gameplayUI.HandleGameOver();
+        _isPaused = true;
+    }
+
+    public void Restart()
+    {
+        level = 0;
+        DestroyLooseBlocks();
+        mapGenerator.Init();
+        StartNewLevel();
+        ShopManager.Instance.HandleRestart();
+        gameplayUI.HandleRestart();
+        ui.HandleRestart();
+    }
+
     public GameObject GetShopUIObj()
     {
         return ui.gameObject;
+    }
+
+    public bool IsPaused()
+    {
+        return _isPaused;
     }
 
     public int GetLevel()
@@ -107,10 +128,10 @@ public class GlobalGameManager : MonoBehaviour
     private IEnumerator FinalizeLevelCOrouitne()
     {
         ui.HandleLevelCompleted(mapGenerator.GetCurrentReward());
-
+        ShopManager.Instance.AddCash(mapGenerator.GetCurrentReward());
+        
         yield return new WaitForSeconds(2);
 
-        ShopManager.Instance.AddCash(mapGenerator.GetCurrentReward());
         StartNewLevel();
     }
 
@@ -177,5 +198,10 @@ public class GlobalGameManager : MonoBehaviour
                 Destroy(block);
             }
         }
+    }
+
+    public void OpenMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

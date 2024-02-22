@@ -9,12 +9,10 @@ namespace design
     {
         class main
         {
-            // dowolna ilość klocka w sklepie
-            // restart -> Quit
+            // debet! -> przegrana gdy 15 s na debecie
             // game over -> score screen
             // score screen: restart, you reched level 123!
             // start screen: start, quit
-            // debet! -> przegrana gdy 15 s na debecie
             // recyklowanie (potrzebne do usuwania niepotrzebnych klocków)
             // chcemy pewnej przewidywalności kolejnych poziomów (widoczny następny poziom w rogu)
             // zmiana koloru przy snapie

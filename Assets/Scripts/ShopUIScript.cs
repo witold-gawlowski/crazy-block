@@ -25,6 +25,7 @@ public class ShopUIScript : MonoBehaviour
     [SerializeField] private TMP_Text levelNuberText;
     [SerializeField] private GameObject restartText;
     [SerializeField] private TMP_Text rewardInfoText;
+    [SerializeField] private TMP_Text debetTimerText;
 
     [SerializeField] private Color availableColor;
     [SerializeField] private Color unavailableColor;
@@ -32,6 +33,7 @@ public class ShopUIScript : MonoBehaviour
     [SerializeField] private float targetDecreasedCashSize = 50;
 
     private float regularCashTextSize;
+    private Color regularCashTextColor;
 
     public Action RerollPressedEvent;
 
@@ -45,6 +47,7 @@ public class ShopUIScript : MonoBehaviour
         }
 
         regularCashTextSize = totalCashText.fontSize;
+        regularCashTextColor = totalCashText.color;
     }
 
 
@@ -105,13 +108,18 @@ public class ShopUIScript : MonoBehaviour
         yield return null;
     }
 
+    public void HandleRestart()
+    {
+        debetTimerText.gameObject.SetActive(false);
+    }
+
     private void HandleCashChanged(int value, int oldValue, bool canAffordReroll)
     {
         if (value != oldValue)
         {
-            UpdateBlockTextColors(value);
+            // UpdateBlockTextColors(value);
             StartCoroutine(AnimateCashCoroutine(oldValue, value));
-            UpdateRerollButton(canAffordReroll);
+            // UpdateRerollButton(canAffordReroll);
         }
     }
 
@@ -142,6 +150,14 @@ public class ShopUIScript : MonoBehaviour
 
     public void SetCashText(int value)
     {
+        if(value < 0)
+        {
+            totalCashText.color = Color.red;
+        }
+        else
+        {
+            totalCashText.color = regularCashTextColor;
+        }
         totalCashText.text = "$" + value.ToString();
     }
 
@@ -162,17 +178,35 @@ public class ShopUIScript : MonoBehaviour
         }
     }
 
-    public void HandleNewShopOffer(List<BlockScript> newOffer, int cash)
+    public void HandleNewShopOffer(int cash)
     {
-        foreach (var (block, item) in newOffer.Zip(shopUIItems, (a, b) => (a, b)))
+        var offerBlockScripts = ShopManager.Instance.GetOfferBlockScripts();
+        foreach (var (block, item) in offerBlockScripts.Zip(shopUIItems, (a, b) => (a, b)))
         {
             item.blockScript = block;
             item.priceText.text = "$"+block.GetPrice();
             item.priceText.gameObject.SetActive(true);
         }
 
-        UpdateBlockTextColors(cash);
+        //UpdateBlockTextColors(cash);
     }
+
+
+    public void SetDebetCountdownValue(float value)
+    {
+        int fullSeconds = Mathf.FloorToInt(value);
+
+        int hundredths = Mathf.FloorToInt((value - fullSeconds) * 100);
+
+        string timeString = string.Format("{0}:{1:D2}", fullSeconds, hundredths);
+        debetTimerText.text = timeString;
+    }
+
+    public void SetDebetCountdonwVisible(bool value)
+    {
+        debetTimerText.gameObject.SetActive(value);
+    }
+
 
     private void UpdateRerollButton(bool canAffordReroll)
     {
