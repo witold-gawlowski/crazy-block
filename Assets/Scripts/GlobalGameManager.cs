@@ -140,22 +140,23 @@ public class GlobalGameManager : MonoBehaviour
 
     private void StartNewLevel()
     {
-        level++;
-
-        ui.HandleNewLevel(level);
-
         DestroyPlacedBLocks();
 
         Destroy(_currentMapObj);
         Destroy(_nextMapObj);
+
+        level++;
 
         mapGenerator.Next();
 
         LoadCurrentNode();
 
         MapManager.GetInstance().AddCleanMap();
-
+        
         ShopManager.Instance.HandleNewLevel();
+
+        ui.HandleNewLevel(level);
+
     }
 
     public GameObject GetCurrentMapObject()

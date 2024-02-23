@@ -8,26 +8,19 @@ namespace design
     public class TODO : MonoBehaviour
     {
         class main
-        {   
-            // regulowana ilośc klocków
-            
+        {
+            // nagroda proporcjonalna do poziomu
+            // losowanie kolorów spośród danych
+            // ilość i wielkość dodatkowych klocków proporcjonalna do wielkości poziomu
+
+            // fix block order
+            // drogi reroll
             // zmiana koloru przy snapie
             // recyklowanie (potrzebne do usuwania niepotrzebnych klocków)
             // score?
-            // ilość dodatkowych klocków proporcjonalna do wielkości poziomu
             // w sklepie powinny też być duże klocki (bo nie ma jak wypełniać dużych poziomów)
-            // regulowana ilość klocków w sklepie
-            // sklep powinien być większy (bo potrzeba też dużech klocków) 
-            // more levels (into bigger ones) 
-            // fix block order
             // upewnić się że małe klocki sa odpowiedno drogie 
-            // more money for bigger levels 
             // upewnić się że duże i długo żyjące klocki sa odpowienio tanie (chcemy promować planowanie) 
-            // w sklepie musi byc dość małych klocków żeby dało się łatwo kończyć kształty
-            // na początku mniej klocków losowanych
-            // poprawić pozycje losowania 
-            // order klocków powinien rosnać wraz ze spawnowaniem
-            // poprawić buga z poziomami 
         }
 
         class Pytanai

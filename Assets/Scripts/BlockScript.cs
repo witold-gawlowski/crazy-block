@@ -104,7 +104,7 @@ public class BlockScript : MonoBehaviour, IWeighted
 
         if (color == null)
         {
-            RandomizeHue();
+            SetInitialColor();
         }
         else
         {
@@ -255,7 +255,7 @@ public class BlockScript : MonoBehaviour, IWeighted
         _lifeTime = Mathf.Clamp(GlobalGameManager.Instance.GetBlockLifeLength() + Random.Range(-lifeTimeVariance, lifeTimeVariance), 10, 180);
     }
 
-    private void RandomizeHue()
+    private void SetInitialColor()
     {
         float hue = Random.value;
         initialColor = Color.HSVToRGB(hue, 1, 1);

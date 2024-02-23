@@ -49,6 +49,20 @@ public class Helpers : MonoBehaviour
         return result;
     }
 
+    public static void Shuffle<T>(List<T> list)
+    {
+
+        int n = list.Count;
+        for (int i = n - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+
+            T temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }
+    }
+
     public static T GetRandomElement<T>(List<T> origin)
     {
         return GetRandomSubset<T>(origin, 1).First<T>();

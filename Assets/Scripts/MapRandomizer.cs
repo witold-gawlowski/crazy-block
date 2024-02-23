@@ -4,43 +4,74 @@ using UnityEditor;
 using System.IO;
 using UnityEngine;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 
 public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
 {
     public string folderPath = "Assets/Prefabs";
 
-    [SerializeField] private List<GameObject> levelPrefabs;
-    [SerializeField] private List<GameObject> prefabPool;
+    [SerializeField] private List<GameObject> initialPrefabs;
+    [SerializeField] private List<GameObject> endgamePrefabs;
 
-    private int currentMapIndex;
-    private int _nextShift;
+    private List<GameObject> initialPrefabPool;
+    private List<GameObject> endgamePool;
+
+    [SerializeField] private int _initialPrafabIndex;
+    [SerializeField] private int _endPrafabIndex;
+    [SerializeField] private bool _isEndgame;
 
     public void Next()
     {
-        var newMapIndex = Mathf.Clamp(currentMapIndex + _nextShift, 0, prefabPool.Count);
-        _nextShift = Random.Range(-1, 10);
-
-        prefabPool.RemoveAt(currentMapIndex);
-        currentMapIndex = newMapIndex;
+        if (_isEndgame)
+        {
+            _endPrafabIndex++;
+            if(_endPrafabIndex == endgamePool.Count)
+            {
+                _endPrafabIndex = 0;
+            }
+        }
+        else
+        {
+            _initialPrafabIndex++;
+            if(_initialPrafabIndex == initialPrefabPool.Count)
+            {
+                _isEndgame = true;
+            }
+        }
     }
 
     public int GetCurrentReward()
     {
-        return 90;
+        int targetPrice = CountChildrenWithTag(GetCurrent(), "LevelTile") * 3;
+        return (targetPrice + 49 ) / 50 * 50 ;
     }
 
     public void Init()
     {
-        prefabPool = new List<GameObject>(levelPrefabs);
-        SortGameObjectsByLevelTileCount(prefabPool);
-        currentMapIndex = 0;
-        _nextShift = Random.Range(-1, 10);
-        Next();
+        int initialPoolCount = Mathf.Min(20, initialPrefabs.Count);
+        initialPrefabPool = Helpers.GetRandomSubset(initialPrefabs, initialPoolCount);
+        SortGameObjectsByLevelTileCount(initialPrefabPool);
+
+        endgamePool = new List<GameObject>(endgamePrefabs);
+        Helpers.Shuffle(endgamePool);
+
+        _isEndgame = false;
+        _initialPrafabIndex = -1;
+        _endPrafabIndex = 0;
     }
+
+
 
     public GameObject GetCurrent()
     {
-        return prefabPool[currentMapIndex];
+        if (_isEndgame)
+        {
+            return endgamePool[_endPrafabIndex];
+        }
+        else
+        {
+            return initialPrefabPool[_initialPrafabIndex];
+        }
     }
 
     void SortGameObjectsByLevelTileCount(List<GameObject> gameObjects)
@@ -71,6 +102,22 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
 
     public GameObject PeekNext()
     {
-        return prefabPool[currentMapIndex + _nextShift];
+        int endPoolSIze = endgamePool.Count;
+        int initialPoolSize = initialPrefabPool.Count;
+        if (_isEndgame)
+        {
+            return endgamePool[(_endPrafabIndex + 1) % endPoolSIze];
+        }
+        else
+        {
+            if(_initialPrafabIndex == initialPoolSize -1)
+            {
+                return endgamePool[0];
+            }
+            else
+            {
+                return initialPrefabPool[_initialPrafabIndex + 1];
+            }
+        }
     }
 }
