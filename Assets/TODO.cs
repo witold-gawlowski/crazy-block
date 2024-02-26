@@ -9,17 +9,23 @@ namespace design
     {
         class main
         {
-            // bloki o tym samym kształcie w tej samej cenie
-            // na palecie po jednym bloku w danym kształcie 
-            // na palecie również duże bloki
+            // balans
+            // poprawić bannery
 
-            // fix block order
-            // zmiana koloru przy snapie
-            // recyklowanie (potrzebne do usuwania niepotrzebnych klocków)
-            // score?
-            // w sklepie powinny też być duże klocki (bo nie ma jak wypełniać dużych poziomów)
-            // upewnić się że małe klocki sa odpowiedno drogie 
-            // upewnić się że duże i długo żyjące klocki sa odpowienio tanie (chcemy promować planowanie) 
+            // fix block order 
+            // zmiana koloru przy snapie 
+            // recyklowanie (drag to store, zaciemnienie store i napis na nim +$22)
+            // score 
+            // leaderboardy
+            // czcionki
+            // horizontal view
+            // tło dla ceny
+            // wygląd dla menu
+            // reklamy na cały ekran
+            // gradient na tło
+            // wersja bez reklam
+            // odgłosy on / off
+            // logo 
         }
 
         class Pytanai
