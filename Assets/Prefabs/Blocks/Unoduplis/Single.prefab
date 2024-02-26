@@ -88,6 +88,7 @@ MonoBehaviour:
   lifeTimeVariance: 30
   clockAppearenceInterval: 15
   clockPrefab: {fileID: 5378506108678979331, guid: 7ce662880cb1e354ebe787576cb604af, type: 3}
+  blockColorList: {fileID: 11400000, guid: 5caff4a1e5825d24c93ab31ea9b1ad28, type: 2}
 --- !u!1001 &2071631400598974909
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -419,6 +419,10 @@ PrefabInstance:
       value: 0.15686275
       objectReference: {fileID: 0}
     - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
+      propertyPath: blockColorList
+      value: 
+      objectReference: {fileID: 11400000, guid: 5caff4a1e5825d24c93ab31ea9b1ad28, type: 2}
+    - target: {fileID: 37045253083505872, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: snappedColor.a
       value: 1
       objectReference: {fileID: 0}

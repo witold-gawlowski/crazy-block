@@ -9,12 +9,11 @@ namespace design
     {
         class main
         {
-            // nagroda proporcjonalna do poziomu
-            // losowanie kolorów spośród danych
-            // ilość i wielkość dodatkowych klocków proporcjonalna do wielkości poziomu
+            // bloki o tym samym kształcie w tej samej cenie
+            // na palecie po jednym bloku w danym kształcie 
+            // na palecie również duże bloki
 
             // fix block order
-            // drogi reroll
             // zmiana koloru przy snapie
             // recyklowanie (potrzebne do usuwania niepotrzebnych klocków)
             // score?

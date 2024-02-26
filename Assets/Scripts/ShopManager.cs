@@ -140,9 +140,9 @@ public class ShopManager : MonoBehaviour
     {
         CleanOffer();
 
-        foreach (Transform t in positionMarkers)
+        var offerItems = Helpers.GetRandomWeightedSubset(blockPrefabs, positionMarkers.Count);
+        foreach ((Transform t, BlockScript prefabScript) in positionMarkers.Zip(offerItems, (a, b) => (a, b)))
         {
-            var prefabScript = Helpers.GetRandomWeightedElement<BlockScript>(blockPrefabs);
             var blockObject = Instantiate(prefabScript.gameObject);
             var blockScript = blockObject.GetComponent<BlockScript>();
 

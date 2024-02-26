@@ -4,7 +4,6 @@ using UnityEditor;
 using System.IO;
 using UnityEngine;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 
 public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
 {
@@ -42,7 +41,7 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
 
     public int GetCurrentReward()
     {
-        int targetPrice = CountChildrenWithTag(GetCurrent(), "LevelTile") * 3;
+        int targetPrice = CountChildrenWithTag(GetCurrent(), "LevelTile") * 4;
         return (targetPrice + 49 ) / 50 * 50 ;
     }
 

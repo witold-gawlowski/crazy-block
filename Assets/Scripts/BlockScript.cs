@@ -24,6 +24,7 @@ public class BlockScript : MonoBehaviour, IWeighted
     [SerializeField] private float lifeTimeVariance = 10;
     [SerializeField] private float clockAppearenceInterval = 15;
     [SerializeField] private GameObject clockPrefab;
+    [SerializeField] private BlockColorList blockColorList;
 
 
     private GameObject _pivot;
@@ -258,7 +259,7 @@ public class BlockScript : MonoBehaviour, IWeighted
     private void SetInitialColor()
     {
         float hue = Random.value;
-        initialColor = Color.HSVToRGB(hue, 1, 1);
+        initialColor = Helpers.GetRandomElement<Color>(blockColorList.colorList);
     }
 
     private void UpdateColorToPlaced()

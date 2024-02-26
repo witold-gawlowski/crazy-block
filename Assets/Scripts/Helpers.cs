@@ -118,4 +118,27 @@ public class Helpers : MonoBehaviour
         // This should not happen, but return null if it does
         return default(T);
     }
+
+    public static List<T> GetRandomWeightedSubset<T>(List<T> weightedItems, int subsetSize) where T: IWeighted
+    {
+        List<T> randomizedSubset = new List<T>();
+        HashSet<T> selectedItems = new HashSet<T>();
+
+        float totalWeight = weightedItems.Sum(item => item.GetWeight());
+        var probabilities = weightedItems.Select(item => item.GetWeight() / totalWeight).ToList();
+
+        while (randomizedSubset.Count < subsetSize && selectedItems.Count < weightedItems.Count)
+        {
+            float randomValue = Random.value;
+            int selectedIndex = Enumerable.Range(0, weightedItems.Count)
+                .FirstOrDefault(i => randomValue <= probabilities.Take(i + 1).Sum() && selectedItems.Add(weightedItems[i]));
+
+            if (selectedIndex != -1)
+            {
+                randomizedSubset.Add(weightedItems[selectedIndex]);
+            }
+        }
+
+        return randomizedSubset;
+    }
 }
