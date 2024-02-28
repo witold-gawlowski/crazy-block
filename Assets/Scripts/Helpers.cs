@@ -141,4 +141,24 @@ public class Helpers : MonoBehaviour
 
         return randomizedSubset;
     }
+
+    public static Vector3 GetCenterOffset(Transform parent)
+    {
+        Vector3 sum = Vector3.zero;
+
+        foreach (Transform t in parent)
+        {
+            // Assuming tiles have a Transform component, you can use localPosition
+            if (t != null && t.transform != null)
+            {
+                sum += t.transform.localPosition;
+            }
+        }
+
+        // Calculate the average by dividing the sum by the number of elements
+        Vector3 averageLocalPosition = sum / parent.transform.childCount;
+
+        return averageLocalPosition;
+    }
+
 }

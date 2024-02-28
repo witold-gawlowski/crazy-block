@@ -167,7 +167,10 @@ public class GlobalGameManager : MonoBehaviour
     private void LoadCurrentNode()
     {
         _currentMapObj = Instantiate(mapGenerator.GetCurrent());
-        _nextMapObj = Instantiate(mapGenerator.PeekNext(), nextmapPreviewParent.transform);
+
+        Vector3 nextMapCenterOffset = Helpers.GetCenterOffset(mapGenerator.PeekNext().transform);
+        _nextMapObj = Instantiate(mapGenerator.PeekNext(), nextmapPreviewParent.transform.position - nextMapCenterOffset, Quaternion.identity, nextmapPreviewParent.transform);
+        
         UpdateMapColor();
     }
     

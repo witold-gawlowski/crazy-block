@@ -26,6 +26,7 @@ public class BlockScript : MonoBehaviour, IWeighted
     [SerializeField] private GameObject clockPrefab;
     [SerializeField] private BlockColorList blockColorList;
 
+    static int order = 5;
 
     private GameObject _pivot;
     private BlockClock _clock;
@@ -88,6 +89,7 @@ public class BlockScript : MonoBehaviour, IWeighted
     public void Init(bool alreadyBought = false, float lifeTime = -1, object color = null)
     {
         srs = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
+        SetSrLayerOrder();
         _size = srs.Count;
 
         initialColor = srs[0].color;
@@ -120,7 +122,15 @@ public class BlockScript : MonoBehaviour, IWeighted
         isPlaced = false;
     }
 
+    private void SetSrLayerOrder()
+    {
+        foreach(var rs in srs)
+        {
+            rs.sortingOrder = order;
+        }
 
+        order++;
+    }
 
     public void SetPosition(Vector3 pos)
     {
@@ -217,7 +227,13 @@ public class BlockScript : MonoBehaviour, IWeighted
             Destroy(_clock.gameObject);
             _clock = null;
         }
+
+        foreach(var rs in srs)
+        {
+            rs.sortingOrder = 0;
+        }
     }
+
 
     private IEnumerator Die()
     {

@@ -10,21 +10,13 @@ namespace design
         class main
         {
             // poprawić wygląd next mapy
-            // menu logo
-            // better icon
-            // odgłosy
-            // gradient na tło
-            // fix block order 
             // balans
             //// jest troche za łatwo: małe klocki są za tanie
             //// można robić duże poziomy bez dużych klocków
-            // czcionki
-            // horizontal view
-            // tło dla ceny
-            // wygląd dla menu
             // odgłosy
             // optymalizacja 
 
+            // odgłosy
             // leaderboardy
             // reklamy na cały ekran
             // wersja bez reklam
