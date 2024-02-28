@@ -9,23 +9,27 @@ namespace design
     {
         class main
         {
-            // balans
-            // poprawić bannery
-
-            // fix block order 
-            // zmiana koloru przy snapie 
+            // poprawić wygląd next mapy
             // recyklowanie (drag to store, zaciemnienie store i napis na nim +$22)
-            // score 
-            // leaderboardy
+            // menu logo
+            // better icon
+            // odgłosy
+            // gradient na tło
+            // fix block order 
+            // balans
+            //// jest troche za łatwo: małe klocki są za tanie
+            //// można robić duże poziomy bez dużych klocków
             // czcionki
             // horizontal view
             // tło dla ceny
             // wygląd dla menu
+            // odgłosy
+            // optymalizacja 
+
+            // leaderboardy
             // reklamy na cały ekran
-            // gradient na tło
             // wersja bez reklam
-            // odgłosy on / off
-            // logo 
+            // bannery: app-ads.txt
         }
 
         class Pytanai

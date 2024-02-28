@@ -11,7 +11,8 @@ public class BlockSpammer : MonoBehaviour
 
     public void HandleNewLevel()
     {
-        var spawnCount = Mathf.RoundToInt(spawnCountCurve.Evaluate(GlobalGameManager.Instance.GetLevel()));
+        //var spawnCount = Mathf.RoundToInt(spawnCountCurve.Evaluate(GlobalGameManager.Instance.GetLevel()));
+        var  spawnCount = 0;
         if (GlobalGameManager.Instance.GetLevel() <= 5)
         {
             SpawnRandomBlocks(spawnCount, true);
