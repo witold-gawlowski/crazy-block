@@ -10,7 +10,6 @@ namespace design
         class main
         {
             // poprawić wygląd next mapy
-            // recyklowanie (drag to store, zaciemnienie store i napis na nim +$22)
             // menu logo
             // better icon
             // odgłosy
