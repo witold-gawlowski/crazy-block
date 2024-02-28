@@ -9,7 +9,6 @@ namespace design
     {
         class main
         {
-            // poprawić wygląd next mapy
             // balans
             //// jest troche za łatwo: małe klocki są za tanie
             //// można robić duże poziomy bez dużych klocków
