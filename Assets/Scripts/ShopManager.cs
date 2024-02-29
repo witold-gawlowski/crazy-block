@@ -63,7 +63,10 @@ public class ShopManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateDebetTimer();
+        if (!GlobalGameManager.Instance.IsPaused())
+        {
+            UpdateDebetTimer();
+        }
     }
 
     private void OnEnable()

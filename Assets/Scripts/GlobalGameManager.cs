@@ -85,6 +85,7 @@ public class GlobalGameManager : MonoBehaviour
     {
         gameplayUI.HandleGameOver();
         _isPaused = true;
+        SoundManager.Instance.PlayFail();
     }
 
     public void Restart()
@@ -211,6 +212,6 @@ public class GlobalGameManager : MonoBehaviour
 
     public void OpenMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MenuScene");
     }
 }
