@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GamplayUIScript : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private TMP_Text levelReachedMessage;
     public void HandleGameOver()
     {
+        levelReachedMessage.text = "You reached level " + GlobalGameManager.Instance.GetLevel() + "!";
         gameOverPanel.SetActive(true);
     }
 

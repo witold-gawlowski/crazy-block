@@ -12,13 +12,16 @@ namespace design
             // balans
             //// jest troche za łatwo: małe klocki są za tanie
             //// można robić duże poziomy bez dużych klocków
-            // odgłosy
-            // optymalizacja 
+            //// za szybko się przegrywa
+            //// wzrost cen klocków? tak żeby opłacało się zachowywać na później klocki
+            //// żeby nie opłacało się trzymać hajsu dużo 
+            //// mogą być duże nagrody na początku ale prawdzwiwym poziomem trudności jest inflacja
+            
+            // reklamy 
+            //// bannery: app-ads.txt
+            //// wersja bez 
 
-            // leaderboardy
-            // reklamy na cały ekran
-            // wersja bez reklam
-            // bannery: app-ads.txt
+            // menu item -> remove ads
         }
 
         class Pytanai

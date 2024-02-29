@@ -145,6 +145,11 @@ public class DragManager : MonoBehaviour
 
     private bool IsInteractible(BlockScript block)
     {
+        if(GlobalGameManager.Instance.IsPaused())
+        {
+            return false;
+        }
+
         if (block.IsDead())
         {
             return false;
@@ -203,7 +208,7 @@ public class DragManager : MonoBehaviour
         {
             var coords = Helpers.RoundPosition(DraggedBlock.transform.position);
             MapManager.GetInstance().Place(DraggedBlock, coords);
-            _draggedScript.ProcessPlacement();
+            _draggedScript.HandleBlockPlaced();
         }
     }
 

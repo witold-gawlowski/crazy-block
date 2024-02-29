@@ -90,6 +90,7 @@ public class GlobalGameManager : MonoBehaviour
 
     public void Restart()
     {
+        _isPaused = false;
         level = 0;
         DestroyLooseBlocks();
         mapGenerator.Init();

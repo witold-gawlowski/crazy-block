@@ -33,6 +33,7 @@ public class BlockScript : MonoBehaviour, IWeighted
     
 
     private List<SpriteRenderer> srs;
+    private List<Collider2D> colliders;
 
     private int _size;
 
@@ -89,6 +90,7 @@ public class BlockScript : MonoBehaviour, IWeighted
     public void Init(bool alreadyBought = false, float lifeTime = -1, object color = null)
     {
         srs = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
+        colliders = GetComponentsInChildren<Collider2D>().ToList<Collider2D>();
         SetSrLayerOrder();
         _size = srs.Count;
 
@@ -217,7 +219,7 @@ public class BlockScript : MonoBehaviour, IWeighted
         MoveToBack();
     }
 
-    public void ProcessPlacement()
+    public void HandleBlockPlaced()
     {
         isPlaced = true;
         UpdateColorToPlaced();
@@ -230,7 +232,12 @@ public class BlockScript : MonoBehaviour, IWeighted
 
         foreach(var rs in srs)
         {
-            rs.sortingOrder = 0;
+            rs.sortingOrder = 1;
+        }
+
+        foreach(var col in colliders)
+        {
+            col.enabled = false;
         }
     }
 

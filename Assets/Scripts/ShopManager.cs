@@ -92,8 +92,11 @@ public class ShopManager : MonoBehaviour
 
     public void HandleRerollPressedEvent()
     {
-        Reroll();
-        Cash = Cash - rerollPrice;
+        if (!GlobalGameManager.Instance.IsPaused())
+        {
+            Reroll();
+            Cash = Cash - rerollPrice;
+        }
     }
 
     public void HandleRestart()
