@@ -73,7 +73,7 @@ public class ShopUIScript : MonoBehaviour
         ShopManager.Instance.CashChanged -= HandleCashChanged;
     }
 
-    public void ShowRestartVisible(bool value)
+    public void ShowQuitVisible(bool value)
     {
         restartText.SetActive(value);
     }

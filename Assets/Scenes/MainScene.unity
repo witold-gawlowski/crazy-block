@@ -2319,7 +2319,7 @@ MonoBehaviour:
   - {fileID: 1836998916}
   - {fileID: 1564858132}
   - {fileID: 1837761514}
-  initialCash: 100
+  initialCash: 150
   rerollPrice: 50
   lifetimeToPrice:
     serializedVersion: 2

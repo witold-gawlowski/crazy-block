@@ -15,6 +15,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource sfxSource2;
 
     public static SoundManager Instance { get; private set; }
     private void Awake()
@@ -52,8 +53,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySuccess()
     {
-        sfxSource.clip = successSound;
-        sfxSource.Play();
+        sfxSource2.clip = successSound;
+        sfxSource2.Play();
     }
     public void PlayFail()
     {

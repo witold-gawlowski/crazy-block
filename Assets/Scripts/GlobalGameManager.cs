@@ -53,10 +53,10 @@ public class GlobalGameManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateRestart();
+        UpdateQuit();
     }
 
-    private void UpdateRestart()
+    private void UpdateQuit()
     {
         if (restartCooldown > 0)
         {
@@ -65,7 +65,7 @@ public class GlobalGameManager : MonoBehaviour
 
         if (restartCooldown <= 0)
         {
-            ui.ShowRestartVisible(false);
+            ui.ShowQuitVisible(false);
         }
     }
 
@@ -73,11 +73,12 @@ public class GlobalGameManager : MonoBehaviour
     {
         if(restartCooldown > 0)
         {
+            SoundManager.Instance.PlayTickTock(false);
             SceneManager.LoadScene("MenuScene");
             restartCooldown = 0;
             return;
         }
-        ui.ShowRestartVisible(true);
+        ui.ShowQuitVisible(true);
         restartCooldown += 3.0f;
     }
 
