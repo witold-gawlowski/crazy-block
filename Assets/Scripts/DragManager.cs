@@ -184,7 +184,12 @@ public class DragManager : MonoBehaviour
         var newPositionRounded = Helpers.RoundPosition(newPosition);
         if (MapManager.GetInstance().CanBePlaced(DraggedBlock, newPositionRounded))
         {
-            DraggedBlock.transform.position = new Vector3(newPositionRounded.x, newPositionRounded.y);
+            var roundPos = new Vector3(newPositionRounded.x, newPositionRounded.y);
+            if ((DraggedBlock.transform.position - roundPos).magnitude > 0.2f)
+            {
+                SoundManager.Instance.PlayClick();
+            }
+            DraggedBlock.transform.position = roundPos;
             _isDraggedBlockSnapped = true;
             //_draggedScript.HandleSnap();
             return;
@@ -202,7 +207,6 @@ public class DragManager : MonoBehaviour
     private void HandleFinishDrag()
     {
         ShopManager.Instance.HandleBlockRelease(_draggedScript);
-        SoundManager.Instance.PlayClick();
 
         if (_isDraggedBlockSnapped && !_draggedScript.IsDead())
         {

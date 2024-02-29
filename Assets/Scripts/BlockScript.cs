@@ -239,6 +239,8 @@ public class BlockScript : MonoBehaviour, IWeighted
         {
             col.enabled = false;
         }
+
+        SoundManager.Instance.PlayLock();
     }
 
 
