@@ -163,6 +163,8 @@ public class ShopManager : MonoBehaviour
         }
 
         ui.HandleNewShopOffer(Cash);
+
+        SoundManager.Instance.PlaySwithc();
     }
 
     private void Respawn(OfferElement e)

@@ -8,5 +8,7 @@ public class MenuUIScript : MonoBehaviour
     public void HandleStartClick()
     {
         SceneManager.LoadScene("MainScene");
+        SoundManager.Instance.PlayMusic(false);
+        SoundManager.Instance.PlayClick();
     }
 }

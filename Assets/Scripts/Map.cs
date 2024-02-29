@@ -83,6 +83,7 @@ public class Map
         if (_coveredArea == mapSize)
         {
             GlobalGameManager.Instance.FinalizeLevel();
+            SoundManager.Instance.PlaySuccess();
         }
     }
 

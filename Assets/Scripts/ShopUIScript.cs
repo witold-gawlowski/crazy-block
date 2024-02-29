@@ -127,7 +127,6 @@ public class ShopUIScript : MonoBehaviour
     {
         mapCompletedPanel.SetActive(true);
         rewardText.text = "+$" + cash;
-      
     }
 
     public void HandleNewLevel(int level)

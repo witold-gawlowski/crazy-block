@@ -15,7 +15,6 @@ namespace design
             // odgłosy
             // optymalizacja 
 
-            // odgłosy
             // leaderboardy
             // reklamy na cały ekran
             // wersja bez reklam

@@ -197,6 +197,7 @@ public class DragManager : MonoBehaviour
     private void HandleFinishDrag()
     {
         ShopManager.Instance.HandleBlockRelease(_draggedScript);
+        SoundManager.Instance.PlayClick();
 
         if (_isDraggedBlockSnapped && !_draggedScript.IsDead())
         {
@@ -214,6 +215,7 @@ public class DragManager : MonoBehaviour
         }
         DraggedBlock.transform.RotateAround(_draggedScript.GetPivot().position, Vector3.forward, 90);
         TryPlace(DraggedBlock, DraggedBlock.transform.position);
+        SoundManager.Instance.PlayClick();
     }
 
     void TryPlace(GameObject block, Vector2 pos)
