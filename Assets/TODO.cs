@@ -20,8 +20,9 @@ namespace design
             // reklamy 
             //// bannery: app-ads.txt
             //// wersja bez 
-
             // menu item -> remove ads
+
+            // add ticker sound
         }
 
         class Pytanai

@@ -232,12 +232,14 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     GlobalGameManager.Instance.GameOver();
+                    SoundManager.Instance.PlayTickTock(false);
                 }               
             }
             else
             {
                 _debetCountdownStartTime = Time.time;
                 ui.SetDebetCountdonwVisible(true);
+                SoundManager.Instance.PlayTickTock(true);
                 _debetCountdownStarted = true;
             }
 
@@ -248,6 +250,7 @@ public class ShopManager : MonoBehaviour
             {
                 ui.SetDebetCountdonwVisible(false);
                 _debetCountdownStarted = false;
+                SoundManager.Instance.PlayTickTock(false);
             }
         }
     }

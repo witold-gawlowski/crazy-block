@@ -477,6 +477,7 @@ MonoBehaviour:
   successSound: {fileID: 8300000, guid: 2decd75b18f9cac48bc86e65d03ab3e4, type: 3}
   failSound: {fileID: 8300000, guid: fe6a476acfc8c9743b5718d4f4af7fa0, type: 3}
   switchSound: {fileID: 8300000, guid: 0bc34d8f47bdf364aa74fc0c420a9833, type: 3}
+  tickTockClip: {fileID: 8300000, guid: e6ffeb38715675941bba8ee3d73014ba, type: 3}
   musicSource: {fileID: 1404783962}
   sfxSource: {fileID: 422120898}
 --- !u!4 &490828109

@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip successSound;
     [SerializeField] private AudioClip failSound;
     [SerializeField] private AudioClip switchSound;
-
+    [SerializeField] private AudioClip tickTockClip;
 
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
@@ -64,5 +64,18 @@ public class SoundManager : MonoBehaviour
     {
         sfxSource.clip = switchSound;
         sfxSource.Play(); 
+    }
+
+    public void PlayTickTock(bool value)
+    {
+        musicSource.clip = tickTockClip;
+        if (value)
+        {
+            musicSource.Play();
+        }
+        else
+        {
+            musicSource.Stop();
+        }
     }
 }
