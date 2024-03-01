@@ -12,6 +12,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip switchSound;
     [SerializeField] private AudioClip tickTockClip;
     [SerializeField] private AudioClip lockClip;
+    [SerializeField] private AudioClip swooshClip;
 
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
@@ -84,6 +85,12 @@ public class SoundManager : MonoBehaviour
     public void PlayLock()
     {
         sfxSource.clip = lockClip;
+        sfxSource.Play();
+    }
+
+    public void PlaySwoosh()
+    {
+        sfxSource.clip = swooshClip;
         sfxSource.Play();
     }
 }

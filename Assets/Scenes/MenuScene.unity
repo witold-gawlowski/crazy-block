@@ -479,6 +479,7 @@ MonoBehaviour:
   switchSound: {fileID: 8300000, guid: 0bc34d8f47bdf364aa74fc0c420a9833, type: 3}
   tickTockClip: {fileID: 8300000, guid: e6ffeb38715675941bba8ee3d73014ba, type: 3}
   lockClip: {fileID: 8300000, guid: 2138e111263343c44bf968d709977e48, type: 3}
+  swooshClip: {fileID: 8300000, guid: 2590b5494d34e584a90306cf3be9c51c, type: 3}
   musicSource: {fileID: 1404783962}
   sfxSource: {fileID: 422120898}
   sfxSource2: {fileID: 1939622903}

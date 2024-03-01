@@ -224,7 +224,7 @@ public class DragManager : MonoBehaviour
         }
         DraggedBlock.transform.RotateAround(_draggedScript.GetPivot().position, Vector3.forward, 90);
         TryPlace(DraggedBlock, DraggedBlock.transform.position);
-        SoundManager.Instance.PlayClick();
+        SoundManager.Instance.PlaySwoosh();
     }
 
     void TryPlace(GameObject block, Vector2 pos)

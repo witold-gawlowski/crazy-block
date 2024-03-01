@@ -16,7 +16,12 @@ namespace design
             //// wzrost cen klocków? tak żeby opłacało się zachowywać na później klocki
             //// żeby nie opłacało się trzymać hajsu dużo 
             //// mogą być duże nagrody na początku ale prawdzwiwym poziomem trudności jest inflacja
-            
+            // szybsze większe klocki
+            // mniej klocków w sklepie
+            // dużo tańszy reroll
+
+            // nowa ikona
+
             // reklamy 
             //// bannery: app-ads.txt
             //// wersja bez 
@@ -27,6 +32,14 @@ namespace design
         class Pytanai
         {
             // czy klocki się zmieniają z czasem -> nie 
+        }
+
+        class Reklamy
+        {
+            // intersitial kiedy? co 5 leveli
+            // jak gracz przejdzie poziom to pauza, intersitial na ryj i jak się skońćzy to odpauzowujemy 
+            
+            // intersitial + wersja darmowa ->  balans -> wrzucić do sklepu -> app ads 
         }
 
         class Content
