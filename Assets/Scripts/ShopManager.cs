@@ -124,7 +124,8 @@ public class ShopManager : MonoBehaviour
 
     public int GetPrice(float lifeTime, int initialPrice)
     {
-        return Mathf.RoundToInt(lifetimeToPrice.Evaluate(lifeTime) * initialPrice);
+        var level = GlobalGameManager.Instance.GetLevel();
+        return Mathf.RoundToInt(lifetimeToPrice.Evaluate(lifeTime) * initialPrice * Mathf.Pow(1.1f, level));
     }
 
     public void ResetCash()

@@ -41,13 +41,13 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
 
     public int GetCurrentReward()
     {
-        int targetPrice = CountChildrenWithTag(GetCurrent(), "LevelTile") * 4;
-        return (targetPrice + 49 ) / 50 * 50 ;
+        int targetPrice = CountChildrenWithTag(GetCurrent(), "LevelTile") * 7;
+        return (targetPrice + 24 ) / 25 * 25 ;
     }
 
     public void Init()
     {
-        int initialPoolCount = Mathf.Min(20, initialPrefabs.Count);
+        int initialPoolCount = Mathf.Min(10, initialPrefabs.Count);
         initialPrefabPool = Helpers.GetRandomSubset(initialPrefabs, initialPoolCount);
         SortGameObjectsByLevelTileCount(initialPrefabPool);
 

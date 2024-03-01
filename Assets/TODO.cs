@@ -16,11 +16,8 @@ namespace design
             //// wzrost cen klocków? tak żeby opłacało się zachowywać na później klocki
             //// żeby nie opłacało się trzymać hajsu dużo 
             //// mogą być duże nagrody na początku ale prawdzwiwym poziomem trudności jest inflacja
-            // szybsze większe klocki
-            // mniej klocków w sklepie
-            // dużo tańszy reroll
-
-            // nowa ikona
+            // szybsze większe poziomy
+            // usunąć odpryski
 
             // reklamy 
             //// bannery: app-ads.txt

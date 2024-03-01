@@ -61,6 +61,7 @@ public class DragManager : MonoBehaviour
         if (collider)
         {
             DraggedBlock = collider.transform.parent.gameObject;
+            _draggedScript.ProcessPickup();
             _touchDuration = 0;
             _mouseTouchStartPosition = _pointerPositionWorld;
         }

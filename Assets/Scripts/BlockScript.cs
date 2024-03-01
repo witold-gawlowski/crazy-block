@@ -213,10 +213,19 @@ public class BlockScript : MonoBehaviour, IWeighted
         return !isAlive;
     }
 
+    public void ProcessPickup()
+    {
+        foreach (var item in srs)
+        {
+            item.sortingOrder = order;
+        }
+        order++;
+    }
+
     public void ProcessPurchase()
     {
         isBought = true;
-        MoveToBack();
+        //MoveToBack();
     }
 
     public void HandleBlockPlaced()
