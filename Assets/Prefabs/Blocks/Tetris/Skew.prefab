@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetColorV: 0.45
   destroyDelay: 1
-  initialPrice: 15
+  initialPrice: 4
   frequency: 2
   placedCOlor: {r: 0.15686275, g: 0.24705882, b: 0.38431373, a: 1}
   deadColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}

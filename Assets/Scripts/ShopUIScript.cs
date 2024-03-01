@@ -177,7 +177,7 @@ public class ShopUIScript : MonoBehaviour
         }
     }
 
-    public void HandleNewShopOffer(int cash)
+    public void HandleNewShopOffer(int cash, int rerollPrice)
     {
         var offerBlockScripts = ShopManager.Instance.GetOfferBlockScripts();
         foreach (var (block, item) in offerBlockScripts.Zip(shopUIItems, (a, b) => (a, b)))
@@ -187,6 +187,7 @@ public class ShopUIScript : MonoBehaviour
             item.priceText.gameObject.SetActive(true);
         }
 
+        rerollText.text = "$" + rerollPrice.ToString();
         //UpdateBlockTextColors(cash);
     }
 
@@ -204,39 +205,5 @@ public class ShopUIScript : MonoBehaviour
     public void SetDebetCountdonwVisible(bool value)
     {
         debetTimerText.gameObject.SetActive(value);
-    }
-
-
-    private void UpdateRerollButton(bool canAffordReroll)
-    {
-        if(canAffordReroll)
-        {
-            rerollButton.interactable = true;
-            rerollText.color = availableColor;
-        }
-        else
-        {
-            rerollButton.interactable = false;
-            rerollText.color = unavailableColor;
-        }
-    }
-
-    private void UpdateBlockTextColors(int currentCash)
-    {
-        foreach(ShopUIItem item in shopUIItems)
-        {
-            if (item.blockScript != null)
-            {
-                var price = item.blockScript.GetPrice();
-                if (price <= currentCash)
-                {
-                    item.priceText.color = availableColor;
-                }
-                else
-                {
-                    item.priceText.color = unavailableColor;
-                }
-            }
-        }
     }
 }

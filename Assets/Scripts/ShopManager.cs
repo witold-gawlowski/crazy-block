@@ -30,7 +30,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private List<Transform> positionMarkers;
 
     [SerializeField] private int initialCash = 100;
-    [SerializeField] private int rerollPrice = 10;
+    [SerializeField] private int baseRerollPrice = 10;
     [SerializeField] private AnimationCurve lifetimeToPrice;
     [SerializeField] private float debetDuration = 15;
 
@@ -69,6 +69,12 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void Init()
+    {
+        Reroll();
+        ResetCash();
+    }
+
     private void OnEnable()
     {
         ui.RerollPressedEvent += HandleRerollPressedEvent;
@@ -79,15 +85,10 @@ public class ShopManager : MonoBehaviour
         ui.RerollPressedEvent -= HandleRerollPressedEvent;
     }
 
-   private void Start()
-    {
-        Reroll();
-        ResetCash();
-    }
-
     public void HandleNewLevel()
     {
         spammer.HandleNewLevel();
+        ui.HandleNewShopOffer(Cash, GetRerollPrice());
     }
 
     public void HandleRerollPressedEvent()
@@ -95,7 +96,7 @@ public class ShopManager : MonoBehaviour
         if (!GlobalGameManager.Instance.IsPaused())
         {
             Reroll();
-            Cash = Cash - rerollPrice;
+            Cash = Cash - GetRerollPrice();
         }
     }
 
@@ -125,7 +126,14 @@ public class ShopManager : MonoBehaviour
     public int GetPrice(float lifeTime, int initialPrice)
     {
         var level = GlobalGameManager.Instance.GetLevel();
-        return Mathf.RoundToInt(lifetimeToPrice.Evaluate(lifeTime) * initialPrice * Mathf.Pow(1.1f, level));
+        return initialPrice * Mathf.RoundToInt(Mathf.Pow(1.1f, level + 3));
+    }
+
+    public int GetRerollPrice()
+    {
+        var level = GlobalGameManager.Instance.GetLevel();
+        var targetPrice = baseRerollPrice * Mathf.RoundToInt(Mathf.Pow(1.1f, level - 1));
+        return (targetPrice + 24) / 25 * 25;
     }
 
     public void ResetCash()
@@ -140,7 +148,7 @@ public class ShopManager : MonoBehaviour
 
     public bool CanAffordReroll()
     {
-        return rerollPrice <= Cash;
+        return GetRerollPrice() <= Cash;
     }
 
     public void Reroll()
@@ -169,7 +177,7 @@ public class ShopManager : MonoBehaviour
             offer.Add(newOfferElem);
         }
 
-        ui.HandleNewShopOffer(Cash);
+        ui.HandleNewShopOffer(Cash, GetRerollPrice());
 
         SoundManager.Instance.PlaySwithc();
     }
@@ -183,7 +191,7 @@ public class ShopManager : MonoBehaviour
         blockScript.SetPosition(e._shopMarker.position);
         e._instance = blockObj;
 
-        ui.HandleNewShopOffer(Cash);
+        ui.HandleNewShopOffer(Cash, GetRerollPrice());
     }
 
     public void CleanOffer()

@@ -29,4 +29,9 @@ public class GamplayUIScript : MonoBehaviour
         gameOverPanel.SetActive(false);
     }
 
+    public void HandleCheat()
+    {
+        GlobalGameManager.Instance.FinalizeLevel();
+    }
+
 }

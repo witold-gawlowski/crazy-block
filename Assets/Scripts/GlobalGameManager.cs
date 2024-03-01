@@ -48,6 +48,7 @@ public class GlobalGameManager : MonoBehaviour
         level = 0;
         _isPaused = false;
         mapGenerator.Init();
+        ShopManager.Instance.Init();
         StartNewLevel();
     }
 
@@ -133,8 +134,10 @@ public class GlobalGameManager : MonoBehaviour
 
     private IEnumerator FinalizeLevelCOrouitne()
     {
+        SoundManager.Instance.PlaySuccess();
         ui.HandleLevelCompleted(mapGenerator.GetCurrentReward());
         ShopManager.Instance.AddCash(mapGenerator.GetCurrentReward());
+        
         
         yield return new WaitForSeconds(2);
 

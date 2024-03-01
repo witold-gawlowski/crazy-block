@@ -25,6 +25,7 @@ public class BlockScript : MonoBehaviour, IWeighted
     [SerializeField] private float clockAppearenceInterval = 15;
     [SerializeField] private GameObject clockPrefab;
     [SerializeField] private BlockColorList blockColorList;
+    [SerializeField] private bool autoInit = false;
 
     static int order = 5;
 
@@ -78,6 +79,14 @@ public class BlockScript : MonoBehaviour, IWeighted
 
     }
 
+    private void Start()
+    {
+        if(autoInit)
+        {
+            Init();
+        }
+    }
+
     public void OnDestroy()
     {
         if (_clock)
@@ -85,7 +94,6 @@ public class BlockScript : MonoBehaviour, IWeighted
             Destroy(_clock.gameObject);
         }
     }   
-
 
     public void Init(bool alreadyBought = false, float lifeTime = -1, object color = null)
     {
