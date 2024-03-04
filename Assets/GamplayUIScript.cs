@@ -10,7 +10,7 @@ public class GamplayUIScript : MonoBehaviour
     [SerializeField] private TMP_Text levelReachedMessage;
     public void HandleGameOver()
     {
-        levelReachedMessage.text = "You reached level " + GlobalGameManager.Instance.GetLevel() + "!";
+        levelReachedMessage.text = "You reached level " + GlobalGameManager.Instance.GetLevel() + ".";
         gameOverPanel.SetActive(true);
     }
 
