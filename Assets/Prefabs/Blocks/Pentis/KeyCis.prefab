@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: KeyCis
       objectReference: {fileID: 0}
+    - target: {fileID: 7577407780560230504, guid: b4e2152d24812654cba7449b597347b6, type: 3}
+      propertyPath: m_TagString
+      value: Block
+      objectReference: {fileID: 0}
     - target: {fileID: 7577407780560230507, guid: b4e2152d24812654cba7449b597347b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

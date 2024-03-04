@@ -126,14 +126,14 @@ public class ShopManager : MonoBehaviour
     public int GetPrice(float lifeTime, int initialPrice)
     {
         var level = GlobalGameManager.Instance.GetLevel();
-        return initialPrice * Mathf.RoundToInt(Mathf.Pow(1.1f, level + 3));
+        return Mathf.RoundToInt(initialPrice * Mathf.Pow(1.11f, level + 1) * (1 + level * 0.015f));
     }
 
     public int GetRerollPrice()
     {
         var level = GlobalGameManager.Instance.GetLevel();
         var targetPrice = baseRerollPrice * Mathf.RoundToInt(Mathf.Pow(1.1f, level - 1));
-        return (targetPrice + 24) / 25 * 25;
+        return Helpers.CustomRound(targetPrice);
     }
 
     public void ResetCash()

@@ -161,4 +161,23 @@ public class Helpers : MonoBehaviour
         return averageLocalPosition;
     }
 
+    public static int CustomRound(int x)
+    {
+        if (x < 50)
+        {
+            return (int)(Math.Round(x / 5.0) * 5);
+        }
+        else if (x < 100)
+        {
+            return (int)(Math.Round(x / 10.0) * 10);
+        }
+        else if (x < 200)
+        {
+            return (int)(Math.Round(x / 25.0) * 25);
+        }
+        else
+        {
+            return (int)(Math.Round(x / 50.0) * 50);
+        }
+    }
 }
