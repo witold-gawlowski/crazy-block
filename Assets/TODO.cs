@@ -9,10 +9,51 @@ namespace design
     {
         class main
         {
+            // poprawic screeny w playstore
+
+            // zmniejszyć api żeby łapało więcej telefonów (tel. Teresy)
+
+            // podniejść mapy do góry o 2 - 3 jednostki
+
+
+            // zablokować rzeczy których i tak nei chce się robić
+                // wyłączyć przechowywanie klocków
+                    // po prostu nie da się puścić jeśli nie jest zesnapowany
+
+            // dodać duch klocka -> to powinno wyelelinować problemy z odsnapowywaniem się klocka przy cofaniu palca
+            // każdy klocek ma dubel pod sobą (kopie z połową opa, schowaną)
+            // gdy snap jest spełniony to włączamy dubla i przesuwamy jego) 
+            // jak snap się koczy wyłączamy dubla 
+            // jak puszcamy to przesuwamy w zesnapowane miesjce, wyłączamy dubla 
+
+            // ordrobinę częsrze duże klocki
+            // mniej częste małe klocki
+
+            // bardziej widoczny quit
+
+            // wyjebać next level
+
+            // dobrze byłoby zaadresować problem z wiecznym progresem 
+            // misje: jakiś seed z celem -> level
+            // system dodawania poziomów
+            // bierzemy seeda i dopasowujemy mu ilość kasy pocz. plus liczbę poziomów do wykonania + koszt startowy rerolla
+            // ilość klocków w rerollu, etc
+
             // reklamy 
             //// bannery: app-ads.txt
             //// wersja bez 
             //// menu item -> remove 
+            ///
+
+            // =========================
+            // spinoff
+            // dostajemy wyrollowane klocki plus mapę, wybieramy na ile je zrobimy
+            // jak się uda dostajemy hajs na next jak się nie uda to przegrywamy wogóle 
+        }
+
+        class ideas
+        {
+
         }
 
         class Pytanai
