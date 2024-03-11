@@ -9,29 +9,32 @@ namespace design
     {
         class main
         {
-            // poprawic screeny w playstore
+            // usunać debet?
+                // przegrywamy jak nie ma kasy na rolla ani na klocki
+                // roll powinien byc tanszy od najtanszego klocka
+                // gra powinna się konczyć jak nie ma kasy na rolla + najtanszy klocek 
+                // usunąć trzymanie klocków
+            // zastanowić się czy zadania to jest dobry pomysł czy da się je prosto zrobić
+            // przesuwanie klocków: 
+            // duże poziomy nie da się wycelować ze względu na offset move
+            // dorobić cień
+            // tapanie jest niestabilne (do obracania)
+            // obrócone klocki zostają w tym stanie
+            // usunąc next level
+            // mniej małych klocków więcej dużych
 
-            // zmniejszyć api żeby łapało więcej telefonów (tel. Teresy)
+            // ==========================================
 
-            // podniejść mapy do góry o 2 - 3 jednostki
+            // czy potrzebny jest wzrost cen?
+            // chyba tak
+            // unifikacja cen?
 
-
-            // zablokować rzeczy których i tak nei chce się robić
-                // wyłączyć przechowywanie klocków
-                    // po prostu nie da się puścić jeśli nie jest zesnapowany
 
             // dodać duch klocka -> to powinno wyelelinować problemy z odsnapowywaniem się klocka przy cofaniu palca
             // każdy klocek ma dubel pod sobą (kopie z połową opa, schowaną)
             // gdy snap jest spełniony to włączamy dubla i przesuwamy jego) 
             // jak snap się koczy wyłączamy dubla 
             // jak puszcamy to przesuwamy w zesnapowane miesjce, wyłączamy dubla 
-
-            // ordrobinę częsrze duże klocki
-            // mniej częste małe klocki
-
-            // bardziej widoczny quit
-
-            // wyjebać next level
 
             // dobrze byłoby zaadresować problem z wiecznym progresem 
             // misje: jakiś seed z celem -> level

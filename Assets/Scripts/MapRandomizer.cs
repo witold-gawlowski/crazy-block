@@ -42,7 +42,7 @@ public class MapRandomizer: MonoBehaviour, MapGeneratorInterface
     public int GetCurrentReward()
     {
         int level = GlobalGameManager.Instance.GetLevel();
-        int targetPrice = Mathf.RoundToInt(CountChildrenWithTag(GetCurrent(), "LevelTile") * Mathf.Pow(1.1f, level) * 4);
+        int targetPrice = Mathf.RoundToInt(CountChildrenWithTag(GetCurrent(), "LevelTile") * Mathf.Pow(1.1f, level) * 3.5f);
         return (targetPrice + 9 ) / 10 * 10 ;
     }
 
